@@ -21,14 +21,13 @@ export default function Product() {
             fetchProduct()
         }
         scrollTo(0, 0)
-    }, [productId,products]);
+    }, [productId, products]);
 
     return (
-        <div className="mx-6">
+        <div className="px-4 sm:px-6">
             <div className="max-w-7xl mx-auto">
 
-                {/* Breadcrums */}
-                <div className="  text-gray-600 text-sm mt-8 mb-5">
+                <div className="text-gray-500 text-xs sm:text-sm mt-5 sm:mt-8 mb-4 sm:mb-5">
                     Home / Products / {product?.category}
                 </div>
 

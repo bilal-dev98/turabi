@@ -18,15 +18,17 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="relative bg-white">
+        <nav className="relative bg-white border-b border-slate-200">
             <div className="mx-6">
-                <div className="flex items-center justify-between max-w-7xl mx-auto py-4  transition-all">
+                <div className="flex items-center justify-between max-w-7xl mx-auto py-4 transition-all">
 
-                    <Link href="/" className="relative text-4xl font-semibold text-slate-700">
-                        <span className="text-green-600">go</span>cart<span className="text-green-600 text-5xl leading-0">.</span>
-                        <p className="absolute text-xs font-semibold -top-1 -right-8 px-3 p-0.5 rounded-full flex items-center gap-2 text-white bg-green-500">
-                            plus
-                        </p>
+                    {/* Original Turabi logo — exact image file */}
+                    <Link href="/" className="shrink-0 flex items-center" style={{ height: '48px', textDecoration: 'none' }}>
+                        <img
+                            src="/turabi-logo.png"
+                            alt="Turabi Logo"
+                            style={{ height: '48px', width: 'auto', objectFit: 'contain', display: 'block' }}
+                        />
                     </Link>
 
                     {/* Desktop Menu */}
@@ -47,17 +49,22 @@ const Navbar = () => {
                             <button className="absolute -top-1 left-3 text-[8px] text-white bg-slate-600 size-3.5 rounded-full">{cartCount}</button>
                         </Link>
 
-                        <button className="px-8 py-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full">
-                            Login
-                        </button>
+                        <Link
+                            href="/track-order"
+                            className="px-8 py-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full font-medium shadow-md hover:shadow-lg"
+                        >
+                            Track Order
+                        </Link>
 
                     </div>
 
-                    {/* Mobile User Button  */}
                     <div className="sm:hidden">
-                        <button className="px-7 py-1.5 bg-indigo-500 hover:bg-indigo-600 text-sm transition text-white rounded-full">
-                            Login
-                        </button>
+                        <Link
+                            href="/track-order"
+                            className="px-7 py-1.5 bg-indigo-500 hover:bg-indigo-600 text-sm transition text-white rounded-full font-medium inline-block"
+                        >
+                            Track Order
+                        </Link>
                     </div>
                 </div>
             </div>

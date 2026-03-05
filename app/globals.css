@@ -1,22 +1,156 @@
+/* Self-hosted Material Symbols - font-display: block prevents FOUT (raw text flash) */
+@font-face {
+    font-family: 'Material Symbols Outlined';
+    font-style: normal;
+    font-weight: 100 700;
+    font-display: block;
+    src: url('/fonts/material-symbols.ttf') format('truetype');
+}
+
+/* Apply the self-hosted font to icon spans */
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+
 @import "tailwindcss";
+
+@theme {
+    --color-primary: #10b981;
+    --color-background-light: #f5f8f6;
+    --color-background-dark: #102216;
+    --color-neutral-surface: #ffffff;
+    
+    --font-sans: var(--font-outfit), var(--font-inter), ui-sans-serif, system-ui;
+}
 
 @layer components {
     @keyframes marqueeScroll {
-        0% {
-            transform: translateX(0%);
-        }
-        100% {
-            transform: translateX(-50%);
-        }
+        0% { transform: translateX(0%); }
+        100% { transform: translateX(-50%); }
     }
 }
 
 @layer base {
-    button {
-        cursor: pointer;
-    }
+    button { cursor: pointer; }
 }
 
-.no-scrollbar::-webkit-scrollbar {
-    display: none;
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* ═══════════════════════════════════════════════════════════════
+   ADMIN DARK MODE  —  Premium layered black palette
+   ═══════════════════════════════════════════════════════════════
+
+   Layer 0 — page canvas   : #0c0c0c
+   Layer 1 — sidebar       : #101010
+   Layer 2 — card/panel    : #181818
+   Layer 3 — table row     : #1e1e1e (hover)
+   Layer 4 — input/select  : #1c1c1c
+   Border  — subtle divider: rgba(255,255,255,0.07)
+   Text-1  — headings      : #f0f0f0
+   Text-2  — body          : #b0b0b0
+   Text-3  — muted         : #666666
+   Accent  — primary green : #10b981
+   ═══════════════════════════════════════════════════════════════ */
+
+.dark {
+    color-scheme: dark;
 }
+
+/* ── Page canvas ──────────────────────────────────────────────── */
+.dark body,
+.dark .bg-background-light {
+    background-color: #0c0c0c !important;
+}
+
+/* ── Card / panel surfaces ────────────────────────────────────── */
+.dark .bg-white {
+    background-color: #181818 !important;
+}
+
+/* ── Table ────────────────────────────────────────────────────── */
+.dark table { color: #b0b0b0; }
+.dark thead tr { background-color: #131313 !important; }
+.dark thead th { color: #555 !important; }
+.dark tbody tr { border-color: rgba(255,255,255,0.05) !important; }
+.dark tbody tr:hover { background-color: #1f1f1f !important; }
+.dark .bg-slate-50\/50 { background-color: #131313 !important; }
+
+/* ── Borders & dividers ───────────────────────────────────────── */
+.dark [class*="border-slate-100"],
+.dark [class*="border-slate-200"],
+.dark .divide-y > * { border-color: rgba(255,255,255,0.07) !important; }
+.dark [class*="border-primary\/5"] { border-color: rgba(13,242,89,0.06) !important; }
+
+/* ── Text hierarchy ───────────────────────────────────────────── */
+.dark .text-slate-900 { color: #f0f0f0 !important; }
+.dark .text-slate-800 { color: #d8d8d8 !important; }
+.dark .text-slate-700 { color: #b8b8b8 !important; }
+.dark .text-slate-600 { color: #888888 !important; }
+.dark .text-slate-500 { color: #666666 !important; }
+.dark .text-slate-400 { color: #444444 !important; }
+
+/* ── Slate bg surfaces ────────────────────────────────────────── */
+.dark .bg-slate-50,
+.dark .bg-slate-50\/50 { background-color: #131313 !important; }
+.dark .bg-slate-100    { background-color: #202020 !important; }
+.dark .bg-slate-100\/60 { background-color: rgba(30,30,30,0.7) !important; }
+.dark .hover\:bg-slate-50:hover,
+.dark .hover\:bg-slate-50\/50:hover { background-color: #1f1f1f !important; }
+.dark .hover\:bg-slate-100:hover    { background-color: #252525 !important; }
+
+/* ── Inputs / selects / textareas ─────────────────────────────── */
+.dark input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.dark select,
+.dark textarea {
+    background-color: #1c1c1c !important;
+    border-color: rgba(255,255,255,0.1) !important;
+    color: #e0e0e0 !important;
+}
+.dark input::placeholder,
+.dark textarea::placeholder { color: #484848 !important; }
+.dark select option { background-color: #1c1c1c; }
+
+/* ── Inline badge overrides (keep color intent, darken bg) ─────── */
+.dark .bg-amber-50  { background-color: #1a1400 !important; }
+.dark .bg-amber-100 { background-color: #1f1700 !important; }
+.dark .border-amber-200 { border-color: #3d2f00 !important; }
+.dark .text-amber-600,
+.dark .text-amber-700 { color: #d97706 !important; }
+
+.dark .bg-blue-100  { background-color: #0d1b2a !important; }
+.dark .text-blue-600 { color: #60a5fa !important; }
+
+.dark .bg-purple-100 { background-color: #1a1025 !important; }
+.dark .text-purple-600 { color: #a78bfa !important; }
+
+.dark .bg-red-50,
+.dark .bg-red-100   { background-color: #1f0a0a !important; }
+.dark .text-red-500 { color: #f87171 !important; }
+
+.dark .bg-pink-100  { background-color: #1f0d14 !important; }
+.dark .text-pink-600 { color: #f472b6 !important; }
+
+/* ── Shadows — glow replaced with subtle dark shadows ──────────── */
+.dark .shadow-sm { box-shadow: 0 1px 8px rgba(0,0,0,0.5) !important; }
+.dark .shadow-xl,
+.dark .shadow-2xl { box-shadow: 0 8px 40px rgba(0,0,0,0.7) !important; }
+.dark [class*="shadow-primary"] { box-shadow: none !important; }
+
+/* ── Scrollbar ────────────────────────────────────────────────── */
+.dark ::-webkit-scrollbar { width: 6px; height: 6px; }
+.dark ::-webkit-scrollbar-track { background: #111; }
+.dark ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
+.dark ::-webkit-scrollbar-thumb:hover { background: #383838; }

@@ -7,9 +7,9 @@ import AdminNavbar from "./AdminNavbar"
 import AdminSidebar from "./AdminSidebar"
 
 const AdminLayout = ({ children }) => {
-
     const [isAdmin, setIsAdmin] = useState(false)
     const [loading, setLoading] = useState(true)
+    const [sidebarOpen, setSidebarOpen] = useState(false)
 
     const fetchIsAdmin = async () => {
         setIsAdmin(true)
@@ -23,14 +23,12 @@ const AdminLayout = ({ children }) => {
     return loading ? (
         <Loading />
     ) : isAdmin ? (
-        <div className="flex flex-col h-screen">
-            <AdminNavbar />
-            <div className="flex flex-1 items-start h-full overflow-y-scroll no-scrollbar">
-                <AdminSidebar />
-                <div className="flex-1 h-full p-5 lg:pl-12 lg:pt-12 overflow-y-scroll">
-                    {children}
-                </div>
-            </div>
+        <div className="bg-background-light text-slate-900 min-h-screen flex font-display">
+            <AdminSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+            <main className="flex-1 lg:ml-64 min-h-screen flex flex-col w-full relative">
+                <AdminNavbar onMenuClick={() => setSidebarOpen(true)} />
+                {children}
+            </main>
         </div>
     ) : (
         <div className="min-h-screen flex flex-col items-center justify-center text-center px-6">

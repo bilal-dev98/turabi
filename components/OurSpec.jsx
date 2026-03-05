@@ -1,12 +1,25 @@
+'use client'
 import React from 'react'
 import Title from './Title'
 import { ourSpecsData } from '@/assets/assets'
+import ProductCard from './ProductCard'
+import { useSelector } from 'react-redux'
 
-const OurSpecs = () => {
+const OurSpecs = ({ sectionData }) => {
+
+    const allProducts = useSelector(state => state.product?.list || [])
+
+    const products = sectionData?.productIds?.length > 0
+        ? sectionData.productIds
+            .map(id => allProducts.find(p => p.id === id))
+            .filter(Boolean)
+        : []
+
+    const title = sectionData?.title || 'Our Specifications'
 
     return (
         <div className='px-6 my-20 max-w-6xl mx-auto'>
-            <Title visibleButton={false} title='Our Specifications' description="We offer top-tier service and convenience to ensure your shopping experience is smooth, secure and completely hassle-free." />
+            <Title visibleButton={false} title={title} description="We offer top-tier service and convenience to ensure your shopping experience is smooth, secure and completely hassle-free." />
 
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 gap-y-10 mt-26'>
                 {
@@ -23,6 +36,15 @@ const OurSpecs = () => {
                     })
                 }
             </div>
+
+            {/* If admin assigned products to this section, show them below the specs */}
+            {products.length > 0 && (
+                <div className='mt-16 grid grid-cols-2 sm:flex flex-wrap gap-6 justify-between'>
+                    {products.map((product, index) => (
+                        <ProductCard key={index} product={product} />
+                    ))}
+                </div>
+            )}
 
         </div>
     )

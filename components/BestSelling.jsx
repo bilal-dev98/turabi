@@ -3,16 +3,25 @@ import Title from './Title'
 import ProductCard from './ProductCard'
 import { useSelector } from 'react-redux'
 
-const BestSelling = () => {
+const BestSelling = ({ sectionData }) => {
 
-    const displayQuantity = 8
-    const products = useSelector(state => state.product.list)
+    const displayQuantity = sectionData?.productIds?.length > 0 ? sectionData.productIds.length : 8
+    const allProducts = useSelector(state => state.product.list)
+
+    // filter if productIds exist, otherwise default to bestselling based on ratings count
+    const products = sectionData?.productIds?.length > 0
+        ? sectionData.productIds
+            .map(id => allProducts.find(p => p.id === id))
+            .filter(Boolean)
+        : allProducts.slice().sort((a, b) => b.rating.length - a.rating.length).slice(0, displayQuantity)
+
+    const title = sectionData?.title || 'Best Selling'
 
     return (
         <div className='px-6 my-30 max-w-6xl mx-auto'>
-            <Title title='Best Selling' description={`Showing ${products.length < displayQuantity ? products.length : displayQuantity} of ${products.length} products`} href='/shop' />
+            <Title title={title} description={`Showing ${products.length} products`} href='/shop' />
             <div className='mt-12  grid grid-cols-2 sm:flex flex-wrap gap-6 xl:gap-12'>
-                {products.slice().sort((a, b) => b.rating.length - a.rating.length).slice(0, displayQuantity).map((product, index) => (
+                {products.map((product, index) => (
                     <ProductCard key={index} product={product} />
                 ))}
             </div>

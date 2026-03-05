@@ -14,8 +14,11 @@ model User {
     id    String @id
     name  String
     email String
-    image String
-    cart  Json   @default("{}")
+    image     String
+    cart      Json     @default("{}")
+    role      String   @default("customer")
+    isBanned  Boolean  @default(false)
+    joinedAt  DateTime @default(now())
 
     // Relations
     ratings     Rating[]
@@ -54,23 +57,27 @@ enum OrderStatus {
 enum PaymentMethod {
     COD
     STRIPE
+    EASYPAISA
+    JAZZCASH
 }
 
 // Required for creating an Order: total, userId, storeId, addressId, isPaid, paymentMethod, isCouponUsed, coupon (JSON), orderItems (nested)
 model Order {
-    id            String        @id @default(cuid())
-    total         Float
-    status        OrderStatus   @default(ORDER_PLACED)
-    userId        String
-    storeId       String
-    addressId     String
-    isPaid        Boolean       @default(false)
-    paymentMethod PaymentMethod
-    createdAt     DateTime      @default(now())
-    updatedAt     DateTime      @updatedAt
-    isCouponUsed  Boolean       @default(false)
-    coupon        Json          @default("{}")
-    orderItems    OrderItem[]
+    id             String        @id @default(cuid())
+    trackingId     String        @unique
+    total          Float
+    status         OrderStatus   @default(ORDER_PLACED)
+    userId         String
+    storeId        String
+    addressId      String
+    isPaid         Boolean       @default(false)
+    paymentMethod  PaymentMethod
+    paymentAccount String?
+    createdAt      DateTime      @default(now())
+    updatedAt      DateTime      @updatedAt
+    isCouponUsed   Boolean       @default(false)
+    coupon         Json          @default("{}")
+    orderItems     OrderItem[]
 
     // Relations
     user    User    @relation("BuyerRelation", fields: [userId], references: [id])
@@ -87,7 +94,7 @@ model OrderItem {
 
     // Relations
     order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
-    product Product @relation(fields: [productId], references: [id])
+    product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
     @@id([orderId, productId])
 }
@@ -97,32 +104,35 @@ model Rating {
     id        String   @id @default(cuid())
     rating    Int
     review    String
-    userId    String
-    productId String
-    orderId   String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    userId        String?
+    productId     String
+    orderId       String?
+    reviewerName  String?
+    reviewerImage String?
+    isCustom      Boolean  @default(false)
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
 
     // Relations
-    user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    user    User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
     product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-
-    @@unique([userId, productId, orderId])
 }
 
 // Required for creating an Address: userId, name, email, street, city, state, zip, country, phone
 model Address {
-    id        String   @id @default(cuid())
-    userId    String
-    name      String
-    email     String
-    street    String
-    city      String
-    state     String
-    zip       String
-    country   String
-    phone     String
-    createdAt DateTime @default(now())
+    id               String   @id @default(cuid())
+    userId           String
+    name             String
+    email            String
+    street           String
+    city             String
+    state            String
+    zip              String
+    country          String
+    phone            String
+    landmark         String?
+    emergencyContact String?
+    createdAt        DateTime @default(now())
 
     // Relations
     Order Order[]
@@ -160,4 +170,35 @@ model Store {
     Product Product[]
     Order   Order[]
     user    User      @relation(fields: [userId], references: [id])
+}
+
+// Required for creating a HomePageSection: identifier, title, productIds
+model HomePageSection {
+    id         String   @id @default(cuid())
+    identifier String   @unique // 'latest_products', 'best_selling', 'our_specs'
+    title      String
+    productIds String[] // Array of Product IDs
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+}
+
+// Required for creating a NewsletterSubscriber: email
+model NewsletterSubscriber {
+    id           String   @id @default(cuid())
+    email        String   @unique
+    subscribedAt DateTime @default(now())
+}
+
+// Required for creating an AnnouncementBanner
+model AnnouncementBanner {
+    id           String   @id @default(cuid())
+    message      String
+    buttonLabel  String?
+    buttonAction String?   // 'coupon' | 'link' | 'dismiss'
+    couponCode   String?
+    linkUrl      String?
+    gradient     String    @default("from-violet-500 via-[#9938CA] to-[#E0724A]")
+    textColor    String    @default("#ffffff")
+    isActive     Boolean   @default(false)
+    createdAt    DateTime  @default(now())
 }

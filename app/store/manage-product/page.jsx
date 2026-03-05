@@ -4,10 +4,11 @@ import { toast } from "react-hot-toast"
 import Image from "next/image"
 import Loading from "@/components/Loading"
 import { productDummyData } from "@/assets/assets"
+import { useSelector } from "react-redux"
 
 export default function StoreManageProducts() {
 
-    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || '$'
+    const currency = useSelector(state => state.settings?.currency) || '$'
 
     const [loading, setLoading] = useState(true)
     const [products, setProducts] = useState([])
@@ -24,7 +25,7 @@ export default function StoreManageProducts() {
     }
 
     useEffect(() => {
-            fetchProducts()
+        fetchProducts()
     }, [])
 
     if (loading) return <Loading />
