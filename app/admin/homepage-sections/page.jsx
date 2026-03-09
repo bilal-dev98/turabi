@@ -126,7 +126,7 @@ const AdminHomePageSections = () => {
                                                     <li key={pId} className="flex items-center justify-between bg-white dark:bg-[#1a1a1a] p-3 rounded-lg border border-slate-100 dark:border-white/5">
                                                         <div className="flex flex-1 items-center gap-3">
                                                             {product?.images?.[0] ? (
-                                                                <Image src={product.images[0]} alt={product.name} width={40} height={40} className="rounded-md object-cover w-auto h-auto" />
+                                                                <Image src={product.images[0]} alt={product.name} width={40} height={40} className="rounded-md object-cover" />
                                                             ) : (
                                                                 <div className="w-10 h-10 bg-slate-200 dark:bg-slate-800 rounded-md shrink-0"></div>
                                                             )}
@@ -157,7 +157,7 @@ const AdminHomePageSections = () => {
                                                 <li key={product.id} className="flex items-center justify-between p-2 hover:bg-white dark:hover:bg-[#1a1a1a] rounded-lg group transition">
                                                     <div className="flex flex-1 items-center gap-3">
                                                         {product?.images?.[0] && (
-                                                            <Image src={product.images[0]} alt={product.name} width={30} height={30} className="rounded-md object-cover md:hidden lg:block shrink-0 w-auto h-auto" />
+                                                            <Image src={product.images[0]} alt={product.name} width={30} height={30} className="rounded-md object-cover md:hidden lg:block shrink-0" />
                                                         )}
                                                         <span className="text-sm truncate overflow-hidden dark:text-slate-200">{product.name}</span>
                                                     </div>
