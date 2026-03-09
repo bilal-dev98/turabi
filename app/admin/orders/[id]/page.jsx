@@ -5,6 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { format } from "date-fns"
 import toast from "react-hot-toast"
+import { getColorHex } from "@/lib/colors"
 
 const STATUS_CONFIG = {
     ORDER_PLACED: { label: "Order Placed", cls: "bg-sky-100 text-sky-600", icon: "receipt", step: 0 },
@@ -148,7 +149,15 @@ export default function OrderDetailPage() {
                                 <div className="flex-1 min-w-0">
                                     <p className="font-semibold text-slate-800 truncate">{item.product?.name || "Unknown Product"}</p>
                                     <p className="text-xs text-slate-400 mt-0.5">{item.product?.category}</p>
-                                    <p className="text-xs text-slate-500 mt-1">Qty: <span className="font-bold">{item.quantity}</span></p>
+                                    <div className="flex items-center gap-3 text-xs mt-1">
+                                        <p className="text-slate-500">Qty: <span className="font-bold">{item.quantity}</span></p>
+                                        {item.color && (
+                                            <div className="flex items-center gap-1.5 bg-slate-50 px-2 py-0.5 rounded-md border border-slate-100">
+                                                <span className="w-3 h-3 rounded-full border border-slate-200 shadow-sm" style={{ backgroundColor: getColorHex(item.color) }}></span>
+                                                <span className="font-medium text-slate-600">{item.color}</span>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
                                 <div className="text-right shrink-0">
                                     <p className="font-bold text-slate-900">{currency} {(item.price * item.quantity).toFixed(2)}</p>

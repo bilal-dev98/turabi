@@ -4,11 +4,11 @@ import { NextResponse } from "next/server";
 // PUT (Update) a product by ID
 export async function PUT(request, { params }) {
     try {
-        const id = params.id;
+        const { id } = await params;
         const body = await request.json();
 
         // Fields to update
-        const { name, description, price, mrp, category, inStock, images } = body;
+        const { name, description, price, mrp, category, inStock, images, colors } = body;
 
         const updatedProduct = await prisma.product.update({
             where: { id: id },
@@ -20,6 +20,7 @@ export async function PUT(request, { params }) {
                 ...(category && { category }),
                 ...(inStock !== undefined && { inStock: Boolean(inStock) }),
                 ...(images && Array.isArray(images) && { images }),
+                ...(colors !== undefined && Array.isArray(colors) && { colors }),
             }
         });
 
@@ -34,7 +35,7 @@ export async function PUT(request, { params }) {
 // DELETE a product by ID
 export async function DELETE(request, { params }) {
     try {
-        const id = params.id;
+        const { id } = await params;
 
         await prisma.product.delete({
             where: { id: id }

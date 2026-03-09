@@ -36,6 +36,7 @@ model Product {
     price       Float
     images      String[]
     category    String
+    colors      String[] @default([])
     inStock     Boolean  @default(true)
     storeId     String
     createdAt   DateTime @default(now())
@@ -91,6 +92,7 @@ model OrderItem {
     productId String
     quantity  Int
     price     Float
+    color     String?
 
     // Relations
     order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)

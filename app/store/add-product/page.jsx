@@ -3,6 +3,7 @@ import { assets } from "@/assets/assets"
 import Image from "next/image"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
+import { AVAILABLE_COLORS } from "@/lib/colors"
 
 export default function StoreAddProduct() {
 
@@ -15,6 +16,7 @@ export default function StoreAddProduct() {
         mrp: 0,
         price: 0,
         category: "",
+        colors: [],
     })
     const [loading, setLoading] = useState(false)
 
@@ -26,7 +28,7 @@ export default function StoreAddProduct() {
     const onSubmitHandler = async (e) => {
         e.preventDefault()
         // Logic to add a product
-        
+
     }
 
 
@@ -64,6 +66,34 @@ export default function StoreAddProduct() {
                     <input type="number" name="price" onChange={onChangeHandler} value={productInfo.price} placeholder="0" rows={5} className="w-full max-w-45 p-2 px-4 outline-none border border-slate-200 rounded resize-none" required />
                 </label>
             </div>
+
+            <label htmlFor="" className="flex flex-col gap-2 my-6 ">
+                Available Colors
+                <div className="flex flex-wrap gap-3 mt-2">
+                    {AVAILABLE_COLORS.map(color => {
+                        const isSelected = productInfo.colors?.includes(color.name);
+                        return (
+                            <button
+                                key={color.name}
+                                type="button"
+                                title={color.name}
+                                onClick={() => {
+                                    const newColors = isSelected
+                                        ? productInfo.colors.filter(c => c !== color.name)
+                                        : [...(productInfo.colors || []), color.name];
+                                    setProductInfo(f => ({ ...f, colors: newColors }));
+                                }}
+                                className={`w-7 h-7 rounded-full transition-all flex items-center justify-center shrink-0 ${isSelected ? 'ring-2 ring-offset-2 ring-primary scale-110' : 'ring-1 ring-slate-200 hover:scale-105'}`}
+                                style={{ backgroundColor: color.hex }}
+                            >
+                                {isSelected && (
+                                    <span className="material-symbols-outlined text-white text-sm" style={{ textShadow: '0 0 2px rgba(0,0,0,0.5)' }}>check</span>
+                                )}
+                            </button>
+                        )
+                    })}
+                </div>
+            </label>
 
             <select onChange={e => setProductInfo({ ...productInfo, category: e.target.value })} value={productInfo.category} className="w-full max-w-sm p-2 px-4 my-6 outline-none border border-slate-200 rounded" required>
                 <option value="">Select a category</option>

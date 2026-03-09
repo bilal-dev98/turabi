@@ -3,6 +3,7 @@ import Counter from "@/components/Counter";
 import OrderSummary from "@/components/OrderSummary";
 import PageTitle from "@/components/PageTitle";
 import { deleteItemFromCart } from "@/lib/features/cart/cartSlice";
+import { getColorHex } from "@/lib/colors";
 import { Trash2Icon } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -28,10 +29,14 @@ export default function Cart() {
         setTotalPrice(0);
         const cartArray = [];
         for (const [key, value] of Object.entries(cartItems)) {
-            const product = products.find(product => product.id === key);
+            // key can be `productId` or `productId-color`
+            const [id, color] = key.split('-');
+            const product = products.find(product => product.id === id);
             if (product) {
                 cartArray.push({
                     ...product,
+                    cartItemId: key,
+                    color: color || null,
                     quantity: value,
                 });
                 setTotalPrice(prev => prev + product.price * value);
@@ -40,8 +45,9 @@ export default function Cart() {
         setCartArray(cartArray);
     }
 
-    const handleDeleteItemFromCart = (productId) => {
-        dispatch(deleteItemFromCart({ productId }))
+    const handleDeleteItemFromCart = (cartItemId) => {
+        const [productId, color] = cartItemId.split('-');
+        dispatch(deleteItemFromCart({ productId, color }))
     }
 
     const handleApplyCoupon = async () => {
@@ -117,7 +123,16 @@ export default function Cart() {
                                         </div>
                                         <div className="flex flex-col justify-center flex-1">
                                             <p className="font-bold text-slate-900 line-clamp-2 leading-tight">{item.name}</p>
-                                            <p className="text-sm text-slate-500 mt-1">{item.category}</p>
+                                            <p className="text-sm text-slate-500 mt-1 flex items-center gap-1.5">
+                                                {item.category}
+                                                {item.color && (
+                                                    <>
+                                                        <span className="text-slate-300">•</span>
+                                                        <span className="w-3.5 h-3.5 rounded-full border border-slate-200 shadow-sm inline-block" style={{ backgroundColor: getColorHex(item.color) }}></span>
+                                                        <span className="font-medium text-slate-600">{item.color}</span>
+                                                    </>
+                                                )}
+                                            </p>
                                             <div className="flex justify-between items-center mt-2">
                                                 <span className="text-sm font-medium text-slate-400">Qty: {item.quantity}</span>
                                                 <span className="font-bold text-slate-900">{currency} {(item.price * item.quantity).toLocaleString()}</span>

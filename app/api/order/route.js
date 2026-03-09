@@ -121,7 +121,8 @@ export async function POST(request) {
                         create: storeItems.map(item => ({
                             productId: item.id,
                             quantity: item.quantity,
-                            price: item.price
+                            price: item.price,
+                            color: item.color || null
                         }))
                     }
                 },

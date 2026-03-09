@@ -3,6 +3,7 @@ import { useEffect, useState, useMemo } from "react"
 import Image from "next/image"
 import { productDummyData, categories } from "@/assets/assets"
 import toast from "react-hot-toast"
+import { AVAILABLE_COLORS } from "@/lib/colors"
 import Pagination from "@/components/admin/Pagination"
 import DeleteConfirmModal from "@/components/admin/DeleteConfirmModal"
 import AdminProductReviews from "@/components/admin/AdminProductReviews"
@@ -13,7 +14,7 @@ const STATUS_BADGE = {
     true: { label: "In Stock", cls: "bg-primary/10 text-primary" },
     false: { label: "Out of Stock", cls: "bg-red-100 text-red-500" }
 }
-const EMPTY_FORM = { name: "", description: "", price: "", mrp: "", category: categories[0], inStock: true, images: [] }
+const EMPTY_FORM = { name: "", description: "", price: "", mrp: "", category: categories[0], inStock: true, images: [], colors: [] }
 
 export default function AdminProducts() {
     const [products, setProducts] = useState([])
@@ -73,7 +74,7 @@ export default function AdminProducts() {
     const openEdit = (p) => {
         setActiveTab("details")
         setEditing(p.id)
-        setForm({ name: p.name, description: p.description, price: p.price, mrp: p.mrp, category: p.category, inStock: p.inStock, images: p.images || [] })
+        setForm({ name: p.name, description: p.description, price: p.price, mrp: p.mrp, category: p.category, inStock: p.inStock, images: p.images || [], colors: p.colors || [] })
         setShowModal(true)
     }
 
@@ -430,6 +431,33 @@ export default function AdminProducts() {
                                         <textarea required rows={3} value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
                                             className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary/20 resize-none"
                                             placeholder="Describe the product…" />
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Available Colors</label>
+                                        <div className="flex flex-wrap gap-3">
+                                            {AVAILABLE_COLORS.map(color => {
+                                                const isSelected = form.colors?.includes(color.name);
+                                                return (
+                                                    <button
+                                                        key={color.name}
+                                                        type="button"
+                                                        title={color.name}
+                                                        onClick={() => {
+                                                            const newColors = isSelected
+                                                                ? form.colors.filter(c => c !== color.name)
+                                                                : [...(form.colors || []), color.name];
+                                                            setForm(f => ({ ...f, colors: newColors }));
+                                                        }}
+                                                        className={`w-7 h-7 rounded-full transition-all flex items-center justify-center shrink-0 ${isSelected ? 'ring-2 ring-offset-2 ring-primary scale-110' : 'ring-1 ring-slate-200 hover:scale-105'}`}
+                                                        style={{ backgroundColor: color.hex }}
+                                                    >
+                                                        {isSelected && (
+                                                            <span className="material-symbols-outlined text-white text-sm" style={{ textShadow: '0 0 2px rgba(0,0,0,0.5)' }}>check</span>
+                                                        )}
+                                                    </button>
+                                                )
+                                            })}
+                                        </div>
                                     </div>
                                     {/* Image section */}
                                     <div>

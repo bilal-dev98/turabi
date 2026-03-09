@@ -27,7 +27,7 @@ export async function GET(request) {
 export async function POST(request) {
     try {
         const body = await request.json();
-        const { name, description, price, mrp, category, inStock, images, storeId } = body;
+        const { name, description, price, mrp, category, inStock, images, storeId, colors } = body;
 
         // Basic validation
         if (!name || !price || !category) {
@@ -53,6 +53,7 @@ export async function POST(request) {
                 category,
                 inStock: inStock === undefined ? true : Boolean(inStock),
                 images: Array.isArray(images) ? images : [],
+                colors: Array.isArray(colors) ? colors : [],
                 storeId: finalStoreId,
             }
         });

@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Counter from "./Counter";
 import { useDispatch, useSelector } from "react-redux";
+import { getColorHex } from "@/lib/colors";
 
 const ProductDetails = ({ product }) => {
     const currency = useSelector(state => state.settings?.currency) || '$';
@@ -17,9 +18,14 @@ const ProductDetails = ({ product }) => {
     const [mainImage, setMainImage] = useState(product.images[0]);
     const [zoomed, setZoomed] = useState(false);
 
-    const averageRating = product.rating.reduce((a, i) => a + i.rating, 0) / product.rating.length;
+    const [selectedColor, setSelectedColor] = useState(product.colors && product.colors.length > 0 ? product.colors[0] : null);
+
+    const averageRating = product.rating?.length ? product.rating.reduce((a, i) => a + i.rating, 0) / product.rating.length : 0;
     const discount = product.mrp ? Math.round(((product.mrp - product.price) / product.mrp) * 100) : 0;
-    const inCart = !!cart[product.id];
+
+    // Check if the current selected variation is in the cart
+    const cartItemId = selectedColor ? `${product.id}-${selectedColor}` : product.id;
+    const inCart = !!cart[cartItemId];
 
     return (
         <div className="flex max-lg:flex-col gap-6 xl:gap-8 items-stretch justify-center">
@@ -110,31 +116,57 @@ const ProductDetails = ({ product }) => {
                 {/* Short desc */}
                 <p className="text-sm text-slate-500 leading-relaxed line-clamp-3">{product.description}</p>
 
+                {/* Colors */}
+                {product.colors && product.colors.length > 0 && (
+                    <div className="flex flex-col gap-3">
+                        <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Color</p>
+                        <div className="flex flex-wrap gap-3">
+                            {product.colors.map(colorName => {
+                                const hex = getColorHex(colorName);
+                                const isSelected = selectedColor === colorName;
+                                return (
+                                    <button
+                                        key={colorName}
+                                        onClick={() => setSelectedColor(colorName)}
+                                        title={colorName}
+                                        className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full transition-all flex items-center justify-center ${isSelected ? 'ring-2 ring-offset-2 ring-primary scale-110 shadow-md shadow-primary/30' : 'ring-1 ring-slate-200 hover:scale-105 shadow-sm'}`}
+                                        style={{ backgroundColor: hex }}
+                                    >
+                                        {isSelected && (
+                                            <span className="material-symbols-outlined text-white text-sm sm:text-base" style={{ textShadow: '0 0 3px rgba(0,0,0,0.5)' }}>check</span>
+                                        )}
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
+                )}
+
                 {/* CTA row */}
                 <div className="flex flex-col sm:flex-row sm:items-center gap-3 pt-1">
                     {inCart && (
                         <div className="flex flex-col gap-1">
                             <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Quantity</p>
-                            <Counter productId={product.id} />
+                            <Counter productId={product.id} color={selectedColor} />
                         </div>
                     )}
                     <div className="flex gap-3 w-full sm:w-auto">
                         <button
                             onClick={() => {
                                 if (!inCart) {
-                                    dispatch(addToCart({ productId: product.id }));
+                                    dispatch(addToCart({ productId: product.id, color: selectedColor }));
                                 }
                                 router.push('/cart');
                             }}
-                            disabled={!product.inStock}
-                            className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm transition-all active:scale-95 shadow-lg ${!product.inStock
+                            disabled={!product.inStock || (product.colors?.length > 0 && !selectedColor)}
+                            className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm transition-all active:scale-95 shadow-lg ${(!product.inStock || (product.colors?.length > 0 && !selectedColor))
                                 ? "bg-slate-100 text-slate-400 cursor-not-allowed shadow-none"
                                 : "bg-primary text-slate-900 hover:bg-primary/90 shadow-primary/30"
                                 }`}>
                             <span className="material-symbols-outlined text-sm">
                                 {!product.inStock ? "block" : "shopping_cart"}
                             </span>
-                            {!product.inStock ? "Out of Stock" : "Buy Now"}
+                            {!product.inStock ? "Out of Stock" : (product.colors?.length > 0 && !selectedColor) ? "Select Color" : "Buy Now"}
                         </button>
                         <button className="p-3.5 rounded-xl border border-slate-200 text-slate-500 hover:border-red-200 hover:text-red-400 hover:bg-red-50 transition-all shrink-0">
                             <span className="material-symbols-outlined text-sm">favorite_border</span>

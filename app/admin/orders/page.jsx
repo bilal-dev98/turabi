@@ -7,6 +7,7 @@ import toast from "react-hot-toast"
 import Pagination from "@/components/admin/Pagination"
 import DeleteConfirmModal from "@/components/admin/DeleteConfirmModal"
 import { exportToCSV } from "@/lib/csvExport"
+import { getColorHex } from "@/lib/colors"
 
 const PER_PAGE = 10
 const STATUS_CONFIG = {
@@ -245,7 +246,18 @@ export default function AdminOrders() {
                                                             <div className="size-10 rounded-lg overflow-hidden bg-slate-100 shrink-0">
                                                                 {item.product?.images?.[0] && <Image src={item.product.images[0]} alt="" width={40} height={40} className="object-cover w-full h-full" />}
                                                             </div>
-                                                            <div className="flex-1"><p className="text-sm font-semibold">{item.product?.name}</p><p className="text-xs text-slate-400">Qty: {item.quantity}</p></div>
+                                                            <div className="flex-1">
+                                                                <p className="text-sm font-semibold">{item.product?.name}</p>
+                                                                <p className="text-xs text-slate-400 flex items-center gap-2 mt-0.5">
+                                                                    <span>Qty: {item.quantity}</span>
+                                                                    {item.color && (
+                                                                        <span className="flex items-center gap-1 bg-white border border-slate-200 shadow-sm px-1.5 py-0.5 rounded-md text-slate-600 font-medium">
+                                                                            <span className="w-2.5 h-2.5 rounded-full border border-slate-200" style={{ backgroundColor: getColorHex(item.color) }}></span>
+                                                                            <span>{item.color}</span>
+                                                                        </span>
+                                                                    )}
+                                                                </p>
+                                                            </div>
                                                             <p className="text-sm font-bold">{currency}{item.price}</p>
                                                         </div>
                                                     ))}

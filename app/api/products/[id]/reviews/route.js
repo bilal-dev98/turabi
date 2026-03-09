@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 // GET all reviews for a product
 export async function GET(request, { params }) {
     try {
-        const productId = params.id;
+        const { id: productId } = await params;
 
         const reviews = await prisma.rating.findMany({
             where: { productId },
@@ -36,7 +36,7 @@ export async function GET(request, { params }) {
 // POST a new custom review
 export async function POST(request, { params }) {
     try {
-        const productId = params.id;
+        const { id: productId } = await params;
         const body = await request.json();
 
         const { rating, review, reviewerName, reviewerImage, createdAt } = body;
