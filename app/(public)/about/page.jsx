@@ -3,8 +3,8 @@ import { ShoppingBag, Truck, ShieldCheck, HeadphonesIcon, TrendingUp, Users } fr
 import Link from 'next/link';
 
 export const metadata = {
-    title: "About Us - GoCart.",
-    description: "Learn more about GoCart, our mission, and our values.",
+    title: "About Us - Turabi Store",
+    description: "Learn more about Turabi Store, our mission, and our values.",
 };
 
 export default function AboutPage() {
@@ -24,7 +24,7 @@ export default function AboutPage() {
                         </span>
                     </h1>
                     <p className="text-xl text-slate-600 leading-relaxed">
-                        At GoCart, we believe that shopping shouldn't just be about buying things—it should be an experience. We curate the best products and deliver them to your doorstep with speed and unmatched reliability.
+                        At Turabi Store, we believe that shopping shouldn't just be about buying things—it should be an experience. We curate the best products and deliver them to your doorstep with speed and unmatched reliability.
                     </p>
                 </div>
 
@@ -55,7 +55,7 @@ export default function AboutPage() {
                 {/* Core Values Section */}
                 <div className="mb-24">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold text-slate-900 mb-4">Why Choose GoCart?</h2>
+                        <h2 className="text-3xl font-bold text-slate-900 mb-4">Why Choose Turabi Store?</h2>
                         <p className="text-slate-600 max-w-2xl mx-auto">We're built on a foundation of quality, trust, and exceptional service.</p>
                     </div>
 
@@ -136,7 +136,7 @@ export default function AboutPage() {
                     <div className="relative z-10 max-w-3xl mx-auto">
                         <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ready to start shopping?</h2>
                         <p className="text-slate-300 text-lg mb-10">
-                            Join thousands of satisfied customers and experience the GoCart difference today.
+                            Join thousands of satisfied customers and experience the Turabi Store difference today.
                         </p>
                         <Link
                             href="/"

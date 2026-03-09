@@ -2,8 +2,8 @@ import React from 'react';
 import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
 
 export const metadata = {
-    title: "Contact Us - GoCart.",
-    description: "Get in touch with the GoCart team. We are here to help you.",
+    title: "Contact Us - Turabi Store",
+    description: "Get in touch with the Turabi Store team. We are here to help you.",
 };
 
 export default function ContactPage() {
@@ -40,9 +40,9 @@ export default function ContactPage() {
                                         <Phone size={24} />
                                     </div>
                                     <div>
-                                        <h3 className="font-semibold text-lg">Phone</h3>
-                                        <p className="text-slate-300 mt-1">+1 (555) 123-4567</p>
-                                        <p className="text-slate-400 text-sm">Mon-Fri from 8am to 5pm</p>
+                                        <h3 className="font-semibold text-lg">WhatsApp</h3>
+                                        <p className="text-slate-300 mt-1">+92 325 5821056<br />+92 309 9162733</p>
+                                        <p className="text-slate-400 text-sm mt-1">Mon-Sat from 9am to 6pm</p>
                                     </div>
                                 </div>
 
@@ -52,8 +52,8 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold text-lg">Email</h3>
-                                        <p className="text-slate-300 mt-1">support@gocart.com</p>
-                                        <p className="text-slate-400 text-sm">Online support 24/7</p>
+                                        <p className="text-slate-300 mt-1">info@turabi.store</p>
+                                        <p className="text-slate-400 text-sm mt-1">Online support 24/7</p>
                                     </div>
                                 </div>
 
@@ -63,7 +63,7 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold text-lg">Office</h3>
-                                        <p className="text-slate-300 mt-1">123 Commerce St, Suite 100<br />New York, NY 10001</p>
+                                        <p className="text-slate-300 mt-1">Shams Colony H-13 Islamabad<br />Pindora chungi Rawalpindi Punjab</p>
                                     </div>
                                 </div>
 
