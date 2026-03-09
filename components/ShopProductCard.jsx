@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useSelector } from 'react-redux'
 
 const ShopProductCard = ({ product }) => {
-    const currency = useSelector(state => state.settings?.currency) || '$'
+    const currency = useSelector(state => state.settings?.currency) || 'Rs'
 
     const rating = product.rating?.length
         ? Math.round(product.rating.reduce((a, c) => a + c.rating, 0) / product.rating.length)

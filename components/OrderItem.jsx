@@ -8,7 +8,7 @@ import RatingModal from "./RatingModal";
 
 const OrderItem = ({ order }) => {
 
-    const currency = useSelector(state => state.settings?.currency) || '$';
+    const currency = useSelector(state => state.settings?.currency) || 'Rs';
     const [ratingModal, setRatingModal] = useState(null);
 
     const { ratings } = useSelector(state => state.rating);

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 
 const ProductCard = ({ product }) => {
 
-    const currency = useSelector(state => state.settings?.currency) || '$'
+    const currency = useSelector(state => state.settings?.currency) || 'Rs'
 
     // calculate the average rating of the product
     const rating = Math.round(product.rating.reduce((acc, curr) => acc + curr.rating, 0) / product.rating.length);

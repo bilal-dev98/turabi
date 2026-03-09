@@ -9,7 +9,7 @@ import CategoriesMarquee from './CategoriesMarquee'
 const Hero = () => {
 
     const currencyRaw = useSelector(state => state.settings?.currency)
-    const [currency, setCurrency] = useState('$')
+    const [currency, setCurrency] = useState('Rs')
 
     useEffect(() => {
         if (currencyRaw) setCurrency(currencyRaw)

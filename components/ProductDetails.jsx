@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getColorHex } from "@/lib/colors";
 
 const ProductDetails = ({ product }) => {
-    const currency = useSelector(state => state.settings?.currency) || '$';
+    const currency = useSelector(state => state.settings?.currency) || 'Rs';
     const cart = useSelector(state => state.cart.cartItems);
     const dispatch = useDispatch();
     const router = useRouter();

@@ -7,7 +7,7 @@ import { clearCart } from '@/lib/features/cart/cartSlice';
 
 const OrderSummary = ({ totalPrice, items, appliedCoupon }) => {
 
-    const currency = useSelector(state => state.settings?.currency) || '$';
+    const currency = useSelector(state => state.settings?.currency) || 'Rs';
 
     const router = useRouter();
     const dispatch = useDispatch();
