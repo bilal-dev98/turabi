@@ -17,6 +17,7 @@ const AdminSidebar = ({ open, onClose }) => {
         { name: 'Analytics', href: '/admin/analytics', icon: 'analytics' },
         { name: 'Activity', href: '/admin/activity', icon: 'history' },
         { name: 'Newsletter', href: '/admin/newsletter', icon: 'mail' },
+        { name: 'Messages', href: '/admin/messages', icon: 'forum' },
         { name: 'Banners', href: '/admin/banners', icon: 'campaign' },
         { name: 'Settings', href: '/admin/settings', icon: 'settings' },
     ]

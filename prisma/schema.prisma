@@ -204,3 +204,13 @@ model AnnouncementBanner {
     isActive     Boolean   @default(false)
     createdAt    DateTime  @default(now())
 }
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
