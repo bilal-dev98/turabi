@@ -3,8 +3,8 @@ import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
 
 export const metadata = {
-    title: "Contact Us - Turabi Store",
-    description: "Get in touch with the Turabi Store team. We are here to help you.",
+    title: "Contact Us - Janan Fashion",
+    description: "Get in touch with the Janan Fashion team. We are here to help you.",
 };
 
 export default function ContactPage() {
@@ -52,7 +52,7 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold text-lg">Email</h3>
-                                        <p className="text-slate-300 mt-1">info@turabi.store</p>
+                                        <p className="text-slate-300 mt-1">info@jananfashion.store</p>
                                         <p className="text-slate-400 text-sm mt-1">Online support 24/7</p>
                                     </div>
                                 </div>

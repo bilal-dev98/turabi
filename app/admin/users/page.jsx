@@ -1,7 +1,6 @@
-'use client'
+﻿'use client'
 import { useEffect, useState, useMemo } from "react"
 import Image from "next/image"
-import { dummyUserData } from "@/assets/assets"
 import { format } from "date-fns"
 import toast from "react-hot-toast"
 import Pagination from "@/components/admin/Pagination"
@@ -70,7 +69,7 @@ export default function AdminUsers() {
 
     const handleViewUser = async (u) => {
         setIsViewOpen(true)
-        setViewUserDetails(null) // Reset while loading
+        setViewUserDetails(null)
         try {
             const res = await fetch(`/api/admin/users/${u.id}`)
             const data = await res.json()
@@ -96,12 +95,12 @@ export default function AdminUsers() {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ isBanned: newState })
-            });
-            const data = await res.json();
+            })
+            const data = await res.json()
 
             if (data.success) {
                 toast.success(`${banTarget.name} ${newState ? "banned" : "unbanned"}`)
-                fetchUsers() // Refresh list
+                fetchUsers()
             } else {
                 toast.error(data.message)
             }
@@ -121,7 +120,7 @@ export default function AdminUsers() {
 
             if (data.success) {
                 toast.success("User deleted permanently")
-                fetchUsers() // Refresh list
+                fetchUsers()
             } else {
                 toast.error(data.message)
             }
@@ -143,22 +142,22 @@ export default function AdminUsers() {
         toast.success("Exported as users.csv")
     }
 
-    if (loading) return <div className="p-10 text-slate-400">Loading...</div>
+    if (loading) return <div className="p-8 flex items-center gap-3 text-zinc-400 dark:text-zinc-500 text-sm"><span className="material-symbols-outlined animate-spin text-emerald-500">progress_activity</span>Loading users…</div>
 
     return (
-        <div className="p-6 lg:p-10 max-w-7xl mx-auto w-full space-y-6">
+        <div className="p-5 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full space-y-5">
             {/* Header */}
             <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div>
-                    <h1 className="text-2xl lg:text-3xl font-bold tracking-tight text-slate-900">Users <span className="text-slate-400 font-medium">Management</span></h1>
-                    <p className="text-sm text-slate-500 mt-1">{users.length} registered users</p>
+                    <h1 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-white">Users</h1>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">{users.length} registered users</p>
                 </div>
-                <div className="flex items-center gap-3">
-                    <button onClick={handleAddUser} className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all">
+                <div className="flex items-center gap-2 flex-wrap">
+                    <button onClick={handleAddUser} className="flex items-center gap-2 bg-zinc-900 dark:bg-emerald-500 text-white dark:text-slate-950 px-3.5 py-2 rounded-[4px] font-semibold text-xs shadow-xs hover:bg-zinc-800 dark:hover:bg-emerald-400 transition-all">
                         <span className="material-symbols-outlined text-sm">add</span>
                         Add User
                     </button>
-                    <button onClick={handleExport} className="flex items-center gap-2 border border-slate-200 text-slate-600 px-4 py-2 rounded-xl text-sm font-semibold hover:bg-slate-50 transition-all">
+                    <button onClick={handleExport} className="flex items-center gap-2 border border-slate-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 px-3.5 py-2 rounded-[4px] text-xs font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all">
                         <span className="material-symbols-outlined text-sm">download</span>
                         Export
                     </button>
@@ -166,30 +165,30 @@ export default function AdminUsers() {
             </div>
 
             {/* Stats Row */}
-            <div className="flex items-center gap-3 flex-wrap">
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary/10 text-primary text-xs font-bold">
-                    <span className="material-symbols-outlined text-sm">person</span>
+            <div className="flex items-center gap-2 flex-wrap">
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/40 text-xs font-bold">
+                    <span className="material-symbols-outlined text-xs">person</span>
                     {users.filter(u => u.role === "customer").length} Customers
                 </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-100 text-blue-600 text-xs font-bold">
-                    <span className="material-symbols-outlined text-sm">store</span>
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300 border border-blue-200/60 dark:border-blue-800/40 text-xs font-bold">
+                    <span className="material-symbols-outlined text-xs">store</span>
                     {users.filter(u => u.role === "seller").length} Sellers
                 </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-red-100 text-red-500 text-xs font-bold">
-                    <span className="material-symbols-outlined text-sm">block</span>
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300 border border-rose-200/60 dark:border-rose-800/40 text-xs font-bold">
+                    <span className="material-symbols-outlined text-xs">block</span>
                     {users.filter(u => u.isBanned).length} Banned
                 </div>
             </div>
 
             {/* Search + filter */}
-            <div className="bg-white rounded-2xl px-5 py-3.5 shadow-sm shadow-primary/5 border border-primary/5 flex items-center gap-4 flex-wrap">
-                <span className="material-symbols-outlined text-slate-400 text-sm">search</span>
+            <div className="bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 rounded-[4px] px-4 py-2.5 flex items-center gap-3 flex-wrap shadow-xs">
+                <span className="material-symbols-outlined text-zinc-400 text-sm">search</span>
                 <input value={search} onChange={e => handleSearch(e.target.value)} placeholder="Search by name or email…"
-                    className="flex-1 min-w-[160px] bg-transparent text-sm text-slate-700 outline-none placeholder:text-slate-400" />
-                <div className="flex items-center gap-1 border-l border-slate-100 pl-4">
+                    className="flex-1 min-w-[160px] bg-transparent text-xs text-zinc-700 dark:text-zinc-200 outline-none placeholder:text-zinc-400 dark:placeholder:text-zinc-500" />
+                <div className="flex items-center gap-1 border-l border-zinc-200 dark:border-zinc-800 pl-3">
                     {["ALL", "customer", "seller"].map(r => (
                         <button key={r} onClick={() => handleFilter(r)}
-                            className={`px-2.5 py-1 rounded-lg text-xs font-bold capitalize transition-all ${filterRole === r ? "bg-primary text-white" : "text-slate-500 hover:bg-slate-100"}`}>
+                            className={`px-2.5 py-1 rounded-[4px] text-xs font-semibold capitalize transition-all ${filterRole === r ? "bg-zinc-900 text-white dark:bg-emerald-500 dark:text-slate-950 shadow-xs" : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800"}`}>
                             {r === "ALL" ? "All" : r}
                         </button>
                     ))}
@@ -197,68 +196,64 @@ export default function AdminUsers() {
             </div>
 
             {/* Table */}
-            <div className="bg-white rounded-2xl shadow-sm shadow-primary/5 border border-primary/5 overflow-hidden">
+            <div className="bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 rounded-[4px] shadow-xs overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left min-w-[700px]">
-                        <thead>
-                            <tr className="bg-slate-50/50 border-b border-slate-100 text-[11px] uppercase tracking-widest font-bold text-slate-400">
-                                <th className="px-5 py-4">User</th>
-                                <th className="px-5 py-4">Role</th>
-                                <th className="px-5 py-4">Orders</th>
-                                <th className="px-5 py-4">Total Spent</th>
-                                <th className="px-5 py-4">Joined</th>
-                                <th className="px-5 py-4">Status</th>
-                                <th className="px-5 py-4 text-right">Actions</th>
+                        <thead className="bg-zinc-50 dark:bg-zinc-800/50 border-b border-zinc-200 dark:border-zinc-800">
+                            <tr>
+                                {["User", "Role", "Orders", "Total Spent", "Joined", "Status", "Actions"].map(h => (
+                                    <th key={h} className="px-5 py-3 text-[10px] uppercase tracking-wider font-bold text-zinc-500 dark:text-zinc-400">{h}</th>
+                                ))}
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-100">
+                        <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
                             {paginated.length === 0 && (
-                                <tr><td colSpan={7} className="px-6 py-16 text-center text-slate-400 text-sm">No users found.</td></tr>
+                                <tr><td colSpan={7} className="px-6 py-16 text-center text-zinc-400 dark:text-zinc-600 text-sm">No users found.</td></tr>
                             )}
                             {paginated.map(user => (
-                                <tr key={user.id} className={`hover:bg-slate-50/50 transition-colors ${user.isBanned ? "opacity-60" : ""}`}>
-                                    <td className="px-5 py-3.5">
+                                <tr key={user.id} className={`hover:bg-zinc-50/70 dark:hover:bg-zinc-800/30 transition-colors ${user.isBanned ? "opacity-60" : ""}`}>
+                                    <td className="px-5 py-3">
                                         <div className="flex items-center gap-3">
                                             {user.image ? (
-                                                <Image src={user.image} alt={user.name} width={32} height={32} className="size-8 rounded-full object-cover" />
+                                                <Image src={user.image} alt={user.name} width={32} height={32} className="size-8 rounded-full object-cover shrink-0" />
                                             ) : (
-                                                <div className="size-8 rounded-full bg-gradient-to-br from-primary/30 to-primary/10 flex items-center justify-center text-xs font-bold text-primary">
+                                                <div className="size-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-xs font-bold text-zinc-600 dark:text-zinc-300 shrink-0">
                                                     {(user.name || "U").charAt(0).toUpperCase()}
                                                 </div>
                                             )}
                                             <div>
-                                                <p className="text-sm font-semibold">{user.name}</p>
-                                                <p className="text-xs text-slate-400">{user.email}</p>
+                                                <p className="text-xs font-semibold text-zinc-900 dark:text-white">{user.name}</p>
+                                                <p className="text-[11px] text-zinc-400 dark:text-zinc-500">{user.email}</p>
                                             </div>
                                         </div>
                                     </td>
-                                    <td className="px-5 py-3.5">
-                                        <span className={`inline-flex px-2.5 py-0.5 rounded-full text-[11px] font-bold capitalize ${user.role === "seller" ? "bg-blue-100 text-blue-600" : "bg-slate-100 text-slate-600"}`}>
+                                    <td className="px-5 py-3">
+                                        <span className={`inline-flex px-2 py-0.5 rounded-[4px] text-[10px] font-bold uppercase ${user.role === "seller" ? "bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300" : "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300"}`}>
                                             {user.role}
                                         </span>
                                     </td>
-                                    <td className="px-5 py-3.5 text-sm font-semibold text-slate-700">{user.orders}</td>
-                                    <td className="px-5 py-3.5 text-sm font-bold text-slate-900">${user.spent}</td>
-                                    <td className="px-5 py-3.5 text-xs text-slate-500">{format(new Date(user.joinedAt), "MMM d, yyyy")}</td>
-                                    <td className="px-5 py-3.5">
-                                        <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold ${user.isBanned ? "bg-red-100 text-red-500" : "bg-primary/10 text-primary"}`}>
+                                    <td className="px-5 py-3 text-xs font-semibold text-zinc-700 dark:text-zinc-300">{user.orders}</td>
+                                    <td className="px-5 py-3 text-xs font-bold text-zinc-900 dark:text-white">${user.spent}</td>
+                                    <td className="px-5 py-3 text-xs text-zinc-500 dark:text-zinc-400">{format(new Date(user.joinedAt), "MMM d, yyyy")}</td>
+                                    <td className="px-5 py-3">
+                                        <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] text-[10px] font-bold ${user.isBanned ? "bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300" : "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300"}`}>
                                             <span className="material-symbols-outlined text-xs">{user.isBanned ? "block" : "check_circle"}</span>
                                             {user.isBanned ? "Banned" : "Active"}
                                         </span>
                                     </td>
-                                    <td className="px-5 py-3.5 text-right">
-                                        <div className="flex items-center justify-end gap-2">
-                                            <button onClick={() => handleViewUser(user)} className="text-slate-400 hover:text-[#4799eb] transition-colors" title="View Details">
-                                                <span className="material-symbols-outlined text-[18px]">visibility</span>
+                                    <td className="px-5 py-3 text-right">
+                                        <div className="flex items-center justify-end gap-1">
+                                            <button onClick={() => handleViewUser(user)} className="p-1.5 text-zinc-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 rounded-[4px] transition-all" title="View Details">
+                                                <span className="material-symbols-outlined text-sm">visibility</span>
                                             </button>
-                                            <button onClick={() => handleEditUser(user)} className="text-slate-400 hover:text-primary transition-colors" title="Edit User">
-                                                <span className="material-symbols-outlined text-[18px]">edit</span>
+                                            <button onClick={() => handleEditUser(user)} className="p-1.5 text-zinc-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 rounded-[4px] transition-all" title="Edit User">
+                                                <span className="material-symbols-outlined text-sm">edit</span>
                                             </button>
-                                            <button onClick={() => confirmBan(user)} className={`text-[18px] transition-colors ${user.isBanned ? 'text-green-500 hover:text-green-600' : 'text-slate-400 hover:text-orange-500'}`} title={user.isBanned ? "Unban User" : "Ban User"}>
-                                                <span className="material-symbols-outlined">{user.isBanned ? 'check_circle' : 'block'}</span>
+                                            <button onClick={() => confirmBan(user)} className={`p-1.5 rounded-[4px] transition-all ${user.isBanned ? 'text-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-950/30' : 'text-zinc-400 hover:text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/30'}`} title={user.isBanned ? "Unban User" : "Ban User"}>
+                                                <span className="material-symbols-outlined text-sm">{user.isBanned ? 'check_circle' : 'block'}</span>
                                             </button>
-                                            <button onClick={() => confirmDelete(user)} className="text-slate-400 hover:text-red-500 transition-colors" title="Delete User">
-                                                <span className="material-symbols-outlined text-[18px]">delete</span>
+                                            <button onClick={() => confirmDelete(user)} className="p-1.5 text-zinc-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 rounded-[4px] transition-all" title="Delete User">
+                                                <span className="material-symbols-outlined text-sm">delete</span>
                                             </button>
                                         </div>
                                     </td>
@@ -267,7 +262,7 @@ export default function AdminUsers() {
                         </tbody>
                     </table>
                 </div>
-                <div className="px-5 pb-4">
+                <div className="px-5 py-3.5 border-t border-zinc-200 dark:border-zinc-800">
                     <Pagination page={page} totalPages={totalPages} onChange={setPage} />
                 </div>
             </div>

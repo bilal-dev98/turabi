@@ -9,8 +9,8 @@ const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit", weight: [
 
 
 export const metadata = {
-    title: "GoCart. - Shop smarter",
-    description: "GoCart. - Shop smarter",
+    title: "Janan Fashion - Shop Smarter",
+    description: "Janan Fashion - Shop Smarter",
 };
 
 export default function RootLayout({ children }) {

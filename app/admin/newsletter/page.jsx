@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import { useEffect, useState, useMemo } from "react"
 import { format } from "date-fns"
 import toast from "react-hot-toast"
@@ -63,21 +63,21 @@ export default function AdminNewsletter() {
         toast.success("Exported as newsletter-subscribers.csv")
     }
 
-    if (loading) return <div className="p-10 text-slate-400">Loading subscribers...</div>
+    if (loading) return <div className="p-10 text-zinc-400">Loading subscribers...</div>
 
     return (
         <div className="p-6 lg:p-10 max-w-5xl mx-auto w-full space-y-6">
             {/* Header */}
             <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div>
-                    <h1 className="text-2xl lg:text-3xl font-bold tracking-tight text-slate-900">
-                        Newsletter <span className="text-slate-400 font-medium">&amp; Subscribers</span>
+                    <h1 className="text-2xl lg:text-3xl font-bold tracking-tight text-zinc-900">
+                        Newsletter <span className="text-zinc-400 font-medium">&amp; Subscribers</span>
                     </h1>
-                    <p className="text-sm text-slate-500 mt-1">{subscribers.length} total subscribers</p>
+                    <p className="text-sm text-zinc-500 mt-1">{subscribers.length} total subscribers</p>
                 </div>
                 <button
                     onClick={handleExport}
-                    className="flex items-center gap-2 border border-slate-200 text-slate-600 px-4 py-2 rounded-xl text-sm font-semibold hover:bg-slate-50 transition-all"
+                    className="flex items-center gap-2 border border-zinc-200 text-zinc-600 px-4 py-2 rounded-[4px] text-sm font-semibold hover:bg-zinc-50 transition-all"
                 >
                     <span className="material-symbols-outlined text-sm">download</span>
                     Export CSV
@@ -86,36 +86,36 @@ export default function AdminNewsletter() {
 
             {/* Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div className="bg-white rounded-2xl p-5 border border-primary/5 shadow-sm shadow-primary/5 flex items-center gap-4">
-                    <div className="size-10 rounded-xl bg-green-100 flex items-center justify-center">
+                <div className="bg-white rounded-[4px] p-5 border border-primary/5 shadow-sm shadow-primary/5 flex items-center gap-4">
+                    <div className="size-10 rounded-[4px] bg-green-100 flex items-center justify-center">
                         <span className="material-symbols-outlined text-green-600 text-[20px]">mail</span>
                     </div>
                     <div>
-                        <p className="text-2xl font-black text-slate-900">{subscribers.length}</p>
-                        <p className="text-xs text-slate-500 font-medium">Total Subscribers</p>
+                        <p className="text-2xl font-black text-zinc-900">{subscribers.length}</p>
+                        <p className="text-xs text-zinc-500 font-medium">Total Subscribers</p>
                     </div>
                 </div>
-                <div className="bg-white rounded-2xl p-5 border border-primary/5 shadow-sm shadow-primary/5 flex items-center gap-4">
-                    <div className="size-10 rounded-xl bg-blue-100 flex items-center justify-center">
+                <div className="bg-white rounded-[4px] p-5 border border-primary/5 shadow-sm shadow-primary/5 flex items-center gap-4">
+                    <div className="size-10 rounded-[4px] bg-blue-100 flex items-center justify-center">
                         <span className="material-symbols-outlined text-[#4799eb] text-[20px]">today</span>
                     </div>
                     <div>
-                        <p className="text-2xl font-black text-slate-900">
+                        <p className="text-2xl font-black text-zinc-900">
                             {subscribers.filter(s => {
                                 const d = new Date(s.subscribedAt)
                                 const now = new Date()
                                 return d.getDate() === now.getDate() && d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear()
                             }).length}
                         </p>
-                        <p className="text-xs text-slate-500 font-medium">Joined Today</p>
+                        <p className="text-xs text-zinc-500 font-medium">Joined Today</p>
                     </div>
                 </div>
-                <div className="bg-white rounded-2xl p-5 border border-primary/5 shadow-sm shadow-primary/5 flex items-center gap-4">
-                    <div className="size-10 rounded-xl bg-purple-100 flex items-center justify-center">
+                <div className="bg-white rounded-[4px] p-5 border border-primary/5 shadow-sm shadow-primary/5 flex items-center gap-4">
+                    <div className="size-10 rounded-[4px] bg-purple-100 flex items-center justify-center">
                         <span className="material-symbols-outlined text-purple-600 text-[20px]">calendar_month</span>
                     </div>
                     <div>
-                        <p className="text-2xl font-black text-slate-900">
+                        <p className="text-2xl font-black text-zinc-900">
                             {subscribers.filter(s => {
                                 const d = new Date(s.subscribedAt)
                                 const now = new Date()
@@ -123,33 +123,33 @@ export default function AdminNewsletter() {
                                 return diff <= 30
                             }).length}
                         </p>
-                        <p className="text-xs text-slate-500 font-medium">Joined This Month</p>
+                        <p className="text-xs text-zinc-500 font-medium">Joined This Month</p>
                     </div>
                 </div>
             </div>
 
             {/* Search */}
-            <div className="bg-white rounded-2xl px-5 py-3.5 shadow-sm shadow-primary/5 border border-primary/5 flex items-center gap-3">
-                <span className="material-symbols-outlined text-slate-400 text-sm">search</span>
+            <div className="bg-white rounded-[4px] px-5 py-3.5 shadow-sm shadow-primary/5 border border-primary/5 flex items-center gap-3">
+                <span className="material-symbols-outlined text-zinc-400 text-sm">search</span>
                 <input
                     value={search}
                     onChange={e => setSearch(e.target.value)}
                     placeholder="Search by email…"
-                    className="flex-1 bg-transparent text-sm text-slate-700 outline-none placeholder:text-slate-400"
+                    className="flex-1 bg-transparent text-sm text-zinc-700 outline-none placeholder:text-zinc-400"
                 />
                 {search && (
-                    <button type="button" onClick={() => setSearch('')} className="text-slate-400 hover:text-slate-600">
+                    <button type="button" onClick={() => setSearch('')} className="text-zinc-400 hover:text-zinc-600">
                         <span className="material-symbols-outlined text-sm">close</span>
                     </button>
                 )}
             </div>
 
             {/* Subscribers Table */}
-            <div className="bg-white rounded-2xl shadow-sm shadow-primary/5 border border-primary/5 overflow-hidden">
+            <div className="bg-white rounded-[4px] shadow-sm shadow-primary/5 border border-primary/5 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left text-sm">
                         <thead>
-                            <tr className="bg-slate-50/50 border-b border-slate-100 text-[11px] uppercase tracking-widest font-bold text-slate-400">
+                            <tr className="bg-zinc-50/50 border-b border-slate-100 text-[11px] uppercase tracking-widest font-bold text-zinc-400">
                                 <th className="px-5 py-4">#</th>
                                 <th className="px-5 py-4">Email Address</th>
                                 <th className="px-5 py-4">Subscribed On</th>
@@ -159,29 +159,29 @@ export default function AdminNewsletter() {
                         <tbody className="divide-y divide-slate-100">
                             {filtered.length === 0 ? (
                                 <tr>
-                                    <td colSpan={4} className="px-6 py-16 text-center text-slate-400 text-sm">
+                                    <td colSpan={4} className="px-6 py-16 text-center text-zinc-400 text-sm">
                                         {search ? 'No subscribers match your search.' : 'No subscribers yet. Share your newsletter!'}
                                     </td>
                                 </tr>
                             ) : (
                                 filtered.map((sub, index) => (
-                                    <tr key={sub.id} className="hover:bg-slate-50/50 transition-colors">
-                                        <td className="px-5 py-3.5 text-slate-400 font-mono text-xs">{index + 1}</td>
+                                    <tr key={sub.id} className="hover:bg-zinc-50/50 transition-colors">
+                                        <td className="px-5 py-3.5 text-zinc-400 font-mono text-xs">{index + 1}</td>
                                         <td className="px-5 py-3.5">
                                             <div className="flex items-center gap-3">
                                                 <div className="size-8 rounded-full bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center text-xs font-bold text-green-600">
                                                     {sub.email.charAt(0).toUpperCase()}
                                                 </div>
-                                                <span className="font-medium text-slate-800">{sub.email}</span>
+                                                <span className="font-medium text-zinc-800">{sub.email}</span>
                                             </div>
                                         </td>
-                                        <td className="px-5 py-3.5 text-xs text-slate-500">
+                                        <td className="px-5 py-3.5 text-xs text-zinc-500">
                                             {format(new Date(sub.subscribedAt), "MMM d, yyyy 'at' h:mm a")}
                                         </td>
                                         <td className="px-5 py-3.5 text-right">
                                             <button
                                                 onClick={() => setDeleteTarget(sub)}
-                                                className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
+                                                className="p-1.5 text-zinc-400 hover:text-red-500 hover:bg-red-50 rounded-[4px] transition-all"
                                                 title="Remove subscriber"
                                             >
                                                 <span className="material-symbols-outlined text-[18px]">delete</span>

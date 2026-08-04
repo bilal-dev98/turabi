@@ -14,7 +14,21 @@ if (typeof globalThis !== 'undefined') {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        unoptimized: true
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "pub-6361186d22bd421988003a2e935b8a2b.r2.dev",
+            },
+            {
+                protocol: "https",
+                hostname: "ytivyldglecdnhkvrevd.supabase.co",
+            },
+            {
+                protocol: "https",
+                hostname: "*.googleusercontent.com",
+            },
+        ],
+        unoptimized: true,
     }
 };
 

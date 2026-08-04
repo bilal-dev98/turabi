@@ -1,12 +1,10 @@
-'use client'
+﻿'use client'
 import { useEffect, useState } from "react"
 import { format } from "date-fns"
 import toast from "react-hot-toast"
-import { couponDummyData } from "@/assets/assets"
 import DeleteConfirmModal from "@/components/admin/DeleteConfirmModal"
 
 export default function AdminCoupons() {
-
     const [coupons, setCoupons] = useState([])
     const [deleteTarget, setDeleteTarget] = useState(null)
 
@@ -22,15 +20,15 @@ export default function AdminCoupons() {
 
     const fetchCoupons = async () => {
         try {
-            const res = await fetch('/api/admin/coupons');
-            const data = await res.json();
+            const res = await fetch('/api/admin/coupons')
+            const data = await res.json()
             if (data.success) {
-                setCoupons(data.data);
+                setCoupons(data.data)
             } else {
-                toast.error(data.message || "Failed to load coupons");
+                toast.error(data.message || "Failed to load coupons")
             }
         } catch (error) {
-            toast.error("Error connecting to server");
+            toast.error("Error connecting to server")
         }
     }
 
@@ -41,11 +39,11 @@ export default function AdminCoupons() {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newCoupon)
-            });
-            const data = await res.json();
+            })
+            const data = await res.json()
 
             if (data.success) {
-                fetchCoupons(); // Reload list
+                fetchCoupons()
                 setNewCoupon({
                     code: '',
                     description: '',
@@ -54,13 +52,13 @@ export default function AdminCoupons() {
                     forMember: false,
                     isPublic: false,
                     expiresAt: new Date()
-                });
-                return data.message;
+                })
+                return data.message
             } else {
-                throw new Error(data.message || "Failed to create coupon");
+                throw new Error(data.message || "Failed to create coupon")
             }
         } catch (error) {
-            throw new Error(error.message || "Connection error");
+            throw new Error(error.message || "Connection error")
         }
     }
 
@@ -72,143 +70,165 @@ export default function AdminCoupons() {
         try {
             const res = await fetch(`/api/admin/coupons/${code}`, {
                 method: 'DELETE'
-            });
-            const data = await res.json();
+            })
+            const data = await res.json()
             if (data.success) {
-                toast.success("Coupon deleted!");
-                fetchCoupons();
+                toast.success("Coupon deleted!")
+                fetchCoupons()
             } else {
-                toast.error(data.message || "Failed to delete coupon");
+                toast.error(data.message || "Failed to delete coupon")
             }
         } catch (error) {
-            toast.error("Connection error while deleting");
+            toast.error("Connection error while deleting")
         } finally {
-            setDeleteTarget(null);
+            setDeleteTarget(null)
         }
     }
 
     useEffect(() => {
-        fetchCoupons();
+        fetchCoupons()
     }, [])
 
+    const inputCls = "w-full bg-white dark:bg-zinc-800/60 border border-slate-300 dark:border-zinc-700 rounded-[4px] px-3.5 py-2 text-xs text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 outline-none focus:ring-2 focus:ring-slate-900/10 dark:focus:ring-emerald-500/20 transition-all"
+    const labelCls = "block text-[10px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1"
+
     return (
-        <div className="p-10 max-w-7xl mx-auto w-full space-y-10 font-display">
-            <div className="flex items-center justify-between mb-8">
-                <h1 className="text-3xl tracking-tight text-slate-800 font-bold drop-shadow-sm">Coupons <span className="text-slate-400 font-medium">Management</span></h1>
+        <div className="p-5 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full space-y-6">
+            {/* Header */}
+            <div>
+                <h1 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-white">Coupons</h1>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">Manage promotional discount codes and special member offers.</p>
             </div>
 
-            {/* Add Coupon */}
-            <form onSubmit={(e) => toast.promise(handleAddCoupon(e), { loading: "Adding coupon..." })} className="bg-white rounded-2xl p-8 shadow-sm shadow-primary/5 border border-primary/5 text-sm max-w-2xl">
-                <h2 className="text-2xl tracking-tight text-slate-800 font-bold drop-shadow-sm mb-6">Add <span className="text-slate-400 font-medium">Coupons</span></h2>
-                <div className="flex gap-2 max-sm:flex-col mt-2">
-                    <input type="text" placeholder="Coupon Code" className="w-full mt-2 p-2 border border-slate-200 outline-slate-400 rounded-md"
-                        name="code" value={newCoupon.code} onChange={handleChange} required
-                    />
-                    <input type="number" placeholder="Coupon Discount (%)" min={1} max={100} className="w-full mt-2 p-2 border border-slate-200 outline-slate-400 rounded-md"
-                        name="discount" value={newCoupon.discount} onChange={handleChange} required
-                    />
-                </div>
-                <input type="text" placeholder="Coupon Description" className="w-full mt-2 p-2 border border-slate-200 outline-slate-400 rounded-md"
-                    name="description" value={newCoupon.description} onChange={handleChange} required
-                />
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                {/* Add Coupon Form */}
+                <div className="bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 rounded-[4px] p-5 shadow-xs flex flex-col gap-4 h-fit">
+                    <h2 className="text-sm font-bold text-zinc-900 dark:text-white">Add New Coupon</h2>
+                    <form onSubmit={(e) => toast.promise(handleAddCoupon(e), { loading: "Adding coupon..." })} className="space-y-3">
+                        <div className="grid grid-cols-2 gap-3">
+                            <div>
+                                <label className={labelCls}>Coupon Code</label>
+                                <input type="text" placeholder="e.g. SAVE20" className={`${inputCls} font-mono`}
+                                    name="code" value={newCoupon.code} onChange={handleChange} required
+                                />
+                            </div>
+                            <div>
+                                <label className={labelCls}>Discount (%)</label>
+                                <input type="number" placeholder="20" min={1} max={100} className={inputCls}
+                                    name="discount" value={newCoupon.discount} onChange={handleChange} required
+                                />
+                            </div>
+                        </div>
 
-                <label>
-                    <p className="mt-3">Coupon Expiry Date</p>
-                    <input type="date" placeholder="Coupon Expires At" className="w-full mt-1 p-2 border border-slate-200 outline-slate-400 rounded-md"
-                        name="expiresAt" value={newCoupon.expiresAt ? format(new Date(newCoupon.expiresAt), 'yyyy-MM-dd') : ''} onChange={handleChange}
-                    />
-                </label>
-
-                <div className="mt-5">
-                    <div className="flex gap-2 mt-3">
-                        <label className="relative inline-flex items-center cursor-pointer text-gray-900 gap-3">
-                            <input type="checkbox" className="sr-only peer"
-                                name="forNewUser" checked={newCoupon.forNewUser}
-                                onChange={(e) => setNewCoupon({ ...newCoupon, forNewUser: e.target.checked })}
+                        <div>
+                            <label className={labelCls}>Description</label>
+                            <input type="text" placeholder="e.g. 20% off first purchase" className={inputCls}
+                                name="description" value={newCoupon.description} onChange={handleChange} required
                             />
-                            <div className="w-11 h-6 bg-slate-300 rounded-full peer peer-checked:bg-green-600 transition-colors duration-200"></div>
-                            <span className="dot absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 ease-in-out peer-checked:translate-x-5"></span>
-                        </label>
-                        <p>For New User</p>
-                    </div>
-                    <div className="flex gap-2 mt-3">
-                        <label className="relative inline-flex items-center cursor-pointer text-gray-900 gap-3">
-                            <input type="checkbox" className="sr-only peer"
-                                name="forMember" checked={newCoupon.forMember}
-                                onChange={(e) => setNewCoupon({ ...newCoupon, forMember: e.target.checked })}
-                            />
-                            <div className="w-11 h-6 bg-slate-300 rounded-full peer peer-checked:bg-green-600 transition-colors duration-200"></div>
-                            <span className="dot absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 ease-in-out peer-checked:translate-x-5"></span>
-                        </label>
-                        <p>For Member</p>
-                    </div>
-                </div>
-                <button className="mt-4 p-2 px-10 rounded bg-slate-700 text-white active:scale-95 transition">Add Coupon</button>
-            </form>
+                        </div>
 
-            {/* List Coupons */}
-            <div className="bg-white rounded-2xl p-8 shadow-sm shadow-primary/5 border border-primary/5">
-                <h2 className="text-2xl tracking-tight text-slate-800 font-bold drop-shadow-sm mb-6">List <span className="text-slate-400 font-medium">Coupons</span></h2>
-                <div className="overflow-x-auto rounded-xl border border-primary/5">
-                    <table className="min-w-full bg-white text-sm">
-                        <thead className="bg-slate-50">
-                            <tr>
-                                <th className="py-3 px-4 text-left font-semibold text-slate-600">Code</th>
-                                <th className="py-3 px-4 text-left font-semibold text-slate-600">Description</th>
-                                <th className="py-3 px-4 text-left font-semibold text-slate-600">Discount</th>
-                                <th className="py-3 px-4 text-left font-semibold text-slate-600">Expires At</th>
-                                <th className="py-3 px-4 text-left font-semibold text-slate-600">Status</th>
-                                <th className="py-3 px-4 text-left font-semibold text-slate-600">New User</th>
-                                <th className="py-3 px-4 text-left font-semibold text-slate-600">For Member</th>
-                                <th className="py-3 px-4 text-left font-semibold text-slate-600">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y divide-slate-200">
-                            {coupons.map((coupon) => (
-                                <tr key={coupon.code} className="hover:bg-slate-50">
-                                    <td className="py-3 px-4 font-mono font-bold text-slate-800">{coupon.code}</td>
-                                    <td className="py-3 px-4 text-slate-800">{coupon.description}</td>
-                                    <td className="py-3 px-4">
-                                        <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold">
-                                            <span className="material-symbols-outlined text-xs">sell</span>
-                                            {coupon.discount}% OFF
-                                        </span>
-                                    </td>
-                                    <td className="py-3 px-4 text-slate-600 text-sm">{format(new Date(coupon.expiresAt), 'yyyy-MM-dd')}</td>
-                                    <td className="py-3 px-4">
-                                        {new Date(coupon.expiresAt) < new Date() ? (
-                                            <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-red-100 text-red-500 rounded-full text-[11px] font-bold">
-                                                <span className="material-symbols-outlined text-xs">cancel</span>Expired
-                                            </span>
-                                        ) : (
-                                            <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-primary/10 text-primary rounded-full text-[11px] font-bold">
-                                                <span className="material-symbols-outlined text-xs">check_circle</span>Active
-                                            </span>
-                                        )}
-                                    </td>
-                                    <td className="py-3 px-4 text-slate-600 text-sm">{coupon.forNewUser ? 'Yes' : 'No'}</td>
-                                    <td className="py-3 px-4 text-slate-600 text-sm">{coupon.forMember ? 'Yes' : 'No'}</td>
-                                    <td className="py-3 px-4">
-                                        <button onClick={() => setDeleteTarget(coupon.code)}
-                                            className="p-1.5 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all">
-                                            <span className="material-symbols-outlined text-sm">delete</span>
-                                        </button>
-                                    </td>
+                        <div>
+                            <label className={labelCls}>Expiry Date</label>
+                            <input type="date" className={inputCls}
+                                name="expiresAt" value={newCoupon.expiresAt ? format(new Date(newCoupon.expiresAt), 'yyyy-MM-dd') : ''} onChange={handleChange}
+                            />
+                        </div>
+
+                        <div className="space-y-2 pt-1">
+                            <label className="flex items-center gap-3 cursor-pointer text-xs text-zinc-700 dark:text-zinc-300">
+                                <input type="checkbox" className="size-4 rounded accent-emerald-500"
+                                    name="forNewUser" checked={newCoupon.forNewUser}
+                                    onChange={(e) => setNewCoupon({ ...newCoupon, forNewUser: e.target.checked })}
+                                />
+                                <span>For New Users Only</span>
+                            </label>
+                            <label className="flex items-center gap-3 cursor-pointer text-xs text-zinc-700 dark:text-zinc-300">
+                                <input type="checkbox" className="size-4 rounded accent-emerald-500"
+                                    name="forMember" checked={newCoupon.forMember}
+                                    onChange={(e) => setNewCoupon({ ...newCoupon, forMember: e.target.checked })}
+                                />
+                                <span>For Registered Members Only</span>
+                            </label>
+                        </div>
+
+                        <button className="w-full bg-zinc-900 dark:bg-emerald-500 text-white dark:text-slate-950 py-2 rounded-[4px] font-semibold text-xs shadow-xs hover:bg-zinc-800 dark:hover:bg-emerald-400 transition-all flex items-center justify-center gap-1.5 mt-2">
+                            <span className="material-symbols-outlined text-sm">add</span>
+                            Add Coupon
+                        </button>
+                    </form>
+                </div>
+
+                {/* List Coupons */}
+                <div className="lg:col-span-2 bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 rounded-[4px] shadow-xs overflow-hidden">
+                    <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800">
+                        <h2 className="text-sm font-bold text-zinc-900 dark:text-white">Active Coupons ({coupons.length})</h2>
+                    </div>
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-left min-w-[650px]">
+                            <thead className="bg-zinc-50 dark:bg-zinc-800/50 border-b border-zinc-200 dark:border-zinc-800">
+                                <tr>
+                                    {["Code", "Description", "Discount", "Expires", "Status", "Target", "Action"].map(h => (
+                                        <th key={h} className="px-4 py-3 text-[10px] uppercase tracking-wider font-bold text-zinc-500 dark:text-zinc-400">{h}</th>
+                                    ))}
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
+                                {coupons.length === 0 ? (
+                                    <tr>
+                                        <td colSpan={7} className="px-5 py-12 text-center text-zinc-400 dark:text-zinc-600 text-xs">No coupons created yet.</td>
+                                    </tr>
+                                ) : (
+                                    coupons.map((coupon) => {
+                                        const isExpired = new Date(coupon.expiresAt) < new Date()
+                                        return (
+                                            <tr key={coupon.code} className="hover:bg-zinc-50/70 dark:hover:bg-zinc-800/30 transition-colors">
+                                                <td className="px-4 py-3 font-mono font-bold text-xs text-zinc-900 dark:text-emerald-400">{coupon.code}</td>
+                                                <td className="px-4 py-3 text-xs text-zinc-600 dark:text-zinc-300 truncate max-w-[150px]">{coupon.description}</td>
+                                                <td className="px-4 py-3">
+                                                    <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 rounded-[4px] text-[10px] font-bold">
+                                                        {coupon.discount}% OFF
+                                                    </span>
+                                                </td>
+                                                <td className="px-4 py-3 text-xs text-zinc-500 dark:text-zinc-400 whitespace-nowrap">{format(new Date(coupon.expiresAt), 'MMM d, yyyy')}</td>
+                                                <td className="px-4 py-3">
+                                                    {isExpired ? (
+                                                        <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-rose-50 text-rose-600 dark:bg-rose-950/60 dark:text-rose-300 rounded-[4px] text-[10px] font-bold">
+                                                            Expired
+                                                        </span>
+                                                    ) : (
+                                                        <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 rounded-[4px] text-[10px] font-bold">
+                                                            Active
+                                                        </span>
+                                                    )}
+                                                </td>
+                                                <td className="px-4 py-3 text-xs text-zinc-500 dark:text-zinc-400">
+                                                    {coupon.forNewUser ? 'New Users' : coupon.forMember ? 'Members' : 'All'}
+                                                </td>
+                                                <td className="px-4 py-3">
+                                                    <button onClick={() => setDeleteTarget(coupon.code)}
+                                                        className="p-1.5 text-zinc-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 rounded-[4px] transition-all" title="Delete Coupon">
+                                                        <span className="material-symbols-outlined text-sm">delete</span>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <DeleteConfirmModal
-                    open={!!deleteTarget}
-                    title={`Delete Coupon ${deleteTarget}?`}
-                    description="This action cannot be undone. Any active carts using this coupon will lose the discount."
-                    confirmLabel="Delete Coupon"
-                    danger={true}
-                    onConfirm={() => deleteCoupon(deleteTarget)}
-                    onCancel={() => setDeleteTarget(null)}
-                />
             </div>
+
+            <DeleteConfirmModal
+                open={!!deleteTarget}
+                title={`Delete Coupon ${deleteTarget}?`}
+                description="This action cannot be undone. Any active carts using this coupon will lose the discount."
+                confirmLabel="Delete Coupon"
+                danger={true}
+                onConfirm={() => deleteCoupon(deleteTarget)}
+                onCancel={() => setDeleteTarget(null)}
+            />
         </div>
     )
 }

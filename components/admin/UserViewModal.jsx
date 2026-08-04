@@ -1,151 +1,132 @@
+﻿'use client'
 import { X } from "lucide-react"
 import { format } from "date-fns"
 import Image from "next/image"
 
 export default function UserViewModal({ isOpen, onClose, userDetails }) {
-    if (!isOpen || !userDetails) return null;
+    if (!isOpen || !userDetails) return null
 
-    // Grab latest address (if any)
-    const latestAddress = userDetails.Address && userDetails.Address.length > 0 ? userDetails.Address[0] : null;
+    const latestAddress = userDetails.Address && userDetails.Address.length > 0 ? userDetails.Address[0] : null
+
+    const statusColors = {
+        DELIVERED: 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300',
+        ORDER_PLACED: 'bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300',
+        PROCESSING: 'bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300',
+        CANCELLED: 'bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300',
+    }
 
     return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-slate-900/40 backdrop-blur-sm transition-all duration-300">
-            <div className="bg-white rounded-3xl w-full max-w-4xl shadow-2xl overflow-hidden shadow-primary/10 border border-primary/10 animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[90vh]">
-
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-slate-950/60 backdrop-blur-xs animate-in fade-in duration-150" onClick={onClose}>
+            <div
+                className="bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 rounded-[4px] w-full max-w-4xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-150 flex flex-col max-h-[90vh]"
+                onClick={e => e.stopPropagation()}
+            >
                 {/* Header */}
-                <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50 sticky top-0 z-10">
-                    <div className="flex items-center gap-3">
-                        <div className="size-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-                            <span className="material-symbols-outlined font-light">account_circle</span>
+                <div className="h-14 px-5 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between bg-white dark:bg-[#121215] sticky top-0 z-10">
+                    <div className="flex items-center gap-2.5">
+                        <div className="size-8 rounded-[4px] bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-300">
+                            <span className="material-symbols-outlined text-base">account_circle</span>
                         </div>
                         <div>
-                            <h2 className="text-xl font-bold text-slate-800 tracking-tight">User Details</h2>
-                            <p className="text-xs text-slate-500 font-medium">Viewing deep information and order history</p>
+                            <h2 className="text-sm font-bold text-zinc-900 dark:text-white tracking-tight">User Details</h2>
+                            <p className="text-[10px] text-zinc-400 font-medium">Profile, address & order history</p>
                         </div>
                     </div>
-                    <button onClick={onClose} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-xl transition-colors">
-                        <X className="w-5 h-5" />
+                    <button onClick={onClose} className="p-1.5 text-zinc-400 hover:text-zinc-700 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-[4px] transition-colors">
+                        <X className="w-4 h-4" />
                     </button>
                 </div>
 
-                {/* Body (Scrollable) */}
-                <div className="flex-1 overflow-y-auto p-6 lg:p-8 custom-scrollbar">
+                {/* Body */}
+                <div className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-6 custom-scrollbar">
 
-                    {/* Top Row: Basic Info & Contact */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-
-                        {/* Core User Info */}
-                        <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 flex items-start gap-4 h-full">
+                    {/* Profile + Address row */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {/* Profile card */}
+                        <div className="bg-zinc-50 dark:bg-zinc-800/40 rounded-[4px] p-5 border border-zinc-200 dark:border-zinc-700/60 flex items-start gap-4">
                             {userDetails.image ? (
-                                <Image src={userDetails.image} alt={userDetails.name} width={64} height={64} className="size-16 rounded-2xl object-cover shadow-sm" />
+                                <Image src={userDetails.image} alt={userDetails.name} width={56} height={56} className="size-14 rounded-[4px] object-cover shadow-xs shrink-0" />
                             ) : (
-                                <div className="size-16 rounded-2xl bg-gradient-to-br from-primary/30 to-primary/10 flex items-center justify-center text-xl font-bold text-primary shadow-sm">
+                                <div className="size-14 rounded-[4px] bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-xl font-bold text-zinc-600 dark:text-zinc-300 shrink-0">
                                     {(userDetails.name || "U").charAt(0).toUpperCase()}
                                 </div>
                             )}
-                            <div className="flex flex-col gap-1">
-                                <h3 className="text-xl font-bold text-slate-800">{userDetails.name}</h3>
-                                <p className="text-sm text-slate-500 font-medium">{userDetails.email}</p>
-                                <div className="flex items-center gap-2 mt-2 flex-wrap">
-                                    <span className={`inline-flex px-2.5 py-0.5 rounded-md text-[10px] uppercase tracking-wider font-bold ${userDetails.role === "seller" ? "bg-blue-100 text-blue-600" : "bg-slate-200 text-slate-600"}`}>
+                            <div className="flex flex-col gap-1.5 min-w-0">
+                                <h3 className="text-base font-bold text-zinc-900 dark:text-white truncate">{userDetails.name}</h3>
+                                <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate">{userDetails.email}</p>
+                                <div className="flex items-center gap-1.5 flex-wrap mt-1">
+                                    <span className={`inline-flex px-2 py-0.5 rounded-[4px] text-[10px] uppercase tracking-wider font-bold ${userDetails.role === "seller" ? "bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300" : "bg-zinc-100 text-zinc-600 dark:bg-slate-700 dark:text-zinc-300"}`}>
                                         {userDetails.role}
                                     </span>
-                                    <span className={`inline-flex px-2.5 py-0.5 rounded-md text-[10px] uppercase tracking-wider font-bold ${userDetails.isBanned ? "bg-red-100 text-red-500" : "bg-green-100 text-green-600"}`}>
+                                    <span className={`inline-flex px-2 py-0.5 rounded-[4px] text-[10px] uppercase tracking-wider font-bold ${userDetails.isBanned ? "bg-rose-50 text-rose-600 dark:bg-rose-950/60 dark:text-rose-300" : "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300"}`}>
                                         {userDetails.isBanned ? "Banned" : "Active"}
                                     </span>
-                                    <span className="text-xs text-slate-400">
+                                    <span className="text-[11px] text-zinc-400 dark:text-zinc-500">
                                         Joined {format(new Date(userDetails.joinedAt), "PP")}
                                     </span>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Delivery / Contact Info from Address */}
-                        <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 flex flex-col gap-3 h-full">
-                            <h4 className="text-sm font-bold text-slate-900 flex items-center gap-2 mb-1">
-                                <span className="material-symbols-outlined text-[#4799eb] text-[18px]">local_shipping</span>
-                                Primary Delivery details
+                        {/* Address card */}
+                        <div className="bg-zinc-50 dark:bg-zinc-800/40 rounded-[4px] p-5 border border-zinc-200 dark:border-zinc-700/60 flex flex-col gap-3">
+                            <h4 className="text-xs font-bold text-zinc-700 dark:text-zinc-200 flex items-center gap-1.5 uppercase tracking-wider">
+                                <span className="material-symbols-outlined text-blue-500 text-sm">local_shipping</span>
+                                Primary Delivery Details
                             </h4>
-
                             {latestAddress ? (
-                                <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
-                                    <div className="flex flex-col">
-                                        <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Full Name</span>
-                                        <span className="font-medium text-slate-700">{latestAddress.name}</span>
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Contact No.</span>
-                                        <span className="font-medium text-slate-700">{latestAddress.phone}</span>
-                                    </div>
-                                    <div className="flex flex-col col-span-2">
-                                        <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Street Address</span>
-                                        <span className="font-medium text-slate-700">{latestAddress.street}</span>
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Landmark</span>
-                                        <span className="font-medium text-slate-700 truncate">{latestAddress.landmark || 'N/A'}</span>
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">City</span>
-                                        <span className="font-medium text-slate-700">{latestAddress.city}</span>
-                                    </div>
-                                    <div className="flex flex-col col-span-2">
-                                        <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Emergency Contact</span>
-                                        <span className="font-medium text-slate-700">{latestAddress.emergencyContact || 'N/A'}</span>
-                                    </div>
+                                <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 text-xs">
+                                    {[
+                                        { label: "Full Name", value: latestAddress.name },
+                                        { label: "Contact No.", value: latestAddress.phone },
+                                        { label: "Street Address", value: latestAddress.street, full: true },
+                                        { label: "Landmark", value: latestAddress.landmark || "N/A" },
+                                        { label: "City", value: latestAddress.city },
+                                        { label: "Emergency Contact", value: latestAddress.emergencyContact || "N/A", full: true },
+                                    ].map(({ label, value, full }) => (
+                                        <div key={label} className={`flex flex-col ${full ? "col-span-2" : ""}`}>
+                                            <span className="text-[10px] text-zinc-400 dark:text-zinc-500 font-bold uppercase tracking-wider mb-0.5">{label}</span>
+                                            <span className="font-semibold text-zinc-700 dark:text-zinc-200 truncate">{value}</span>
+                                        </div>
+                                    ))}
                                 </div>
                             ) : (
-                                <div className="flex-1 flex flex-col items-center justify-center text-slate-400 opacity-70">
-                                    <span className="material-symbols-outlined text-3xl mb-2">location_off</span>
-                                    <p className="text-sm font-medium">No address or checkout history found.</p>
+                                <div className="flex-1 flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-600 py-4 gap-1.5">
+                                    <span className="material-symbols-outlined text-2xl">location_off</span>
+                                    <p className="text-xs font-medium">No address or checkout history found.</p>
                                 </div>
                             )}
                         </div>
-
                     </div>
 
-                    {/* Order Summary */}
+                    {/* Order History */}
                     <div>
-                        <h4 className="text-lg font-bold text-slate-900 flex items-center gap-2 mb-4">
-                            <span className="material-symbols-outlined text-primary text-[20px]">receipt_long</span>
+                        <h4 className="text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider flex items-center gap-1.5 mb-3">
+                            <span className="material-symbols-outlined text-zinc-400 text-sm">receipt_long</span>
                             Order History ({userDetails.buyerOrders?.length || 0})
                         </h4>
-
                         {userDetails.buyerOrders && userDetails.buyerOrders.length > 0 ? (
-                            <div className="border border-slate-100 rounded-2xl overflow-hidden bg-white">
-                                <table className="w-full text-left text-sm">
-                                    <thead className="bg-slate-50 border-b border-slate-100 text-[10px] uppercase tracking-wider font-bold text-slate-500">
+                            <div className="border border-zinc-200 dark:border-zinc-800 rounded-[4px] overflow-hidden">
+                                <table className="w-full text-left">
+                                    <thead className="bg-zinc-50 dark:bg-zinc-800/50 border-b border-zinc-200 dark:border-zinc-800">
                                         <tr>
-                                            <th className="px-5 py-3">Order ID</th>
-                                            <th className="px-5 py-3">Date</th>
-                                            <th className="px-5 py-3 w-[40%]">Items Summary</th>
-                                            <th className="px-5 py-3">Total</th>
-                                            <th className="px-5 py-3">Status</th>
+                                            {["Order ID", "Date", "Items", "Total", "Status"].map(h => (
+                                                <th key={h} className="px-4 py-2.5 text-[10px] uppercase tracking-wider font-bold text-zinc-500 dark:text-zinc-400">{h}</th>
+                                            ))}
                                         </tr>
                                     </thead>
-                                    <tbody className="divide-y divide-slate-50">
+                                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
                                         {userDetails.buyerOrders.map((order) => (
-                                            <tr key={order.id} className="hover:bg-slate-50/50 transition-colors">
-                                                <td className="px-5 py-3 font-mono font-bold text-slate-700">
-                                                    {order.trackingId}
+                                            <tr key={order.id} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/30 transition-colors">
+                                                <td className="px-4 py-2.5 font-mono text-xs font-bold text-zinc-700 dark:text-zinc-200">{order.trackingId}</td>
+                                                <td className="px-4 py-2.5 text-xs text-zinc-500 dark:text-zinc-400 whitespace-nowrap">{format(new Date(order.createdAt), "MMM d, yyyy")}</td>
+                                                <td className="px-4 py-2.5 text-xs text-zinc-600 dark:text-zinc-300 truncate max-w-[180px]">
+                                                    {order.orderItems?.map(i => `${i.quantity}× ${i.product?.name}`).join(", ") || "Unknown items"}
                                                 </td>
-                                                <td className="px-5 py-3 text-slate-500">
-                                                    {format(new Date(order.createdAt), "MMM d, yyyy")}
-                                                </td>
-                                                <td className="px-5 py-3 text-slate-600 truncate max-w-[200px]">
-                                                    {order.orderItems?.map(i => `${i.quantity}x ${i.product?.name}`).join(', ') || 'Unknown items'}
-                                                </td>
-                                                <td className="px-5 py-3 font-bold text-slate-900">
-                                                    ${order.total.toFixed(2)}
-                                                </td>
-                                                <td className="px-5 py-3">
-                                                    <span className={`inline-flex px-2.5 py-1 rounded-md text-[10px] tracking-wider uppercase font-bold 
-                                                        ${order.status === 'DELIVERED' ? 'bg-green-100 text-green-600' :
-                                                            order.status === 'ORDER_PLACED' ? 'bg-blue-100 text-blue-600' :
-                                                                order.status === 'PROCESSING' ? 'bg-orange-100 text-orange-600' :
-                                                                    'bg-slate-100 text-slate-600'
-                                                        }`}>
-                                                        {order.status.replace('_', ' ')}
+                                                <td className="px-4 py-2.5 text-xs font-bold text-zinc-900 dark:text-white">${order.total.toFixed(2)}</td>
+                                                <td className="px-4 py-2.5">
+                                                    <span className={`inline-flex px-2 py-0.5 rounded-[4px] text-[10px] tracking-wider uppercase font-bold ${statusColors[order.status] || "bg-zinc-100 text-zinc-600 dark:bg-slate-700 dark:text-zinc-300"}`}>
+                                                        {order.status.replace(/_/g, " ")}
                                                     </span>
                                                 </td>
                                             </tr>
@@ -154,22 +135,21 @@ export default function UserViewModal({ isOpen, onClose, userDetails }) {
                                 </table>
                             </div>
                         ) : (
-                            <div className="border border-slate-100 border-dashed rounded-2xl bg-slate-50 p-8 flex flex-col items-center justify-center text-slate-400">
-                                <span className="material-symbols-outlined text-4xl mb-2 opacity-50">shopping_cart_checkout</span>
-                                <p className="text-sm font-medium">This user hasn't placed any orders yet.</p>
+                            <div className="border border-dashed border-slate-300 dark:border-zinc-700 rounded-[4px] bg-zinc-50 dark:bg-zinc-800/20 p-8 flex flex-col items-center text-zinc-400 dark:text-zinc-600 gap-2">
+                                <span className="material-symbols-outlined text-3xl">shopping_cart_checkout</span>
+                                <p className="text-xs font-medium">No orders placed yet.</p>
                             </div>
                         )}
                     </div>
-
                 </div>
 
                 {/* Footer */}
-                <div className="p-5 border-t border-slate-100 bg-slate-50 flex justify-end">
-                    <button onClick={onClose} className="px-5 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl font-bold transition-colors text-sm">
-                        Close Details
+                <div className="px-5 py-3.5 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/20 flex justify-end">
+                    <button onClick={onClose} className="px-4 py-2 border border-slate-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 rounded-[4px] text-xs font-semibold hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors">
+                        Close
                     </button>
                 </div>
             </div>
         </div>
     )
-} 
+}

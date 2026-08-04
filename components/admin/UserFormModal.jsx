@@ -1,84 +1,94 @@
-import { useState } from "react";
-import toast from "react-hot-toast";
+﻿'use client'
+import { useState } from "react"
+import toast from "react-hot-toast"
 
 export default function UserFormModal({ isOpen, onClose, user, onSuccess }) {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({
         name: user?.name || "",
         email: user?.email || "",
         role: user?.role || "customer",
-    });
+    })
 
-    if (!isOpen) return null;
+    if (!isOpen) return null
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-
+        e.preventDefault()
+        setLoading(true)
         try {
-            const url = user ? `/api/admin/users/${user.id}` : "/api/admin/users";
-            const method = user ? "PATCH" : "POST";
-
+            const url = user ? `/api/admin/users/${user.id}` : "/api/admin/users"
+            const method = user ? "PATCH" : "POST"
             const res = await fetch(url, {
                 method,
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
-            });
-
-            const data = await res.json();
+            })
+            const data = await res.json()
             if (data.success) {
-                toast.success(data.message);
-                onSuccess();
-                onClose();
+                toast.success(data.message)
+                onSuccess()
+                onClose()
             } else {
-                toast.error(data.message);
+                toast.error(data.message)
             }
-        } catch (error) {
-            toast.error("Failed to save user");
+        } catch {
+            toast.error("Failed to save user")
         } finally {
-            setLoading(false);
+            setLoading(false)
         }
-    };
+    }
+
+    const inputCls = "w-full px-3.5 py-2.5 rounded-[4px] border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-800/60 text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900/10 dark:focus:ring-emerald-500/20 focus:border-slate-400 dark:focus:border-emerald-600 transition-all"
+    const labelCls = "block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1.5"
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
-            <div className="bg-white rounded-2xl w-full max-w-md shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-                <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-800">
-                    <h2 className="text-xl font-bold text-slate-900">{user ? "Edit User" : "Add New User"}</h2>
-                    <button onClick={onClose} className="text-slate-400 hover:text-slate-600">
-                        <span className="material-symbols-outlined">close</span>
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs animate-in fade-in duration-150" onClick={onClose}>
+            <div
+                className="bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 rounded-[4px] w-full max-w-md shadow-xl overflow-hidden animate-in zoom-in-95 duration-150"
+                onClick={e => e.stopPropagation()}
+            >
+                {/* Header */}
+                <div className="h-13 px-5 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
+                    <div className="flex items-center gap-2.5">
+                        <div className="size-7 rounded-[4px] bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-300">
+                            <span className="material-symbols-outlined text-base">{user ? "edit" : "person_add"}</span>
+                        </div>
+                        <h2 className="text-sm font-bold text-zinc-900 dark:text-white">{user ? "Edit User" : "Add New User"}</h2>
+                    </div>
+                    <button onClick={onClose} className="p-1.5 text-zinc-400 hover:text-zinc-700 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-[4px] transition-colors">
+                        <span className="material-symbols-outlined text-sm">close</span>
                     </button>
                 </div>
 
-                <form onSubmit={handleSubmit} className="p-6 space-y-4">
+                <form onSubmit={handleSubmit} className="p-5 space-y-4">
                     <div>
-                        <label className="block text-sm font-semibold text-slate-700 mb-1">Full Name</label>
+                        <label className={labelCls}>Full Name</label>
                         <input
                             type="text"
                             required
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                            className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm"
+                            className={inputCls}
                             placeholder="e.g. John Doe"
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-semibold text-slate-700 mb-1">Email Address</label>
+                        <label className={labelCls}>Email Address</label>
                         <input
                             type="email"
                             required
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm"
+                            className={inputCls}
                             placeholder="e.g. john@example.com"
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-semibold text-slate-700 mb-1">Role</label>
+                        <label className={labelCls}>Role</label>
                         <select
                             value={formData.role}
                             onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                            className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm"
+                            className={inputCls}
                         >
                             <option value="customer">Customer</option>
                             <option value="seller">Seller</option>
@@ -86,24 +96,25 @@ export default function UserFormModal({ isOpen, onClose, user, onSuccess }) {
                         </select>
                     </div>
 
-                    <div className="flex gap-3 justify-end pt-4 mt-6 border-t border-slate-100">
+                    {/* Footer */}
+                    <div className="flex gap-2.5 justify-end pt-4 border-t border-zinc-200 dark:border-zinc-800">
                         <button
                             type="button"
                             onClick={onClose}
-                            className="px-5 py-2.5 text-sm font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all"
+                            className="px-4 py-2 text-xs font-semibold text-zinc-700 dark:text-zinc-300 border border-slate-300 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 rounded-[4px] transition-all"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
                             disabled={loading}
-                            className={`px-5 py-2.5 text-sm font-bold text-white bg-primary hover:bg-primary/90 rounded-xl transition-all shadow-sm ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+                            className={`px-4 py-2 text-xs font-semibold text-white bg-zinc-900 hover:bg-zinc-800 dark:bg-emerald-500 dark:hover:bg-emerald-400 dark:text-slate-950 rounded-[4px] transition-all shadow-xs ${loading ? "opacity-60 cursor-not-allowed" : ""}`}
                         >
-                            {loading ? "Saving..." : "Save User"}
+                            {loading ? "Saving…" : user ? "Save Changes" : "Create User"}
                         </button>
                     </div>
                 </form>
             </div>
         </div>
-    );
+    )
 }

@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabase";
+import { uploadToR2 } from "@/lib/r2";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
@@ -7,34 +7,28 @@ export async function POST(request) {
         const file = formData.get("file");
 
         if (!file) {
-            return NextResponse.json({ success: false, message: "No file provided" }, { status: 400 });
+            return NextResponse.json(
+                { success: false, message: "No file provided" },
+                { status: 400 }
+            );
         }
+
+        // Sanitise file name and make it unique
+        const safeName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, "");
+        const fileName = `${Date.now()}_${safeName}`;
 
         const fileBuffer = await file.arrayBuffer();
-        const fileName = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.\-_]/g, '')}`;
 
-        const { data, error } = await supabase.storage
-            .from("products")
-            .upload(fileName, fileBuffer, {
-                contentType: file.type || "image/jpeg",
-                cacheControl: "3600",
-                upsert: false,
-            });
+        // Upload to Cloudflare R2
+        const publicUrl = await uploadToR2(fileBuffer, fileName, file.type || "image/jpeg");
 
-        if (error) {
-            throw error;
-        }
+        return NextResponse.json({ success: true, url: publicUrl });
 
-        const { data: publicUrlData } = supabase.storage
-            .from("products")
-            .getPublicUrl(fileName);
-
-        return NextResponse.json({
-            success: true,
-            url: publicUrlData.publicUrl,
-        });
     } catch (error) {
         console.error("Upload error:", error);
-        return NextResponse.json({ success: false, message: error.message }, { status: 500 });
+        return NextResponse.json(
+            { success: false, message: error.message },
+            { status: 500 }
+        );
     }
 }

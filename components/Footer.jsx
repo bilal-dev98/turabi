@@ -33,7 +33,7 @@ const Footer = () => {
             title: "CONTACT",
             links: [
                 { text: "+92 325 5821056", path: '/contact', icon: PhoneIcon },
-                { text: "info@turabi.store", path: '/contact', icon: MailIcon },
+                { text: "info@jananfashion.store", path: '/contact', icon: MailIcon },
                 { text: "Shams Colony H-13 Islamabad", path: '/contact', icon: MapPinIcon }
             ]
         }
@@ -52,9 +52,9 @@ const Footer = () => {
                 <div className="flex flex-col md:flex-row items-start justify-between gap-10 py-10 border-b border-slate-500/30 text-slate-500">
                     <div>
                         <Link href="/" className="text-4xl font-semibold text-slate-700">
-                            Turabi <span className="text-green-600">Store</span><span className="text-green-600 text-5xl leading-0">.</span>
+                            Janan <span className="text-green-600">Fashion</span><span className="text-green-600 text-5xl leading-0">.</span>
                         </Link>
-                        <p className="max-w-[410px] mt-6 text-sm">Welcome to Turabi Store, your ultimate destination for the latest and smartest gadgets. From smartphones and smartwatches to essential accessories, we bring you the best in innovation — all in one place.</p>
+                        <p className="max-w-[410px] mt-6 text-sm">Welcome to Janan Fashion, your ultimate destination for the latest trends, clothing, and fashion accessories. We bring you the finest style — all in one place.</p>
                         <div className="flex items-center gap-3 mt-5">
                             {socialIcons.map((item, i) => (
                                 <Link href={item.link} key={i} className="flex items-center justify-center w-10 h-10 bg-slate-100 hover:scale-105 hover:border border-slate-300 transition rounded-full">
@@ -80,7 +80,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <p className="py-4 text-sm text-slate-500">
-                    Copyright 2025 © Turabi Store All Right Reserved.
+                    Copyright 2026 © Janan Fashion. All Rights Reserved.
                 </p>
             </div>
         </footer>

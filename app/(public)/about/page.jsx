@@ -5,8 +5,8 @@ import Image from 'next/image';
 import { assets } from '@/assets/assets';
 
 export const metadata = {
-    title: "About Us - Turabi Store",
-    description: "Learn more about Turabi Store, our mission, and our premium selection of tech products.",
+    title: "About Us - Janan Fashion",
+    description: "Learn more about Janan Fashion, our mission, and our premium selection of fashion products.",
 };
 
 export default function AboutPage() {
@@ -21,7 +21,7 @@ export default function AboutPage() {
                                 Our Story
                             </div>
                             <h1 className="text-4xl sm:text-6xl leading-[1.2] my-3 font-medium text-slate-800 max-w-xl">
-                                Turabi Store
+                                Janan Fashion
                             </h1>
                             <p className="text-slate-600 text-lg sm:text-xl font-medium mt-4 max-w-xl leading-relaxed">
                                 Starting in Rawalpindi and Islamabad, we have evolved into a trusted hub for premium gadgets and electronics. We bring the best tech right to your doorstep.
@@ -74,7 +74,7 @@ export default function AboutPage() {
                 <div className="mt-20">
                     <div className="text-center mb-12">
                         <h2 className="text-4xl font-medium text-slate-800 mb-4">Why Choose Us</h2>
-                        <p className="text-slate-500 font-medium">What makes Turabi Store the right choice for your tech needs.</p>
+                        <p className="text-slate-500 font-medium">What makes Janan Fashion the right choice for your fashion needs.</p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-slate-800">

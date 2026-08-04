@@ -1,8 +1,8 @@
 import AdminLayout from "@/components/admin/AdminLayout";
 
 export const metadata = {
-    title: "GoCart. - Admin",
-    description: "GoCart. - Admin",
+    title: "Janan Fashion - Admin",
+    description: "Janan Fashion - Admin",
 };
 
 export default function RootAdminLayout({ children }) {
