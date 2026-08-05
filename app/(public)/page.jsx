@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import Newsletter from "@/components/Newsletter";
 import OurSpecs from "@/components/OurSpec";
 import LatestProducts from "@/components/LatestProducts";
+import CardStackSection from "@/components/CardStackSection";
 
 export default function Home() {
     const [sections, setSections] = useState(null);
@@ -33,6 +34,7 @@ export default function Home() {
             <Hero />
             <LatestProducts sectionData={latestProductsSection} />
             <BestSelling sectionData={bestSellingSection} />
+            <CardStackSection />
             <OurSpecs sectionData={ourSpecsSection} />
             <Newsletter />
         </div>

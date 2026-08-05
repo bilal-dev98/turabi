@@ -59,3 +59,9 @@
 .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
 .custom-scrollbar::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 9999px; }
 .dark .custom-scrollbar::-webkit-scrollbar-thumb { background: #27272a; }
+
+/* ── Continuous marquee scroll animation ─────────────────────────────────── */
+@keyframes marqueeScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}

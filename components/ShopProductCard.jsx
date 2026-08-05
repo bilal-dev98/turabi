@@ -16,7 +16,7 @@ const ShopProductCard = ({ product }) => {
 
     return (
         <Link href={`/product/${product.id}`}
-            className="group flex flex-col w-full bg-white rounded-2xl border border-slate-100 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5 overflow-hidden transition-all duration-300">
+            className="group flex flex-col w-full bg-white rounded-[4px] border border-slate-200 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10 overflow-hidden transition-all duration-300">
             {/* Image area */}
             <div className="relative bg-[#F5F5F5] w-full aspect-square flex items-center justify-center overflow-hidden">
                 <Image

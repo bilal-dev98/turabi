@@ -14,19 +14,19 @@ const Footer = () => {
         {
             title: "PRODUCTS",
             links: [
-                { text: "Earphones", path: '/', icon: null },
-                { text: "Headphones", path: '/', icon: null },
-                { text: "Smartphones", path: '/', icon: null },
-                { text: "Laptops", path: '/', icon: null },
+                { text: "Earphones", path: '/shop', icon: null },
+                { text: "Headphones", path: '/shop', icon: null },
+                { text: "Smartphones", path: '/shop', icon: null },
+                { text: "Laptops", path: '/shop', icon: null },
             ]
         },
         {
-            title: "WEBSITE?",
+            title: "WEBSITE",
             links: [
                 { text: "Home", path: '/', icon: null },
-                { text: "Privacy Policy", path: '/privacy', icon: null },
-                { text: "Become Plus Member", path: '/pricing', icon: null },
-                { text: "Create Your Store", path: '/create-store', icon: null },
+                { text: "Shop", path: '/shop', icon: null },
+                { text: "About Us", path: '/about', icon: null },
+                { text: "Contact Us", path: '/contact', icon: null },
             ]
         },
         {
@@ -47,31 +47,31 @@ const Footer = () => {
     ]
 
     return (
-        <footer className="mx-6 bg-white">
+        <footer className="px-4 sm:px-6 bg-white border-t border-slate-100">
             <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col md:flex-row items-start justify-between gap-10 py-10 border-b border-slate-500/30 text-slate-500">
-                    <div>
-                        <Link href="/" className="text-4xl font-semibold text-slate-700">
-                            Janan <span className="text-green-600">Fashion</span><span className="text-green-600 text-5xl leading-0">.</span>
+                <div className="flex flex-col md:flex-row items-start justify-between gap-8 sm:gap-10 py-8 sm:py-10 border-b border-slate-200 text-slate-500">
+                    <div className="w-full md:w-auto">
+                        <Link href="/" className="text-3xl sm:text-4xl font-semibold text-slate-700">
+                            Janan <span className="text-green-600">Fashion</span><span className="text-green-600 text-4xl sm:text-5xl leading-0">.</span>
                         </Link>
-                        <p className="max-w-[410px] mt-6 text-sm">Welcome to Janan Fashion, your ultimate destination for the latest trends, clothing, and fashion accessories. We bring you the finest style — all in one place.</p>
-                        <div className="flex items-center gap-3 mt-5">
+                        <p className="max-w-[410px] mt-4 sm:mt-6 text-xs sm:text-sm leading-relaxed">Welcome to Janan Fashion, your ultimate destination for the latest trends, clothing, and fashion accessories. We bring you the finest style — all in one place.</p>
+                        <div className="flex items-center gap-3 mt-4 sm:mt-5">
                             {socialIcons.map((item, i) => (
-                                <Link href={item.link} key={i} className="flex items-center justify-center w-10 h-10 bg-slate-100 hover:scale-105 hover:border border-slate-300 transition rounded-full">
+                                <Link href={item.link} key={i} className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 bg-slate-100 hover:scale-105 hover:border border-slate-300 transition rounded-full">
                                     <item.icon />
                                 </Link>
                             ))}
                         </div>
                     </div>
-                    <div className="flex flex-wrap justify-between w-full md:w-[45%] gap-5 text-sm ">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8 w-full md:w-auto text-xs sm:text-sm">
                         {linkSections.map((section, index) => (
-                            <div key={index}>
-                                <h3 className="font-medium text-slate-700 md:mb-5 mb-3">{section.title}</h3>
-                                <ul className="space-y-2.5">
+                            <div key={index} className={index === 2 ? "col-span-2 sm:col-span-1" : ""}>
+                                <h3 className="font-bold text-slate-800 mb-3 uppercase tracking-wider text-[11px] sm:text-xs">{section.title}</h3>
+                                <ul className="space-y-2">
                                     {section.links.map((link, i) => (
                                         <li key={i} className="flex items-center gap-2">
                                             {link.icon && <link.icon />}
-                                            <Link href={link.path} className="hover:underline transition">{link.text}</Link>
+                                            <Link href={link.path} className="hover:underline transition text-slate-600">{link.text}</Link>
                                         </li>
                                     ))}
                                 </ul>
@@ -79,7 +79,7 @@ const Footer = () => {
                         ))}
                     </div>
                 </div>
-                <p className="py-4 text-sm text-slate-500">
+                <p className="py-4 text-xs sm:text-sm text-slate-500 text-center sm:text-left">
                     Copyright 2026 © Janan Fashion. All Rights Reserved.
                 </p>
             </div>

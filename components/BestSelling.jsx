@@ -20,7 +20,7 @@ const BestSelling = ({ sectionData }) => {
     return (
         <div className='px-6 my-30 max-w-6xl mx-auto'>
             <Title title={title} description={`Showing ${products.length} products`} href='/shop' />
-            <div className='mt-12  grid grid-cols-2 sm:flex flex-wrap gap-6 xl:gap-12'>
+            <div className='mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5'>
                 {products.map((product, index) => (
                     <ProductCard key={index} product={product} />
                 ))}
