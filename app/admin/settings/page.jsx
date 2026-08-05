@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import { useState, useEffect } from "react"
 import toast from "react-hot-toast"
 import { useDispatch, useSelector } from "react-redux"
@@ -42,7 +42,7 @@ export default function AdminSettings() {
 
     const [activeTab, setActiveTab] = useState("general")
 
-    const [general, setGeneral] = useState({ storeName: "Janan Fashion", tagline: "Elegance & Perfection", supportEmail: "info@jananfashion.store", phone: "+92 300 1234567", timezone: "UTC+5", currency: "PKR - Rs" })
+    const [general, setGeneral] = useState({ storeName: "Janan Fashion", tagline: "Elegance & Perfection", supportEmail: "info@jananfashion.store", phone: "+92 300 1234567", timezone: "UTC+5", currency: "Rs" })
     const [payment, setPayment] = useState({ stripeKey: "sk_live_***", stripeEnabled: true, paypalEmail: "info@jananfashion.store", paypalEnabled: false, codEnabled: true })
     const [shipping, setShipping] = useState({ freeShippingMin: "2000", defaultRate: "200", expressRate: "450", internationalEnabled: false })
     const [profile, setProfile] = useState({ name: "Alex Rivera", email: "admin@jananfashion.store", role: "Super Admin" })
@@ -96,7 +96,7 @@ export default function AdminSettings() {
                                 <div>
                                     <label className="block text-[10px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">Currency</label>
                                     <select value={general.currency} onChange={e => setGeneral(g => ({ ...g, currency: e.target.value }))} className="w-full bg-white dark:bg-zinc-800/60 border border-slate-300 dark:border-zinc-700 rounded-[4px] px-3.5 py-2 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:ring-2 focus:ring-slate-900/10 dark:focus:ring-emerald-500/20 transition-all">
-                                        {["USD", "EUR", "GBP", "PKR - Rs", "AED"].map(c => <option key={c}>{c}</option>)}
+                                        {["Rs", "$", "€", "£", "AED"].map(c => <option key={c}>{c}</option>)}
                                     </select>
                                 </div>
                             </div>

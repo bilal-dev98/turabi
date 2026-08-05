@@ -9,7 +9,7 @@ import { useSelector } from "react-redux"
 
 export default function Dashboard() {
 
-    const currency = useSelector(state => state.settings?.currency) || '$'
+    const currency = useSelector(state => state.settings?.currency) || 'Rs'
 
     const router = useRouter()
 

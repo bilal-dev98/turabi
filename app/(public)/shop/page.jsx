@@ -161,9 +161,9 @@ function ShopContent() {
                 </h3>
                 <div className="space-y-4">
                     <div className="flex items-center justify-between text-sm font-semibold">
-                        <span className="px-2.5 py-1 bg-slate-100 rounded-lg text-slate-700">${priceRange[0]}</span>
+                        <span className="px-2.5 py-1 bg-slate-100 rounded-lg text-slate-700">Rs {priceRange[0]}</span>
                         <span className="text-slate-400 text-xs">to</span>
-                        <span className="px-2.5 py-1 bg-slate-100 rounded-lg text-slate-700">${priceRange[1]}</span>
+                        <span className="px-2.5 py-1 bg-slate-100 rounded-lg text-slate-700">Rs {priceRange[1]}</span>
                     </div>
                     {/* Min slider */}
                     <div className="relative">
@@ -305,7 +305,7 @@ function ShopContent() {
                                             </div>
                                             <div className="flex-1 min-w-0">
                                                 <p className="text-sm font-semibold text-slate-800 truncate">{p.name}</p>
-                                                <p className="text-xs text-slate-400">{p.category} · ${p.price}</p>
+                                                <p className="text-xs text-slate-400">{p.category} · Rs {p.price}</p>
                                             </div>
                                             <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full shrink-0">View</span>
                                         </button>
@@ -437,10 +437,10 @@ function ShopContent() {
                                                 <p className="text-xs text-slate-400 mt-1 line-clamp-1">{product.description}</p>
                                             </div>
                                             <div className="shrink-0 text-right">
-                                                <p className="text-lg font-bold text-slate-900">${product.price}</p>
+                                                <p className="text-lg font-bold text-slate-900">Rs {product.price}</p>
                                                 {disc > 0 && (
                                                     <>
-                                                        <p className="text-xs text-slate-400 line-through">${product.mrp}</p>
+                                                        <p className="text-xs text-slate-400 line-through">Rs {product.mrp}</p>
                                                         <span className="inline-block text-[10px] font-bold bg-primary/10 text-primary px-2 py-0.5 rounded-full">{disc}% OFF</span>
                                                     </>
                                                 )}

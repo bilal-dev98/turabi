@@ -8,7 +8,7 @@ import { useSelector } from "react-redux"
 
 export default function StoreManageProducts() {
 
-    const currency = useSelector(state => state.settings?.currency) || '$'
+    const currency = useSelector(state => state.settings?.currency) || 'Rs'
 
     const [loading, setLoading] = useState(true)
     const [products, setProducts] = useState([])

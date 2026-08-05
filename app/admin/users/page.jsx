@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import { useEffect, useState, useMemo } from "react"
 import Image from "next/image"
 import { format } from "date-fns"
@@ -233,7 +233,7 @@ export default function AdminUsers() {
                                         </span>
                                     </td>
                                     <td className="px-5 py-3 text-xs font-semibold text-zinc-700 dark:text-zinc-300">{user.orders}</td>
-                                    <td className="px-5 py-3 text-xs font-bold text-zinc-900 dark:text-white">${user.spent}</td>
+                                    <td className="px-5 py-3 text-xs font-bold text-zinc-900 dark:text-white">Rs {user.spent}</td>
                                     <td className="px-5 py-3 text-xs text-zinc-500 dark:text-zinc-400">{format(new Date(user.joinedAt), "MMM d, yyyy")}</td>
                                     <td className="px-5 py-3">
                                         <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] text-[10px] font-bold ${user.isBanned ? "bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300" : "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300"}`}>

@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import { X } from "lucide-react"
 import { format } from "date-fns"
 import Image from "next/image"
@@ -123,7 +123,7 @@ export default function UserViewModal({ isOpen, onClose, userDetails }) {
                                                 <td className="px-4 py-2.5 text-xs text-zinc-600 dark:text-zinc-300 truncate max-w-[180px]">
                                                     {order.orderItems?.map(i => `${i.quantity}× ${i.product?.name}`).join(", ") || "Unknown items"}
                                                 </td>
-                                                <td className="px-4 py-2.5 text-xs font-bold text-zinc-900 dark:text-white">${order.total.toFixed(2)}</td>
+                                                <td className="px-4 py-2.5 text-xs font-bold text-zinc-900 dark:text-white">Rs {order.total.toFixed(0)}</td>
                                                 <td className="px-4 py-2.5">
                                                     <span className={`inline-flex px-2 py-0.5 rounded-[4px] text-[10px] tracking-wider uppercase font-bold ${statusColors[order.status] || "bg-zinc-100 text-zinc-600 dark:bg-slate-700 dark:text-zinc-300"}`}>
                                                         {order.status.replace(/_/g, " ")}

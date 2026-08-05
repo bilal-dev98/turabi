@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import { useEffect, useState, useMemo } from "react"
 import Image from "next/image"
 import { productDummyData, categories } from "@/assets/assets"
@@ -28,6 +28,8 @@ export default function AdminProducts() {
     const [deleteTarget, setDeleteTarget] = useState(null) // id or "bulk"
     const [uploading, setUploading] = useState(false)
     const [activeTab, setActiveTab] = useState("details") // "details" | "reviews"
+    const [enableReviewsOnAdd, setEnableReviewsOnAdd] = useState(true)
+    const [reviewCountOnAdd, setReviewCountOnAdd] = useState(5)
 
     const fetchProducts = async () => {
         setLoading(true)
@@ -70,7 +72,7 @@ export default function AdminProducts() {
     }
 
     // --- CRUD ---
-    const openAdd = () => { setActiveTab("details"); setEditing(null); setForm(EMPTY_FORM); setShowModal(true) }
+    const openAdd = () => { setActiveTab("details"); setEditing(null); setForm(EMPTY_FORM); setEnableReviewsOnAdd(true); setReviewCountOnAdd(5); setShowModal(true) }
     const openEdit = (p) => {
         setActiveTab("details")
         setEditing(p.id)
@@ -146,8 +148,25 @@ export default function AdminProducts() {
                 })
                 const data = await res.json()
                 if (data.success) {
-                    setProducts(prev => [data.data, ...prev])
-                    toast.success("Product added!")
+                    const createdProduct = data.data;
+
+                    // If Enable Reviews was checked during creation, generate smart reviews!
+                    if (enableReviewsOnAdd && reviewCountOnAdd > 0) {
+                        try {
+                            await fetch(`/api/products/${createdProduct.id}/generate-reviews`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ count: reviewCountOnAdd })
+                            });
+                            toast.success(`Product created with ${reviewCountOnAdd} smart reviews!`);
+                        } catch (err) {
+                            toast.success("Product added! (Reviews generation failed)");
+                        }
+                    } else {
+                        toast.success("Product added!")
+                    }
+
+                    setProducts(prev => [createdProduct, ...prev])
                     setShowModal(false)
                 } else {
                     toast.error(data.message || "Failed to add product")
@@ -328,8 +347,8 @@ export default function AdminProducts() {
                                     <td className="px-5 py-3">
                                         <span className="inline-flex px-2 py-0.5 rounded-[4px] text-[10px] font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">{product.category}</span>
                                     </td>
-                                    <td className="px-5 py-3 text-xs font-bold text-zinc-900 dark:text-white">${product.price}</td>
-                                    <td className="px-5 py-3 text-xs text-zinc-400 line-through">${product.mrp}</td>
+                                    <td className="px-5 py-3 text-xs font-bold text-zinc-900 dark:text-white">Rs {product.price}</td>
+                                    <td className="px-5 py-3 text-xs text-zinc-400 line-through">Rs {product.mrp}</td>
                                     <td className="px-5 py-3">
                                         <button onClick={() => toggleStock(product.id)}
                                             className={`inline-flex px-2 py-0.5 rounded-[4px] text-[10px] font-bold cursor-pointer transition-all ${STATUS_BADGE[product.inStock].cls}`}>
@@ -480,11 +499,53 @@ export default function AdminProducts() {
                                             <p className="text-[10px] text-zinc-400 dark:text-zinc-600">PNG, JPG, WEBP</p>
                                             <input type="file" accept="image/*" multiple className="hidden" onChange={handleImageUpload} />
                                         </label>
+
+                                        {/* Customer Reviews Section (for New Product Creation) */}
+                                        {!editing && (
+                                            <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/40 dark:to-teal-950/30 border border-emerald-200 dark:border-emerald-800/60 rounded-[4px] p-4 space-y-3 mt-4">
+                                                <div className="flex items-center justify-between">
+                                                    <div className="flex items-center gap-2">
+                                                        <span className="material-symbols-outlined text-emerald-600 dark:text-emerald-400 text-sm">auto_awesome</span>
+                                                        <h3 className="text-xs font-bold text-zinc-900 dark:text-white uppercase tracking-wider">Customer Reviews</h3>
+                                                    </div>
+                                                    <label className="flex items-center gap-2 cursor-pointer">
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={enableReviewsOnAdd}
+                                                            onChange={e => setEnableReviewsOnAdd(e.target.checked)}
+                                                            className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 size-4"
+                                                        />
+                                                        <span className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Enable Smart Reviews</span>
+                                                    </label>
+                                                </div>
+
+                                                {enableReviewsOnAdd && (
+                                                    <div className="flex items-center gap-3 pt-1">
+                                                        <div className="flex-1">
+                                                            <label className="block text-[10px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1">Number of Reviews to Generate</label>
+                                                            <select
+                                                                value={reviewCountOnAdd}
+                                                                onChange={e => setReviewCountOnAdd(Number(e.target.value))}
+                                                                className="w-full bg-white dark:bg-zinc-800 border border-slate-300 dark:border-zinc-700 rounded-[4px] px-3 py-1.5 text-xs text-zinc-900 dark:text-zinc-100 font-bold outline-none focus:ring-2 focus:ring-emerald-500/20"
+                                                            >
+                                                                {[1, 2, 3, 5, 10, 15, 20, 25, 30, 50, 75, 100].map(n => (
+                                                                    <option key={n} value={n}>{n} Reviews</option>
+                                                                ))}
+                                                            </select>
+                                                        </div>
+                                                        <div className="text-[10px] text-zinc-500 dark:text-zinc-400 max-w-[200px] leading-tight">
+                                                            Auto-generates Pakistani reviews with realistic 4★–5★ ratings upon save.
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+
                                     </div>
                                     <div className="flex gap-2.5 pt-2">
                                         <button type="button" onClick={() => setShowModal(false)} className="flex-1 border border-slate-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 py-2.5 rounded-[4px] font-semibold text-xs hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all">Cancel</button>
                                         <button type="submit" className="flex-1 bg-zinc-900 dark:bg-emerald-500 text-white dark:text-slate-950 py-2.5 rounded-[4px] font-semibold text-xs shadow-xs hover:bg-zinc-800 dark:hover:bg-emerald-400 transition-all">
-                                            {editing ? "Save Changes" : "Add Product"}
+                                            {editing ? "Save Changes" : (enableReviewsOnAdd ? `Add Product & Generate (${reviewCountOnAdd} Reviews)` : "Add Product")}
                                         </button>
                                     </div>
                                 </form>

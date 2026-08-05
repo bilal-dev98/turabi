@@ -50,11 +50,11 @@ export default function TrackOrder() {
         return (
             <div className="relative flex gap-6 pb-12 last:pb-0">
                 {!isLast && (
-                    <div className={`absolute left-[23px] top-12 bottom-0 w-[2px] ${isCompleted ? 'bg-green-500' : 'bg-slate-200'}`} />
+                    <div className={`absolute left-[23px] top-12 bottom-0 w-[2px] ${isCompleted ? 'bg-emerald-500' : 'bg-slate-200'}`} />
                 )}
 
                 <div className="relative z-10 flex-shrink-0">
-                    <div className={`size-12 rounded-full flex items-center justify-center border-4 border-white shadow-sm ${isActive || isCompleted ? 'bg-green-500 text-white' : 'bg-slate-100 text-slate-400'}`}>
+                    <div className={`size-12 rounded-full flex items-center justify-center border-4 border-white shadow-sm ${isActive || isCompleted ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/20' : 'bg-slate-100 text-slate-400'}`}>
                         <Icon size={20} className={isCompleted || isActive ? 'animate-pulse-slow' : ''} />
                     </div>
                 </div>
@@ -77,7 +77,7 @@ export default function TrackOrder() {
             <div className="max-w-3xl mx-auto space-y-8">
                 {/* Search Header */}
                 <div className="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 sm:p-12 text-center">
-                    <div className="inline-flex items-center justify-center size-16 bg-blue-50 text-blue-600 rounded-2xl mb-6">
+                    <div className="inline-flex items-center justify-center size-16 bg-emerald-50 text-emerald-600 rounded-2xl mb-6">
                         <PackageSearch size={32} />
                     </div>
                     <h1 className="text-3xl font-extrabold text-slate-900 mb-4 tracking-tight">Track Your Order</h1>
@@ -85,14 +85,14 @@ export default function TrackOrder() {
 
                     <form onSubmit={handleTrackOrder} className="max-w-md mx-auto relative group">
                         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <MapPin className="text-slate-400 group-focus-within:text-blue-500 transition-colors" size={20} />
+                            <MapPin className="text-slate-400 group-focus-within:text-emerald-500 transition-colors" size={20} />
                         </div>
                         <input
                             type="text"
                             value={trackingId}
                             onChange={(e) => setTrackingId(e.target.value.toUpperCase())}
                             placeholder="e.g. GC-A8F93BD"
-                            className="w-full pl-12 pr-32 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 font-medium placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all uppercase"
+                            className="w-full pl-12 pr-32 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 font-medium placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all uppercase"
                         />
                         <button
                             type="submit"
@@ -115,8 +115,8 @@ export default function TrackOrder() {
                                 <h2 className="text-2xl font-black text-slate-900">{orderInfo.trackingId}</h2>
                                 <p className="text-sm text-slate-500 mt-2">Placed on {new Date(orderInfo.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
                             </div>
-                            <div className="px-6 py-3 rounded-2xl bg-slate-50 border border-slate-100 flex items-center gap-4 min-w-[200px]">
-                                <div className="size-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                            <div className="px-6 py-3 rounded-2xl bg-emerald-50/60 border border-emerald-100 flex items-center gap-4 min-w-[200px]">
+                                <div className="size-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
                                     <Truck size={20} />
                                 </div>
                                 <div>

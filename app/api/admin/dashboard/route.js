@@ -52,7 +52,7 @@ export async function GET(request) {
             activities.push({
                 type: 'ORDER',
                 title: 'Order Placed',
-                desc: `Order #${order.id.slice(-6).toUpperCase()} for $${order.total}`,
+                desc: `Order #${order.id.slice(-6).toUpperCase()} for Rs ${order.total}`,
                 date: order.createdAt,
                 icon: 'check_circle',
                 color: 'text-primary',

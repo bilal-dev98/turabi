@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import { useEffect, useState, useMemo, Fragment } from "react"
 import Image from "next/image"
 import Link from "next/link"
@@ -198,7 +198,7 @@ export default function AdminOrders() {
                                                 <span className="material-symbols-outlined text-sm">{expanded === order.id ? "expand_less" : "expand_more"}</span>
                                             </button>
                                         </td>
-                                        <td className="px-5 py-3 text-xs font-bold text-zinc-900 dark:text-white">{currency}{order.total?.toFixed(2)}</td>
+                                        <td className="px-5 py-3 text-xs font-bold text-zinc-900 dark:text-white">{currency}{order.total?.toFixed(0)}</td>
                                         <td className="px-5 py-3">
                                             <span className={`inline-flex px-2 py-0.5 rounded-[4px] text-[10px] font-bold ${order.isPaid ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300" : "bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300"}`}>
                                                 {order.isPaid ? "Paid" : order.paymentMethod || "COD"}
@@ -262,7 +262,7 @@ export default function AdminOrders() {
                                                                 <p className="mt-0.5">{order.address?.street || ""}{order.address?.landmark ? <span className="ml-1 font-semibold text-emerald-600 dark:text-emerald-400">({order.address.landmark})</span> : ""}</p>
                                                                 <p>{order.address?.city || ""}{order.address?.country ? `, ${order.address.country}` : ""}</p>
                                                             </div>
-                                                            <span className="text-xs font-bold text-zinc-900 dark:text-white">Total: {currency}{order.total?.toFixed(2)}</span>
+                                                            <span className="text-xs font-bold text-zinc-900 dark:text-white">Total: {currency}{order.total?.toFixed(0)}</span>
                                                         </div>
                                                     </div>
                                                 </div>

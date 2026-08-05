@@ -57,7 +57,7 @@ const Navbar = () => {
 
                         <Link
                             href="/track-order"
-                            className="px-6 py-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full font-medium shadow-sm hover:shadow text-sm"
+                            className="px-6 py-2 bg-primary hover:bg-primary/90 transition text-slate-900 rounded-full font-bold shadow-md shadow-primary/20 hover:shadow-lg text-sm"
                         >
                             Track Order
                         </Link>
@@ -110,7 +110,7 @@ const Navbar = () => {
                         <Link
                             href="/track-order"
                             onClick={() => setMobileMenuOpen(false)}
-                            className="w-full py-3 bg-indigo-500 hover:bg-indigo-600 transition text-white text-center rounded-xl font-semibold text-sm shadow"
+                            className="w-full py-3 bg-primary hover:bg-primary/90 transition text-slate-900 text-center rounded-xl font-bold text-sm shadow-md shadow-primary/20"
                         >
                             Track Order
                         </Link>

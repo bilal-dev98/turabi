@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import Image from "next/image"
@@ -160,7 +160,7 @@ export default function OrderDetailPage() {
                                     </div>
                                 </div>
                                 <div className="text-right shrink-0">
-                                    <p className="font-bold text-xs text-slate-900 dark:text-white">{currency} {(item.price * item.quantity).toFixed(2)}</p>
+                                    <p className="font-bold text-xs text-slate-900 dark:text-white">{currency} {(item.price * item.quantity).toFixed(0)}</p>
                                     <p className="text-[10px] text-slate-400">{currency} {item.price} each</p>
                                 </div>
                             </div>
@@ -168,14 +168,14 @@ export default function OrderDetailPage() {
                     </div>
                     {/* Totals */}
                     <div className="border-t border-slate-200 dark:border-slate-800 px-5 py-3.5 space-y-1.5 text-xs">
-                        <div className="flex justify-between text-slate-600 dark:text-slate-400"><span>Subtotal</span><span>{currency} {order.total?.toFixed(2)}</span></div>
+                        <div className="flex justify-between text-slate-600 dark:text-slate-400"><span>Subtotal</span><span>{currency} {order.total?.toFixed(0)}</span></div>
                         <div className="flex justify-between text-slate-600 dark:text-slate-400"><span>Shipping</span><span className="text-emerald-600 dark:text-emerald-400 font-semibold">Free</span></div>
                         {order.isCouponUsed && (
                             <div className="flex justify-between text-emerald-600 dark:text-emerald-400"><span>Coupon Applied</span><span className="font-semibold">✓</span></div>
                         )}
                         <div className="flex justify-between font-bold text-slate-900 dark:text-white border-t border-slate-200 dark:border-slate-800 pt-2">
                             <span>Total</span>
-                            <span>{currency} {order.total?.toFixed(2)}</span>
+                            <span>{currency} {order.total?.toFixed(0)}</span>
                         </div>
                     </div>
                 </div>

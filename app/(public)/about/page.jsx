@@ -41,8 +41,8 @@ export default function AboutPage() {
                                 To redefine how you shop for technology. We bridge the gap between premium electronics and accessible pricing.
                             </p>
                         </div>
-                        <div className="flex-1 bg-blue-100 rounded-3xl p-8 sm:p-10 flex flex-col justify-center relative overflow-hidden">
-                            <h2 className="text-3xl font-medium bg-gradient-to-r from-slate-800 to-[#78B2FF] bg-clip-text text-transparent mb-4">Our Promise</h2>
+                        <div className="flex-1 bg-emerald-100 rounded-3xl p-8 sm:p-10 flex flex-col justify-center relative overflow-hidden">
+                            <h2 className="text-3xl font-medium bg-gradient-to-r from-slate-800 to-emerald-600 bg-clip-text text-transparent mb-4">Our Promise</h2>
                             <p className="text-slate-600 font-medium leading-relaxed">
                                 100% authentic, curated products with lightning-fast delivery and dedicated customer support you can actually trust.
                             </p>

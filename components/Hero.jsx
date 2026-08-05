@@ -42,9 +42,9 @@ const Hero = () => {
                         </div>
                         <Image className='w-28 sm:w-35' src={assets.hero_product_img1} alt="" />
                     </div>
-                    <div className='flex-1 flex items-center justify-between w-full bg-blue-200 rounded-3xl p-6 px-8 group'>
+                    <div className='flex-1 flex items-center justify-between w-full bg-emerald-100 rounded-3xl p-6 px-8 group'>
                         <div>
-                            <p className='text-2xl sm:text-3xl font-medium bg-gradient-to-r from-slate-800 to-[#78B2FF] bg-clip-text text-transparent max-w-40'>20% discounts</p>
+                            <p className='text-2xl sm:text-3xl font-medium bg-gradient-to-r from-slate-800 to-emerald-600 bg-clip-text text-transparent max-w-40'>20% discounts</p>
                             <p className='flex items-center gap-1 mt-3 sm:mt-4 text-xs sm:text-sm font-semibold'>View more <ArrowRightIcon className='group-hover:ml-2 transition-all' size={16} /> </p>
                         </div>
                         <Image className='w-28 sm:w-35' src={assets.hero_product_img2} alt="" />

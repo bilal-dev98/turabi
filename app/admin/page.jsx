@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import { dummyAdminDashboardData } from "@/assets/assets"
 import Loading from "@/components/Loading"
 import OrdersAreaChart from "@/components/OrdersAreaChart"
@@ -11,7 +11,7 @@ const KPI_CONFIG = [
     { key: "dailySales", label: "Daily Sales", icon: "trending_up", prefix: true, format: v => Number(v || 0).toLocaleString(), color: "blue", suffix: "Last 24h" },
     { key: "orders", label: "Total Orders", icon: "receipt_long", prefix: false, format: v => Number(v || 0).toLocaleString(), color: "violet", suffix: "Placed" },
     { key: "users", label: "Total Users", icon: "group", prefix: false, format: v => Number(v || 0).toLocaleString(), color: "amber", suffix: "Registered" },
-    { key: "avgOrderValue", label: "Avg. Order Value", icon: "insights", prefix: true, format: v => Number(v || 0).toFixed(2), color: "rose", suffix: "Average" },
+    { key: "avgOrderValue", label: "Avg. Order Value", icon: "insights", prefix: true, format: v => Number(v || 0).toFixed(0), color: "rose", suffix: "Average" },
 ]
 
 const colorMap = {
@@ -31,7 +31,7 @@ const statusBadge = {
 }
 
 export default function AdminDashboard() {
-    const currency = useSelector(state => state.settings.currency) || '$'
+    const currency = useSelector(state => state.settings.currency) || 'Rs'
     const [loading, setLoading] = useState(true)
     const [dateRange, setDateRange] = useState("24h")
     const [dashboardData, setDashboardData] = useState({
@@ -96,7 +96,7 @@ export default function AdminDashboard() {
                         <div>
                             <h2 className="text-sm font-bold text-zinc-900 dark:text-white">Sales Overview</h2>
                             <div className="flex items-baseline gap-2 mt-1">
-                                <span className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">{currency}{Number(dashboardData.revenue).toFixed(2)}</span>
+                                <span className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">{currency}{Number(dashboardData.revenue).toLocaleString()}</span>
                                 <span className="text-xs font-bold text-emerald-500">+14.2%</span>
                             </div>
                         </div>
@@ -199,7 +199,7 @@ export default function AdminDashboard() {
                                                 )}
                                             </div>
                                         </td>
-                                        <td className="px-5 py-3 text-xs font-bold text-zinc-900 dark:text-white">{currency}{order.total?.toFixed(2) || '0.00'}</td>
+                                        <td className="px-5 py-3 text-xs font-bold text-zinc-900 dark:text-white">{currency}{order.total?.toFixed(0) || '0'}</td>
                                         <td className="px-5 py-3">
                                             <span className={`inline-flex px-2 py-0.5 rounded-[4px] text-[10px] font-bold uppercase tracking-wider ${statusBadge[order.status] || "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300"}`}>
                                                 {(order.status || 'ORDER_PLACED').replace(/_/g, ' ')}

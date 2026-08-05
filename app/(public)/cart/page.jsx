@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 
 export default function Cart() {
 
-    const currency = useSelector(state => state.settings?.currency) || '$';
+    const currency = useSelector(state => state.settings?.currency) || 'Rs';
 
     const { cartItems } = useSelector(state => state.cart);
     const products = useSelector(state => state.product.list);
@@ -191,7 +191,7 @@ export default function Cart() {
                                 )}
                                 <div className="flex justify-between text-slate-600">
                                     <span>Shipping</span>
-                                    <span className="text-blue-500 font-medium">Calculated at next step</span>
+                                    <span className="text-emerald-600 font-medium">Calculated at next step</span>
                                 </div>
                                 <div className="flex justify-between text-slate-600">
                                     <span>Estimated Tax (5%)</span>
