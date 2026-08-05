@@ -60,22 +60,22 @@ const CardStackSection = () => {
     }, [])
 
     return (
-        <section className="px-4 sm:px-6 my-12 sm:my-20 max-w-6xl mx-auto overflow-hidden">
+        <section className="w-full py-6 sm:py-10 overflow-hidden">
             {/* Header */}
-            <div className="text-center mb-8 sm:mb-12">
-                <p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">
+            <div className="text-center mb-4 sm:mb-6 px-4">
+                <p className="text-xs font-bold uppercase tracking-widest text-primary mb-1.5">
                     Featured Collection
                 </p>
                 <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">
                     Shop the Highlights
                 </h2>
-                <p className="mt-2 sm:mt-3 text-slate-500 text-xs sm:text-sm max-w-md mx-auto">
+                <p className="mt-1.5 sm:mt-2 text-slate-500 text-xs sm:text-sm max-w-md mx-auto">
                     Drag, swipe, or click through our curated picks. Each card is a world of its own.
                 </p>
             </div>
 
             {/* Card Stack */}
-            <div className="w-full mx-auto max-w-5xl flex justify-center">
+            <div className="w-full flex justify-center">
                 <CardStack
                     items={items}
                     cardWidth={cardWidth}

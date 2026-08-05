@@ -1,8 +1,6 @@
 'use client'
 import * as React from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
-import { SquareArrowOutUpRight } from 'lucide-react'
-import Link from 'next/link'
 
 function cn(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -122,22 +120,12 @@ export function CardStack({
             {/* Stage */}
             <div
                 className="relative w-full"
-                style={{ height: Math.max(380, cardHeight + 80) }}
+                style={{ height: cardHeight + 40 }}
                 tabIndex={0}
                 onKeyDown={onKeyDown}
             >
-                {/* background wash / spotlight */}
                 <div
-                    className="pointer-events-none absolute inset-x-0 top-6 mx-auto h-48 w-[70%] rounded-full bg-black/5 blur-3xl dark:bg-white/5"
-                    aria-hidden="true"
-                />
-                <div
-                    className="pointer-events-none absolute inset-x-0 bottom-0 mx-auto h-40 w-[76%] rounded-full bg-black/10 blur-3xl dark:bg-black/30"
-                    aria-hidden="true"
-                />
-
-                <div
-                    className="absolute inset-0 flex items-end justify-center"
+                    className="absolute inset-0 flex items-center justify-center"
                     style={{ perspective: `${perspectivePx}px` }}
                 >
                     <AnimatePresence initial={false}>
@@ -235,17 +223,6 @@ export function CardStack({
                             )
                         })}
                     </div>
-                    {activeItem?.href ? (
-                        <Link
-                            href={activeItem.href}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="text-muted-foreground hover:text-foreground transition"
-                            aria-label="Open link"
-                        >
-                            <SquareArrowOutUpRight className="h-4 w-4" />
-                        </Link>
-                    ) : null}
                 </div>
             ) : null}
         </div>

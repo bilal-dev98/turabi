@@ -36,7 +36,7 @@ const Newsletter = () => {
     };
 
     return (
-        <div className='flex flex-col items-center mx-4 my-16 sm:my-36'>
+        <div className='flex flex-col items-center mx-4 my-10 sm:my-16'>
             <Title title="Join Newsletter" description="Subscribe to get exclusive deals, new arrivals, and insider updates delivered straight to your inbox every week." visibleButton={false} />
             {subscribed ? (
                 <div className='flex items-center gap-3 bg-green-50 text-green-700 border border-green-200 rounded-2xl px-6 py-4 my-6 sm:my-10 font-medium text-xs sm:text-sm text-center'>

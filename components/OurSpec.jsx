@@ -18,7 +18,7 @@ const OurSpecs = ({ sectionData }) => {
     const title = sectionData?.title || 'Our Specifications'
 
     return (
-        <div className='px-4 sm:px-6 my-12 sm:my-20 max-w-6xl mx-auto'>
+        <div className='px-4 sm:px-6 my-10 sm:my-16 max-w-6xl mx-auto'>
             <Title visibleButton={false} title={title} description="We offer top-tier service and convenience to ensure your shopping experience is smooth, secure and completely hassle-free." />
 
             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 gap-y-8 sm:gap-y-10 mt-12 sm:mt-20'>
