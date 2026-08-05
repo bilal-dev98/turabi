@@ -23,6 +23,7 @@ const AdminSidebar = ({ open, onClose }) => {
                 { name: 'Store Approval', href: '/admin/approve', icon: 'verified' },
                 { name: 'Coupons', href: '/admin/coupons', icon: 'confirmation_number' },
                 { name: 'Home Sections', href: '/admin/homepage-sections', icon: 'view_quilt' },
+                { name: 'Shop Highlights', href: '/admin/shop-highlights', icon: 'style' },
                 { name: 'Banners', href: '/admin/banners', icon: 'campaign' },
             ]
         },

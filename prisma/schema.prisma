@@ -214,3 +214,16 @@ model ContactMessage {
   isRead    Boolean  @default(false)
   createdAt DateTime @default(now())
 }
+
+model HighlightItem {
+    id          String   @id @default(cuid())
+    title       String
+    description String?
+    imageSrc    String
+    href        String   @default("/shop")
+    order       Int      @default(0)
+    isActive    Boolean  @default(true)
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
