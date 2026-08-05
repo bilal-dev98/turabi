@@ -110,6 +110,7 @@ export function CardStack({
     if (!len) return null
 
     const activeItem = items[active]
+    const stageHeight = Math.max(440, Math.round(cardHeight * 1.45))
 
     return (
         <div
@@ -119,13 +120,13 @@ export function CardStack({
         >
             {/* Stage */}
             <div
-                className="relative w-full"
-                style={{ height: cardHeight + 40 }}
+                className="relative w-full overflow-visible"
+                style={{ height: stageHeight }}
                 tabIndex={0}
                 onKeyDown={onKeyDown}
             >
                 <div
-                    className="absolute inset-0 flex items-center justify-center"
+                    className="absolute inset-0 flex justify-center"
                     style={{ perspective: `${perspectivePx}px` }}
                 >
                     <AnimatePresence initial={false}>
@@ -167,7 +168,7 @@ export function CardStack({
                                 <motion.div
                                     key={item.id}
                                     className={cn(
-                                        'absolute bottom-0 rounded-2xl border-4 border-black/10 dark:border-white/10 overflow-hidden shadow-xl',
+                                        'absolute top-4 sm:top-6 rounded-2xl border border-white/20 overflow-hidden shadow-2xl',
                                         'will-change-transform select-none',
                                         isActive ? 'cursor-grab active:cursor-grabbing' : 'cursor-pointer',
                                     )}

@@ -60,7 +60,7 @@ const CardStackSection = () => {
     }, [])
 
     return (
-        <section className="w-full py-6 sm:py-10 overflow-hidden">
+        <section className="w-full py-6 sm:py-10 overflow-x-hidden">
             {/* Header */}
             <div className="text-center mb-4 sm:mb-6 px-4">
                 <p className="text-xs font-bold uppercase tracking-widest text-primary mb-1.5">
