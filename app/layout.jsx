@@ -1,6 +1,7 @@
 import { Inter, Outfit } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import StoreProvider from "@/app/StoreProvider";
 import InitData from "@/components/InitData";
 import "./globals.css";
@@ -143,6 +144,7 @@ export default function RootLayout({ children }) {
                     {children}
                 </StoreProvider>
                 <Analytics />
+                <SpeedInsights />
             </body>
         </html>
     );
