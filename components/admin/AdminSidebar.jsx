@@ -10,7 +10,7 @@ const AdminSidebar = ({ open, onClose, collapsed = false, onToggleCollapse }) =>
             title: "Core",
             links: [
                 { name: 'Dashboard', href: '/admin', icon: 'dashboard' },
-                { name: 'Analytics', href: '/admin/activity', icon: 'analytics' },
+                { name: 'Analytics', href: '/admin/analytics', icon: 'analytics' },
                 { name: 'Activity Log', href: '/admin/activity', icon: 'history' },
             ]
         },
@@ -47,32 +47,32 @@ const AdminSidebar = ({ open, onClose, collapsed = false, onToggleCollapse }) =>
     const SidebarContent = ({ isCompact = false }) => (
         <aside className={`${isCompact ? 'w-16' : 'w-64'} bg-white dark:bg-[#121215] text-zinc-900 dark:text-zinc-100 border-r border-zinc-200 dark:border-zinc-800/80 h-full flex flex-col transition-all duration-300 select-none`}>
             {/* Header Brand */}
-            <div className={`h-16 px-4 flex items-center ${isCompact ? 'justify-center' : 'justify-between'} border-b border-zinc-200 dark:border-zinc-800/80`}>
+            <div className="h-16 px-3.5 flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800/80">
                 <Link href="/admin" className="flex items-center gap-2 shrink-0 group" title="Chand Jewelry Admin">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/logo.png" alt="Chand Jewelry Logo" className="h-8 w-auto object-contain shrink-0 group-hover:scale-105 transition-transform" />
+                    <img src="/logo.png" alt="Chand Jewelry Logo" className="h-7 w-auto object-contain shrink-0 group-hover:scale-105 transition-transform" />
                 </Link>
 
-                {!isCompact && (
-                    <div className="flex items-center gap-1">
-                        {/* Desktop Collapse Toggle Button */}
-                        <button
-                            type="button"
-                            onClick={onToggleCollapse}
-                            className="hidden lg:flex p-1.5 text-zinc-400 hover:text-zinc-900 dark:hover:text-white rounded-[4px] hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-                            title="Collapse sidebar"
-                        >
-                            <span className="material-symbols-outlined text-xl">side_navigation</span>
-                        </button>
+                <div className="flex items-center gap-1">
+                    {/* Desktop Collapse Toggle Button */}
+                    <button
+                        type="button"
+                        onClick={onToggleCollapse}
+                        className="hidden lg:flex p-1.5 text-zinc-400 hover:text-zinc-900 dark:hover:text-white rounded-[4px] hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                        title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+                    >
+                        <span className="material-symbols-outlined text-xl">
+                            {collapsed ? "menu_open" : "side_navigation"}
+                        </span>
+                    </button>
 
-                        {/* Mobile Close Button */}
-                        {onClose && (
-                            <button onClick={onClose} className="p-1.5 text-zinc-400 hover:text-zinc-900 dark:hover:text-white rounded-[4px] lg:hidden hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors">
-                                <span className="material-symbols-outlined text-lg">close</span>
-                            </button>
-                        )}
-                    </div>
-                )}
+                    {/* Mobile Close Button */}
+                    {onClose && (
+                        <button onClick={onClose} className="p-1.5 text-zinc-400 hover:text-zinc-900 dark:hover:text-white rounded-[4px] lg:hidden hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors">
+                            <span className="material-symbols-outlined text-lg">close</span>
+                        </button>
+                    )}
+                </div>
             </div>
 
             {/* Nav Groups */}
