@@ -53,7 +53,7 @@ export default function AdminLogin() {
         }
 
         if (!securityAnswer) {
-            toast.error("Please enter the Security Code (Answer: CJ27)")
+            toast.error("Please enter your Secret Security Code")
             return
         }
 
@@ -166,10 +166,10 @@ export default function AdminLogin() {
                             </div>
                         </div>
 
-                        {/* Security Question (Answer: CJ27) */}
+                        {/* Security Question */}
                         <div>
                             <label className="block text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1.5">
-                                Security Question: <span className="text-emerald-400 font-normal">What is your Secret Security Code?</span>
+                                Security Question: <span className="text-zinc-300 font-normal">What is your Secret Security Code?</span>
                             </label>
                             <div className="relative">
                                 <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 text-sm">verified_user</span>
@@ -178,7 +178,7 @@ export default function AdminLogin() {
                                     required
                                     value={securityAnswer}
                                     onChange={e => setSecurityAnswer(e.target.value)}
-                                    placeholder="Enter CJ27..."
+                                    placeholder="Enter security code..."
                                     className="w-full bg-zinc-900/80 border border-zinc-800 rounded-lg pl-9 pr-3.5 py-2.5 text-xs text-white placeholder:text-zinc-600 outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all font-mono uppercase"
                                 />
                             </div>
