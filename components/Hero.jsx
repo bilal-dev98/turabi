@@ -10,17 +10,17 @@ const Hero = () => {
             {/* Single horizontal row layout across all screens */}
             <div className='flex flex-row items-stretch gap-3 sm:gap-4 md:gap-5 max-w-7xl mx-auto my-6 sm:my-10 overflow-x-auto scrollbar-none snap-x snap-mandatory pb-2'>
                 
-                {/* 1. Large Main Hero Banner (~45% width on desktop) */}
+                {/* 1. Large Main Hero Banner (~61% width on desktop) */}
                 <Link 
                     href="/shop" 
-                    className='w-[85vw] sm:w-[54vw] lg:w-auto lg:flex-[2.4] shrink-0 lg:shrink snap-start relative flex flex-col justify-between rounded-3xl min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] group overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-500 bg-slate-100'
+                    className='w-[88vw] sm:w-[58vw] lg:w-auto lg:flex-[3.2] shrink-0 lg:shrink snap-start relative flex flex-col justify-between rounded-3xl min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] group overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-500 bg-slate-100'
                 >
                     <Image 
                         priority 
                         src="/hero-banners/banner.webp" 
                         alt="Chand Jewelry Main Banner" 
                         fill
-                        sizes="(max-width: 768px) 85vw, 45vw"
+                        sizes="(max-width: 768px) 88vw, 60vw"
                         className='object-cover group-hover:scale-105 transition-transform duration-700 ease-out'
                     />
                 </Link>
