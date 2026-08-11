@@ -1,6 +1,33 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
+// GET a product by ID
+export async function GET(request, { params }) {
+    try {
+        const { id } = await params;
+
+        const product = await prisma.product.findUnique({
+            where: { id: id },
+            include: {
+                store: true,
+                rating: {
+                    include: { user: true }
+                }
+            }
+        });
+
+        if (!product) {
+            return NextResponse.json({ success: false, message: "Product not found" }, { status: 404 });
+        }
+
+        return NextResponse.json({ success: true, data: product });
+
+    } catch (error) {
+        console.error("Error fetching product by ID:", error);
+        return NextResponse.json({ success: false, message: error.message }, { status: 500 });
+    }
+}
+
 // PUT (Update) a product by ID
 export async function PUT(request, { params }) {
     try {

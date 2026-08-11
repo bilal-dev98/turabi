@@ -12,15 +12,27 @@ export default function Product() {
     const products = useSelector(state => state.product.list);
 
     const fetchProduct = async () => {
-        const product = products.find((product) => product.id === productId);
-        setProduct(product);
+        const found = products.find((p) => p.id === productId);
+        if (found) {
+            setProduct(found);
+            return;
+        }
+        try {
+            const res = await fetch(`/api/products/${productId}`);
+            const data = await res.json();
+            if (data.success && data.data) {
+                setProduct(data.data);
+            }
+        } catch (err) {
+            console.error("Error fetching product details:", err);
+        }
     }
 
     useEffect(() => {
-        if (products.length > 0) {
-            fetchProduct()
+        if (productId) {
+            fetchProduct();
         }
-        scrollTo(0, 0)
+        window.scrollTo(0, 0);
     }, [productId, products]);
 
     return (

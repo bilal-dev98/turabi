@@ -22,7 +22,7 @@ const ShopProductCard = ({ product }) => {
                 <Image
                     width={300} height={300}
                     className="object-contain w-3/4 h-3/4 group-hover:scale-110 transition-transform duration-300"
-                    src={product.images[0]} alt={product.name}
+                    src={product.images?.[0] || '/hero-banners/card-1.webp'} alt={product.name}
                 />
                 {discount > 0 && (
                     <span className="absolute top-2 left-2 bg-primary text-slate-900 text-[10px] font-black px-2 py-0.5 rounded-full">

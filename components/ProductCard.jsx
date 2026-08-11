@@ -24,7 +24,7 @@ const ProductCard = ({ product }) => {
                 <Image
                     width={300} height={300}
                     className="object-contain w-3/4 h-3/4 group-hover:scale-110 transition-transform duration-300"
-                    src={product.images[0]}
+                    src={product.images?.[0] || '/hero-banners/card-1.webp'}
                     alt={product.name}
                 />
                 {discount > 0 && (

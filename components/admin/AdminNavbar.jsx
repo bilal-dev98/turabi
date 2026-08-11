@@ -53,15 +53,34 @@ const AdminNavbar = ({ onMenuClick }) => {
     useEffect(() => {
         if (!search.trim()) { setSearchResults([]); return }
         const q = search.toLowerCase()
-        const products = productDummyData
-            .filter(p => p.name.toLowerCase().includes(q))
-            .slice(0, 3)
-            .map(p => ({ type: "Product", label: p.name, href: "/admin/products" }))
-        const orders = orderDummyData
-            .filter(o => o.id.toLowerCase().includes(q) || o.user?.name?.toLowerCase().includes(q))
-            .slice(0, 2)
-            .map(o => ({ type: "Order", label: `#${o.id.slice(-8).toUpperCase()} · ${o.user?.name}`, href: `/admin/orders/${o.id}` }))
-        setSearchResults([...products, ...orders])
+        let active = true
+
+        const searchData = async () => {
+            try {
+                const [prodRes, ordRes] = await Promise.all([
+                    fetch('/api/products').then(r => r.json()).catch(() => ({ data: [] })),
+                    fetch('/api/admin/orders').then(r => r.json()).catch(() => ({ data: [] }))
+                ])
+                if (!active) return
+
+                const matchingProds = (prodRes.data || [])
+                    .filter(p => p.name?.toLowerCase().includes(q) || p.category?.toLowerCase().includes(q))
+                    .slice(0, 3)
+                    .map(p => ({ type: "Product", label: p.name, href: "/admin/products" }))
+
+                const matchingOrders = (ordRes.data || [])
+                    .filter(o => o.id?.toLowerCase().includes(q) || o.trackingId?.toLowerCase().includes(q) || o.user?.name?.toLowerCase().includes(q))
+                    .slice(0, 2)
+                    .map(o => ({ type: "Order", label: `#${(o.trackingId || o.id).slice(-8).toUpperCase()} · ${o.user?.name || 'Customer'}`, href: `/admin/orders/${o.id}` }))
+
+                setSearchResults([...matchingProds, ...matchingOrders])
+            } catch (err) {
+                console.error("Error in admin search:", err)
+            }
+        }
+
+        const timer = setTimeout(searchData, 250)
+        return () => { active = false; clearTimeout(timer) }
     }, [search])
 
     // Close dropdowns on outside click

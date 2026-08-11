@@ -14,8 +14,18 @@ export default function StoreManageProducts() {
     const [products, setProducts] = useState([])
 
     const fetchProducts = async () => {
-        setProducts(productDummyData)
-        setLoading(false)
+        setLoading(true)
+        try {
+            const res = await fetch('/api/products')
+            const data = await res.json()
+            if (data.success && data.data) {
+                setProducts(data.data)
+            }
+        } catch (err) {
+            console.error("Failed to fetch products:", err)
+        } finally {
+            setLoading(false)
+        }
     }
 
     const toggleStock = async (productId) => {
