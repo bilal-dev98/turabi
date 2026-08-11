@@ -33,6 +33,9 @@ export const metadata = {
     creator: "Chand Jewelry",
     publisher: "Chand Jewelry",
     manifest: "/manifest.json",
+    verification: {
+        google: 'Kualrj9O8zhVqEAMNvwMirRUErOkwdSFZE-iRx_3pyo',
+    },
     icons: {
         icon: [
             { url: '/favicon.ico?v=4' },
@@ -132,6 +135,7 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <head>
+                <meta name="google-site-verification" content="Kualrj9O8zhVqEAMNvwMirRUErOkwdSFZE-iRx_3pyo" />
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
