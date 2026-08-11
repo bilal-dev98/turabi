@@ -1,5 +1,5 @@
 'use client'
-import { ArrowRightIcon } from 'lucide-react'
+import { ArrowRightIcon, Sparkles } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -8,30 +8,33 @@ import CategoriesMarquee from './CategoriesMarquee'
 const Hero = () => {
     return (
         <div className='mx-4 sm:mx-6 pt-4 sm:pt-8'>
-            {/* Ultra-Modern Minimal Luxury Header */}
-            <div className='max-w-3xl mx-auto text-center pt-6 sm:pt-10 pb-6 px-4 space-y-4 sm:space-y-5'>
-                {/* Minimalist Sub-heading / Eyebrow */}
-                <div className='flex items-center justify-center gap-3 text-emerald-800/80 text-[10px] sm:text-xs tracking-[0.25em] font-semibold uppercase'>
-                    <span className='h-[1px] w-8 bg-emerald-600/30'></span>
-                    <span>Fine & High Jewelry</span>
-                    <span className='h-[1px] w-8 bg-emerald-600/30'></span>
+            {/* Ultra-Luxury Hero Header Section */}
+            <div className='relative max-w-4xl mx-auto text-center pt-8 sm:pt-12 pb-6 px-4 space-y-4 sm:space-y-6'>
+                {/* Background Ambient Glow */}
+                <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-48 bg-gradient-to-r from-emerald-400/15 via-amber-400/15 to-teal-400/15 blur-3xl pointer-events-none rounded-full'></div>
+
+                {/* Sparkling Luxury Badge */}
+                <div className='inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50/90 backdrop-blur-md border border-emerald-200/80 text-emerald-900 text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase shadow-xs'>
+                    <Sparkles className='w-3.5 h-3.5 text-emerald-600 animate-pulse' />
+                    <span>HANDCRAFTED FINE JEWELRY</span>
+                    <Sparkles className='w-3.5 h-3.5 text-emerald-600 animate-pulse' />
                 </div>
 
-                {/* Minimal Luxury Title */}
-                <h1 className='text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight text-slate-900 leading-[1.08] font-serif'>
-                    Chand <span className='font-black bg-gradient-to-r from-emerald-800 via-emerald-600 to-teal-700 bg-clip-text text-transparent'>Jewelry</span>
+                {/* Elegant Luxury Title */}
+                <h1 className='text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.08] font-serif'>
+                    CHAND <span className='bg-gradient-to-r from-emerald-800 via-emerald-600 to-amber-700 bg-clip-text text-transparent font-black'>JEWELRY</span>
                 </h1>
 
                 {/* Refined Description */}
-                <p className='text-slate-600 text-xs sm:text-base max-w-xl mx-auto leading-relaxed font-normal tracking-wide'>
-                    Discover timeless handcrafted gold & silver jewelry, luxury rings, necklaces, watches and fine accessories crafted to perfection.
+                <p className='text-slate-600 text-xs sm:text-base md:text-lg max-w-xl mx-auto leading-relaxed font-normal tracking-wide'>
+                    Discover timeless handcrafted gold & silver jewelry, luxury rings, necklaces, watches and fine accessories crafted to perfection in Pakistan.
                 </p>
 
                 {/* Luxury Action Buttons */}
-                <div className='flex items-center justify-center gap-3 sm:gap-4 pt-1'>
+                <div className='flex items-center justify-center gap-3.5 sm:gap-5 pt-2 relative z-10'>
                     <Link 
                         href="/shop" 
-                        className='inline-flex items-center gap-2.5 bg-slate-950 text-white text-xs sm:text-sm font-semibold px-7 sm:px-9 py-3 sm:py-3.5 rounded-full hover:bg-emerald-800 active:scale-95 transition-all shadow-sm hover:shadow-md group tracking-wide'
+                        className='inline-flex items-center gap-2.5 bg-slate-950 text-white text-xs sm:text-sm font-semibold px-8 sm:px-10 py-3.5 sm:py-4 rounded-[4px] hover:bg-emerald-800 active:scale-95 transition-all shadow-md hover:shadow-lg shadow-emerald-900/10 group tracking-wider uppercase'
                     >
                         <span>Shop Collection</span>
                         <ArrowRightIcon className='w-4 h-4 group-hover:translate-x-1 transition-transform' />
@@ -39,7 +42,7 @@ const Hero = () => {
 
                     <Link 
                         href="/contact" 
-                        className='inline-flex items-center gap-2 bg-transparent text-slate-800 text-xs sm:text-sm font-semibold px-7 sm:px-9 py-3 sm:py-3.5 rounded-full border border-slate-300 hover:border-slate-900 hover:bg-slate-900 hover:text-white active:scale-95 transition-all tracking-wide'
+                        className='inline-flex items-center gap-2 bg-white text-slate-800 text-xs sm:text-sm font-semibold px-8 sm:px-10 py-3.5 sm:py-4 rounded-[4px] border border-slate-300 hover:border-slate-900 hover:bg-slate-950 hover:text-white active:scale-95 transition-all tracking-wider uppercase shadow-xs'
                     >
                         <span>Contact Us</span>
                     </Link>
