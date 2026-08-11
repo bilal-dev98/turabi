@@ -25,7 +25,7 @@ const Hero = () => {
                     />
                 </Link>
 
-                {/* 2. Side Card 1 (~18% width on desktop) */}
+                {/* 2. Side Card 1 */}
                 <Link 
                     href="/shop" 
                     className='w-[55vw] sm:w-[32vw] lg:w-auto lg:flex-1 shrink-0 lg:shrink snap-start relative flex flex-col justify-between rounded-3xl min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] group overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-500 bg-slate-100'
@@ -34,35 +34,21 @@ const Hero = () => {
                         src="/hero-banners/card-1.webp" 
                         alt="Chand Jewelry Card 1" 
                         fill
-                        sizes="(max-width: 768px) 55vw, 20vw"
+                        sizes="(max-width: 768px) 55vw, 25vw"
                         className='object-cover group-hover:scale-105 transition-transform duration-700 ease-out'
                     />
                 </Link>
 
-                {/* 3. Side Card 2 (~18% width on desktop) */}
-                <Link 
-                    href="/shop" 
-                    className='w-[55vw] sm:w-[32vw] lg:w-auto lg:flex-1 shrink-0 lg:shrink snap-start relative flex flex-col justify-between rounded-3xl min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] group overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-500 bg-slate-100'
-                >
-                    <Image 
-                        src="/hero-banners/card-2.webp" 
-                        alt="Chand Jewelry Card 2" 
-                        fill
-                        sizes="(max-width: 768px) 55vw, 20vw"
-                        className='object-cover group-hover:scale-105 transition-transform duration-700 ease-out'
-                    />
-                </Link>
-
-                {/* 4. Side Card 3 (~18% width on desktop) */}
+                {/* 3. Side Card 2 */}
                 <Link 
                     href="/shop" 
                     className='w-[55vw] sm:w-[32vw] lg:w-auto lg:flex-1 shrink-0 lg:shrink snap-start relative flex flex-col justify-between rounded-3xl min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] group overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-500 bg-slate-100'
                 >
                     <Image 
                         src="/hero-banners/card-3.webp" 
-                        alt="Chand Jewelry Card 3" 
+                        alt="Chand Jewelry Card 2" 
                         fill
-                        sizes="(max-width: 768px) 55vw, 20vw"
+                        sizes="(max-width: 768px) 55vw, 25vw"
                         className='object-cover group-hover:scale-105 transition-transform duration-700 ease-out'
                     />
                 </Link>
