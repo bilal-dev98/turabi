@@ -18,11 +18,13 @@ const ShopProductCard = ({ product }) => {
         <Link href={`/product/${product.id}`}
             className="group flex flex-col w-full bg-white rounded-[4px] border border-slate-200 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10 overflow-hidden transition-all duration-300">
             {/* Image area */}
-            <div className="relative bg-[#F5F5F5] w-full aspect-square flex items-center justify-center overflow-hidden">
+            <div className="relative bg-slate-100 w-full aspect-square overflow-hidden">
                 <Image
-                    width={300} height={300}
-                    className="object-contain w-3/4 h-3/4 group-hover:scale-110 transition-transform duration-300"
-                    src={product.images?.[0] || '/hero-banners/card-1.webp'} alt={product.name}
+                    fill
+                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500 ease-out"
+                    src={product.images?.[0] || '/hero-banners/card-1.webp'}
+                    alt={product.name}
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 />
                 {discount > 0 && (
                     <span className="absolute top-2 left-2 bg-primary text-slate-900 text-[10px] font-black px-2 py-0.5 rounded-full">

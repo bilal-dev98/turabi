@@ -419,9 +419,9 @@ function ShopContent() {
                                     return (
                                         <Link key={product.id} href={`/product/${product.id}`}
                                             className="flex items-center gap-4 bg-white rounded-2xl p-4 border border-slate-100 hover:border-primary/20 hover:shadow-md shadow-sm transition-all group">
-                                            <div className="size-20 sm:size-24 shrink-0 rounded-xl overflow-hidden bg-[#f5f5f5] flex items-center justify-center">
-                                                <Image src={product.images[0]} alt={product.name} width={96} height={96}
-                                                    className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-300 max-h-20" />
+                                            <div className="size-20 sm:size-24 shrink-0 rounded-xl overflow-hidden bg-slate-100 relative">
+                                                <Image src={product.images?.[0] || '/hero-banners/card-1.webp'} alt={product.name} fill
+                                                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" sizes="96px" />
                                             </div>
                                             <div className="flex-1 min-w-0">
                                                 <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{product.category}</span>
