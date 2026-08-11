@@ -77,7 +77,7 @@ const CardStackSection = () => {
     }, [])
 
     return (
-        <section className="w-full py-6 sm:py-10 overflow-x-hidden">
+        <section className="w-full pt-4 pb-2 sm:py-10 overflow-x-hidden">
             {/* Header */}
             <div className="mb-6 px-4">
                 <Title title="Shop the Highlights" description="Drag, swipe, or click through our curated picks. Each card is a world of its own." visibleButton={false} />

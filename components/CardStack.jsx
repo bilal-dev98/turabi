@@ -109,8 +109,7 @@ export function CardStack({
 
     if (!len) return null
 
-    const activeItem = items[active]
-    const stageHeight = Math.max(440, Math.round(cardHeight * 1.45))
+    const stageHeight = Math.round(cardHeight * 1.2) + 24
 
     return (
         <div
@@ -207,7 +206,7 @@ export function CardStack({
 
             {/* Dots navigation centered at bottom */}
             {showDots ? (
-                <div className="mt-6 flex items-center justify-center gap-3">
+                <div className="mt-2 sm:mt-4 flex items-center justify-center gap-3">
                     <div className="flex items-center gap-2">
                         {items.map((it, idx) => {
                             const on = idx === active

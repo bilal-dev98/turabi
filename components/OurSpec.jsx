@@ -4,7 +4,7 @@ import Title from './Title'
 
 const OurSpecs = ({ sectionData }) => {
     return (
-        <section className="w-full bg-[#f6f6f7] py-[60px] sm:py-[80px] px-[20px] flex justify-center font-sans my-10 sm:my-16">
+        <section className="w-full bg-[#f6f6f7] py-[36px] sm:py-[80px] px-[20px] flex justify-center font-sans mt-3 mb-10 sm:my-16">
             <div className="w-full max-w-[1100px] text-center">
                 {/* Header Block */}
                 <div className="mb-10 sm:mb-12">
