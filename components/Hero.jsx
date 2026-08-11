@@ -8,25 +8,30 @@ import CategoriesMarquee from './CategoriesMarquee'
 const Hero = () => {
     return (
         <div className='mx-4 sm:mx-6 pt-4 sm:pt-8'>
-            {/* Hero Header Section */}
-            <div className='max-w-4xl mx-auto text-center pt-4 sm:pt-6 pb-6 px-4 space-y-3.5 sm:space-y-4'>
-                <div className='inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-50 text-emerald-800 text-[11px] sm:text-xs font-bold border border-emerald-200/80 shadow-2xs'>
-                    <span className='w-2 h-2 rounded-full bg-emerald-600 animate-pulse'></span>
-                    <span>Handcrafted Luxury & Perfection</span>
+            {/* Ultra-Modern Minimal Luxury Header */}
+            <div className='max-w-3xl mx-auto text-center pt-6 sm:pt-10 pb-6 px-4 space-y-4 sm:space-y-5'>
+                {/* Minimalist Sub-heading / Eyebrow */}
+                <div className='flex items-center justify-center gap-3 text-emerald-800/80 text-[10px] sm:text-xs tracking-[0.25em] font-semibold uppercase'>
+                    <span className='h-[1px] w-8 bg-emerald-600/30'></span>
+                    <span>Fine & High Jewelry</span>
+                    <span className='h-[1px] w-8 bg-emerald-600/30'></span>
                 </div>
 
-                <h1 className='text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.15]'>
-                    Welcome to <span className='bg-gradient-to-r from-emerald-700 via-emerald-600 to-teal-600 bg-clip-text text-transparent'>Chand Jewelry</span>
+                {/* Minimal Luxury Title */}
+                <h1 className='text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight text-slate-900 leading-[1.08] font-serif'>
+                    Chand <span className='font-black bg-gradient-to-r from-emerald-800 via-emerald-600 to-teal-700 bg-clip-text text-transparent'>Jewelry</span>
                 </h1>
 
-                <p className='text-slate-600 text-xs sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-medium'>
-                    Discover timeless gold & silver jewelry, luxury rings, necklaces, watches and fine accessories handcrafted with perfection in Pakistan.
+                {/* Refined Description */}
+                <p className='text-slate-600 text-xs sm:text-base max-w-xl mx-auto leading-relaxed font-normal tracking-wide'>
+                    Discover timeless handcrafted gold & silver jewelry, luxury rings, necklaces, watches and fine accessories crafted to perfection.
                 </p>
 
-                <div className='flex items-center justify-center gap-3 sm:gap-4 pt-2'>
+                {/* Luxury Action Buttons */}
+                <div className='flex items-center justify-center gap-3 sm:gap-4 pt-1'>
                     <Link 
                         href="/shop" 
-                        className='inline-flex items-center gap-2 bg-slate-900 text-white text-xs sm:text-sm font-bold px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl hover:bg-emerald-700 active:scale-95 transition-all shadow-md group'
+                        className='inline-flex items-center gap-2.5 bg-slate-950 text-white text-xs sm:text-sm font-semibold px-7 sm:px-9 py-3 sm:py-3.5 rounded-full hover:bg-emerald-800 active:scale-95 transition-all shadow-sm hover:shadow-md group tracking-wide'
                     >
                         <span>Shop Collection</span>
                         <ArrowRightIcon className='w-4 h-4 group-hover:translate-x-1 transition-transform' />
@@ -34,7 +39,7 @@ const Hero = () => {
 
                     <Link 
                         href="/contact" 
-                        className='inline-flex items-center gap-2 bg-white text-slate-800 text-xs sm:text-sm font-bold px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl border border-slate-300 hover:bg-slate-50 hover:border-slate-400 active:scale-95 transition-all shadow-xs'
+                        className='inline-flex items-center gap-2 bg-transparent text-slate-800 text-xs sm:text-sm font-semibold px-7 sm:px-9 py-3 sm:py-3.5 rounded-full border border-slate-300 hover:border-slate-900 hover:bg-slate-900 hover:text-white active:scale-95 transition-all tracking-wide'
                     >
                         <span>Contact Us</span>
                     </Link>
