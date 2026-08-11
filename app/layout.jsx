@@ -21,11 +21,12 @@ export const metadata = {
     publisher: "Chand Jewelry",
     icons: {
         icon: [
-            { url: '/icon.png', type: 'image/png' },
-            { url: '/favicon.png', type: 'image/png' },
+            { url: '/favicon.ico?v=2' },
+            { url: '/icon.png?v=2', type: 'image/png' },
+            { url: '/favicon.png?v=2', type: 'image/png' },
         ],
-        shortcut: '/icon.png',
-        apple: '/apple-icon.png',
+        shortcut: '/favicon.ico?v=2',
+        apple: '/apple-icon.png?v=2',
     },
     alternates: {
         canonical: 'https://chandjewelry.store',
