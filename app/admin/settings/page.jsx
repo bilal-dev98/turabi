@@ -41,7 +41,7 @@ function ToggleRow({ label, description, value, onChange }) {
 
 export default function AdminSettings() {
     const dispatch = useDispatch()
-    const globalCurrency = useSelector((state) => state.settings.currency)
+    const globalCurrency = useSelector((state) => state.settings?.currency || 'Rs')
 
     const [activeTab, setActiveTab] = useState("general")
     const [loading, setLoading] = useState(true)

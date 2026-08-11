@@ -31,7 +31,7 @@ const statusBadge = {
 }
 
 export default function AdminDashboard() {
-    const currency = useSelector(state => state.settings.currency) || 'Rs'
+    const currency = useSelector(state => state.settings?.currency) || 'Rs'
     const [loading, setLoading] = useState(true)
     const [dateRange, setDateRange] = useState("24h")
     const [dashboardData, setDashboardData] = useState({

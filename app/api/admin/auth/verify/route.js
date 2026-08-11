@@ -10,7 +10,7 @@ export async function GET(request) {
         const token = cookieToken || headerToken;
 
         if (!token || !token.startsWith("cj_admin_token_")) {
-            return NextResponse.json({ success: false, authenticated: false, message: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ success: false, authenticated: false, message: "Unauthorized" });
         }
 
         return NextResponse.json({
@@ -23,6 +23,6 @@ export async function GET(request) {
             }
         });
     } catch (error) {
-        return NextResponse.json({ success: false, authenticated: false }, { status: 401 });
+        return NextResponse.json({ success: false, authenticated: false });
     }
 }

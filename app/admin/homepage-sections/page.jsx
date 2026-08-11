@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import React, { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import Loading from '@/components/Loading'
@@ -10,7 +10,7 @@ const AdminHomePageSections = () => {
     const [loading, setLoading] = useState(true)
     const [saving, setSaving] = useState(false)
 
-    const products = useSelector(state => state.product.list) || []
+    const products = useSelector(state => state.product?.list) || []
 
     useEffect(() => {
         const fetchSections = async () => {
