@@ -27,6 +27,14 @@ export const metadata = {
         description: "Discover Chand Jewelry - your premier online store for handcrafted luxury jewelry, gold & silver rings, necklaces, watches and fine accessories in Pakistan.",
         url: 'https://chandjewelry.store',
         siteName: 'Chand Jewelry',
+        images: [
+            {
+                url: 'https://chandjewelry.store/twitter-og.png',
+                width: 1200,
+                height: 630,
+                alt: 'Chand Jewelry OG Banner',
+            },
+        ],
         locale: 'en_PK',
         type: 'website',
     },
@@ -34,6 +42,7 @@ export const metadata = {
         card: 'summary_large_image',
         title: "Chand Jewelry - Handcrafted Luxury Jewelry & Fine Accessories",
         description: "Discover Chand Jewelry - your premier online store for handcrafted luxury jewelry, gold & silver rings, necklaces, watches and fine accessories in Pakistan.",
+        images: ['https://chandjewelry.store/twitter-og.png'],
     },
     robots: {
         index: true,
