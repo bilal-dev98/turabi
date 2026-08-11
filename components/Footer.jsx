@@ -45,10 +45,9 @@ const socialButtons = [
 
 const ChandLogo = ({ className }) => {
     return (
-        <span className={`font-black tracking-tight ${className || "text-slate-900 text-2xl"}`}>
-            Chand <span className="text-emerald-600 dark:text-emerald-500">Jewelry</span>
-            <span className="text-emerald-600 dark:text-emerald-500 font-black text-3xl leading-none">.</span>
-        </span>
+        <Link href="/" className="inline-block">
+            <img src="/logo.png" alt="Chand Jewelry Logo" className="h-10 sm:h-12 w-auto object-contain" />
+        </Link>
     )
 }
 

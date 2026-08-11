@@ -48,9 +48,7 @@ const AdminSidebar = ({ open, onClose }) => {
             {/* Header Brand */}
             <div className="h-16 px-5 flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800/80">
                 <Link href="/admin" className="flex items-center gap-3 group">
-                    <div className="size-8 rounded-[4px] bg-emerald-500 flex items-center justify-center text-zinc-950 font-black shadow-xs shrink-0 group-hover:scale-105 transition-transform">
-                        <span className="material-symbols-outlined text-lg font-bold">checkroom</span>
-                    </div>
+                    <img src="/logo.png" alt="Chand Jewelry Logo" className="h-8 w-auto object-contain shrink-0 group-hover:scale-105 transition-transform" />
                     <div className="flex flex-col">
                         <span className="text-sm font-bold tracking-tight text-zinc-900 dark:text-white leading-tight">Chand Jewelry</span>
                         <span className="text-[10px] uppercase tracking-widest text-emerald-600 dark:text-emerald-400 font-semibold">Admin Panel</span>

@@ -85,7 +85,7 @@ const Navbar = () => {
                     {/* Chand Jewelry logo */}
                     <Link href="/" className="shrink-0 flex items-center" style={{ height: '40px', textDecoration: 'none' }}>
                         <img
-                            src="/turabi-logo.png"
+                            src="/logo.png"
                             alt="Chand Jewelry Logo"
                             className="h-10 sm:h-12 w-auto object-contain block"
                         />

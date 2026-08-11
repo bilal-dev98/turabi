@@ -57,7 +57,7 @@ export default function RootLayout({ children }) {
                 "@id": "https://chandjewelry.store/#organization",
                 "name": "Chand Jewelry",
                 "url": "https://chandjewelry.store",
-                "logo": "https://chandjewelry.store/turabi-logo.png",
+                "logo": "https://chandjewelry.store/logo.png",
                 "sameAs": [
                     "https://facebook.com/chandjewelry.store",
                     "https://instagram.com/chandjewelry.store"
