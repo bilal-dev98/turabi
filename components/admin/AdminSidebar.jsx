@@ -5,6 +5,14 @@ import Link from "next/link"
 const AdminSidebar = ({ open, onClose, collapsed = false, onToggleCollapse }) => {
     const pathname = usePathname()
 
+    const handleLogout = async () => {
+        try {
+            await fetch('/api/admin/auth/logout', { method: 'POST' })
+        } catch (e) {}
+        localStorage.removeItem('cj_admin_token')
+        window.location.href = '/admin-login.php'
+    }
+
     const navGroups = [
         {
             title: "Core",
@@ -122,8 +130,8 @@ const AdminSidebar = ({ open, onClose, collapsed = false, onToggleCollapse }) =>
                 ))}
             </nav>
 
-            {/* Sidebar Footer Widget */}
-            <div className="p-3 border-t border-zinc-200 dark:border-zinc-800/80">
+            {/* Sidebar Footer Widget + Logout Button */}
+            <div className="p-3 border-t border-zinc-200 dark:border-zinc-800/80 space-y-2">
                 <div className={`bg-zinc-50 dark:bg-zinc-800/50 rounded-[4px] ${isCompact ? 'p-2 flex justify-center' : 'p-3 flex items-center gap-3'} border border-zinc-200 dark:border-zinc-700/50`}>
                     <div className="size-8 rounded-[4px] bg-zinc-200 dark:bg-zinc-700 flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-bold text-xs shrink-0">
                         PRO
@@ -135,6 +143,15 @@ const AdminSidebar = ({ open, onClose, collapsed = false, onToggleCollapse }) =>
                         </div>
                     )}
                 </div>
+
+                <button
+                    onClick={handleLogout}
+                    className={`w-full flex items-center ${isCompact ? 'justify-center p-2.5' : 'gap-2.5 px-3 py-2'} rounded-[4px] text-xs font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 border border-rose-200/50 dark:border-rose-900/30 transition-all`}
+                    title="Logout Administrator"
+                >
+                    <span className="material-symbols-outlined text-lg text-rose-500">logout</span>
+                    {!isCompact && <span>Logout Session</span>}
+                </button>
             </div>
         </aside>
     )
