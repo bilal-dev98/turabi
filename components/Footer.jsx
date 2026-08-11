@@ -69,9 +69,7 @@ const footerLinks = [
         links: [
             { name: "About Us", href: "/about" },
             { name: "Contact Us", href: "/contact" },
-            { name: "Pricing", href: "/pricing" },
             { name: "Create Store", href: "/create-store" },
-            { name: "Admin Portal", href: "/admin" },
         ],
     },
     {
