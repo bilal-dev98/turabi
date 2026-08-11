@@ -5,7 +5,7 @@ import ProductCard from './ProductCard'
 import { useSelector } from 'react-redux'
 
 const BestSelling = ({ sectionData }) => {
-    const [visibleCount, setVisibleCount] = useState(4)
+    const [visibleCount, setVisibleCount] = useState(8)
     const allProducts = useSelector(state => state.product.list)
 
     // filter if productIds exist, otherwise default to bestselling based on ratings count
