@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 import Loading from "../Loading"
 import Link from "next/link"
 import { ArrowRightIcon } from "lucide-react"
@@ -7,18 +8,35 @@ import AdminNavbar from "./AdminNavbar"
 import AdminSidebar from "./AdminSidebar"
 
 const AdminLayout = ({ children }) => {
+    const router = useRouter()
     const [isAdmin, setIsAdmin] = useState(false)
     const [loading, setLoading] = useState(true)
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const [collapsed, setCollapsed] = useState(false)
 
-    const fetchIsAdmin = async () => {
-        setIsAdmin(true)
-        setLoading(false)
+    const verifyAdmin = async () => {
+        try {
+            const token = typeof window !== 'undefined' ? localStorage.getItem("cj_admin_token") || "" : ""
+            const res = await fetch("/api/admin/auth/verify", {
+                headers: { "Authorization": `Bearer ${token}` }
+            })
+            const data = await res.json()
+            if (data.authenticated) {
+                setIsAdmin(true)
+            } else {
+                setIsAdmin(false)
+                router.push("/admin-login.php")
+            }
+        } catch (err) {
+            setIsAdmin(false)
+            router.push("/admin-login.php")
+        } finally {
+            setLoading(false)
+        }
     }
 
     useEffect(() => {
-        fetchIsAdmin()
+        verifyAdmin()
         const saved = localStorage.getItem("admin_sidebar_collapsed")
         if (saved === "true") {
             setCollapsed(true)
@@ -60,10 +78,15 @@ const AdminLayout = ({ children }) => {
                 <span className="material-symbols-outlined text-3xl">lock</span>
             </div>
             <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">Access Restricted</h1>
-            <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-2 max-w-sm">You are not authorized to view the Chand Jewelry Admin Panel.</p>
-            <Link href="/" className="bg-zinc-900 hover:bg-zinc-800 dark:bg-emerald-500 dark:hover:bg-emerald-400 dark:text-zinc-950 text-white font-medium flex items-center gap-2 mt-6 px-5 py-2.5 rounded-[4px] text-sm transition-all shadow-xs">
-                Return to Homepage <ArrowRightIcon size={16} />
-            </Link>
+            <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-2 max-w-sm">You must authenticate via Admin Login to access the Admin Panel.</p>
+            <div className="flex items-center gap-3 mt-6">
+                <Link href="/admin-login.php" className="bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold flex items-center gap-2 px-5 py-2.5 rounded-[4px] text-sm transition-all shadow-xs">
+                    Admin Login <ArrowRightIcon size={16} />
+                </Link>
+                <Link href="/" className="bg-zinc-900 hover:bg-zinc-800 text-white font-medium flex items-center gap-2 px-5 py-2.5 rounded-[4px] text-sm transition-all shadow-xs">
+                    Homepage
+                </Link>
+            </div>
         </div>
     )
 }

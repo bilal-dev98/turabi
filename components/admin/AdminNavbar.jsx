@@ -120,6 +120,14 @@ const AdminNavbar = ({ onMenuClick, collapsed, onToggleCollapse }) => {
         setShowSearch(false)
     }
 
+    const handleLogout = async () => {
+        try {
+            await fetch('/api/admin/auth/logout', { method: 'POST' })
+        } catch (e) {}
+        localStorage.removeItem('cj_admin_token')
+        window.location.href = '/admin-login.php'
+    }
+
     return (
         <header className="h-16 bg-white dark:bg-[#121215] sticky top-0 z-30 px-4 sm:px-6 lg:px-8 flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800/80 transition-colors duration-200 shadow-xs">
             {/* Left: Mobile menu toggle + Global search */}
@@ -138,7 +146,7 @@ const AdminNavbar = ({ onMenuClick, collapsed, onToggleCollapse }) => {
                         search
                     </span>
                     <input
-                        className="w-full bg-zinc-100 dark:bg-zinc-800/80 text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 rounded-[4px] py-1.5 pl-9 pr-4 text-xs lg:text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-emerald-500/20 border border-zinc-200 dark:border-zinc-700/80 transition-all"
+                        className="w-full bg-zinc-100 dark:bg-zinc-800/80 text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 rounded-[4px] py-1.5 pl-9 pr-4 text-xs lg:text-sm focus:outline-none focus:ring-2 focus:ring-slate-900/10 dark:focus:ring-emerald-500/20 border border-zinc-200 dark:border-zinc-700/80 transition-all"
                         placeholder="Search products, orders, customers…"
                         type="text"
                         value={search}
@@ -146,52 +154,52 @@ const AdminNavbar = ({ onMenuClick, collapsed, onToggleCollapse }) => {
                         onFocus={() => setShowSearch(true)}
                     />
                     {/* Search dropdown */}
-                    {showSearch && searchResults.length > 0 && (
-                        <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-[#16161a] rounded-[4px] shadow-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-100">
-                            {searchResults.map((r, i) => (
-                                <button key={i} onClick={() => handleSearchSelect(r.href)}
-                                    className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-zinc-50 dark:hover:bg-zinc-800/60 text-left transition-colors border-b border-zinc-100 dark:border-zinc-800/50 last:border-0">
-                                    <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded-[4px] ${r.type === "Product" ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300" : "bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300"}`}>
-                                        {r.type}
-                                    </span>
-                                    <span className="text-xs font-medium text-zinc-700 dark:text-zinc-200 truncate">{r.label}</span>
-                                </button>
-                            ))}
-                        </div>
-                    )}
-                    {showSearch && search && searchResults.length === 0 && (
-                        <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-[#16161a] rounded-[4px] shadow-xl border border-zinc-200 dark:border-zinc-800 px-4 py-5 text-center z-50">
-                            <p className="text-xs text-zinc-400">No results for "<span className="font-semibold">{search}</span>"</p>
+                    {showSearch && (searchResults.length > 0 || search.trim() !== "") && (
+                        <div className="absolute left-0 right-0 top-full mt-2 bg-white dark:bg-[#16161a] rounded-[4px] shadow-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-100">
+                            {searchResults.length > 0 ? (
+                                <div className="divide-y divide-zinc-100 dark:divide-zinc-800/60">
+                                    {searchResults.map((item, idx) => (
+                                        <button
+                                            key={idx}
+                                            onClick={() => handleSearchSelect(item.href)}
+                                            className="w-full px-4 py-2.5 flex items-center justify-between text-left hover:bg-zinc-50 dark:hover:bg-zinc-800/60 transition-colors text-xs"
+                                        >
+                                            <span className="font-medium text-zinc-800 dark:text-zinc-200 truncate">{item.label}</span>
+                                            <span className="text-[10px] uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-bold ml-2 shrink-0">{item.type}</span>
+                                        </button>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="px-4 py-3 text-xs text-zinc-400 text-center">No matching products or orders found</div>
+                            )}
                         </div>
                     )}
                 </div>
             </div>
 
-            {/* Right: Actions */}
-            <div className="flex items-center gap-2 sm:gap-3 ml-auto">
-                {/* Store Preview Link */}
-                <a
+            {/* Right: Quick Action Controls */}
+            <div className="flex items-center gap-2 sm:gap-3">
+                {/* View Store Quick Button */}
+                <Link
                     href="/"
                     target="_blank"
-                    rel="noreferrer"
-                    className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-[4px] border border-zinc-200 dark:border-zinc-800 text-xs font-semibold text-zinc-600 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+                    className="hidden md:flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white bg-zinc-100 dark:bg-zinc-800/60 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-[4px] transition-all"
+                    title="Open live storefront"
                 >
-                    <span className="material-symbols-outlined text-sm">open_in_new</span>
+                    <span className="material-symbols-outlined text-base text-emerald-500">open_in_new</span>
                     <span>View Store</span>
-                </a>
+                </Link>
 
-                {/* Notifications */}
+                {/* Notifications Dropdown */}
                 <div ref={notifRef} className="relative">
                     <button
-                        onClick={() => { setShowNotif(v => !v); setShowSearch(false) }}
-                        className="p-2 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-[4px] transition-colors relative"
+                        onClick={() => setShowNotif(prev => !prev)}
+                        className="relative p-2 text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-[4px] transition-colors"
                         title="Notifications"
                     >
                         <span className="material-symbols-outlined text-xl">notifications</span>
                         {unreadCount > 0 && (
-                            <span className="absolute top-1 right-1 size-4 bg-emerald-500 text-zinc-950 text-[10px] font-black rounded-full flex items-center justify-center">
-                                {unreadCount}
-                            </span>
+                            <span className="absolute top-1.5 right-1.5 size-2 bg-emerald-500 rounded-full ring-2 ring-white dark:ring-[#121215] animate-pulse" />
                         )}
                     </button>
 
@@ -230,6 +238,15 @@ const AdminNavbar = ({ onMenuClick, collapsed, onToggleCollapse }) => {
                     title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
                 >
                     <span className="material-symbols-outlined text-xl">{darkMode ? "light_mode" : "dark_mode"}</span>
+                </button>
+
+                {/* Logout Button */}
+                <button
+                    onClick={handleLogout}
+                    className="p-2 text-rose-500 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-[4px] transition-colors"
+                    title="Logout of Admin Panel"
+                >
+                    <span className="material-symbols-outlined text-xl">logout</span>
                 </button>
 
                 <div className="h-6 w-px bg-zinc-200 dark:bg-zinc-800 mx-1" />
