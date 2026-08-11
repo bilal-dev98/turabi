@@ -19,6 +19,14 @@ export const metadata = {
     authors: [{ name: "Chand Jewelry" }],
     creator: "Chand Jewelry",
     publisher: "Chand Jewelry",
+    icons: {
+        icon: [
+            { url: '/icon.png', type: 'image/png' },
+            { url: '/favicon.png', type: 'image/png' },
+        ],
+        shortcut: '/icon.png',
+        apple: '/apple-icon.png',
+    },
     alternates: {
         canonical: 'https://chandjewelry.store',
     },
