@@ -17,7 +17,7 @@ const Hero = () => {
                 >
                     <Image 
                         priority 
-                        src="/hero-banners/banner.webp?v=3" 
+                        src="/hero-banners/banner.webp?v=4" 
                         alt="Chand Jewelry Main Banner" 
                         fill
                         sizes="(max-width: 768px) 88vw, 60vw"
