@@ -46,11 +46,13 @@ export default function AdminSettings() {
     const [activeTab, setActiveTab] = useState("general")
     const [loading, setLoading] = useState(true)
     const [saving, setSaving] = useState(false)
+    const [uploadingAvatar, setUploadingAvatar] = useState(false)
+    const [uploadingLogo, setUploadingLogo] = useState(false)
 
-    const [general, setGeneral] = useState({ storeName: "Chand Jewelry", tagline: "Handcrafted Luxury & Perfection", supportEmail: "info@chandjewelry.store", phone: "+92 300 1234567", timezone: "UTC+5", currency: "Rs" })
+    const [general, setGeneral] = useState({ storeName: "Chand Jewelry", tagline: "Handcrafted Luxury & Perfection", supportEmail: "info@chandjewelry.store", phone: "+92 300 1234567", timezone: "UTC+5", currency: "Rs", logo: "/logo.png" })
     const [payment, setPayment] = useState({ codEnabled: true, bankTransferEnabled: true, bankName: "Meezan Bank", accountTitle: "Chand Jewelry Store", accountNumber: "01020304050607", iban: "PK36MEZN0001020304050607" })
     const [shipping, setShipping] = useState({ freeShippingMin: "2000", defaultRate: "200", expressRate: "450", internationalEnabled: false })
-    const [profile, setProfile] = useState({ name: "Alex Rivera", email: "admin@chandjewelry.store", role: "Super Admin", password: "" })
+    const [profile, setProfile] = useState({ name: "Alex Rivera", email: "admin@chandjewelry.store", role: "Super Admin", password: "", image: "" })
     const [security, setSecurity] = useState({ twoFactor: false, loginAlerts: true, sessionTimeout: "30", ipWhitelist: "" })
 
     const fetchSettings = async () => {
@@ -75,6 +77,50 @@ export default function AdminSettings() {
     useEffect(() => {
         fetchSettings()
     }, [])
+
+    const handleAvatarUpload = async (e) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+        setUploadingAvatar(true)
+        try {
+            const formData = new FormData()
+            formData.append("file", file)
+            const res = await fetch("/api/upload", { method: "POST", body: formData })
+            const data = await res.json()
+            if (data.success && data.url) {
+                setProfile(p => ({ ...p, image: data.url }))
+                toast.success("Profile picture uploaded! Click Save to apply.")
+            } else {
+                toast.error(data.message || "Failed to upload image")
+            }
+        } catch (err) {
+            toast.error("Error uploading image")
+        } finally {
+            setUploadingAvatar(false)
+        }
+    }
+
+    const handleLogoUpload = async (e) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+        setUploadingLogo(true)
+        try {
+            const formData = new FormData()
+            formData.append("file", file)
+            const res = await fetch("/api/upload", { method: "POST", body: formData })
+            const data = await res.json()
+            if (data.success && data.url) {
+                setGeneral(g => ({ ...g, logo: data.url }))
+                toast.success("Store logo uploaded! Click Save to apply.")
+            } else {
+                toast.error(data.message || "Failed to upload logo")
+            }
+        } catch (err) {
+            toast.error("Error uploading logo")
+        } finally {
+            setUploadingLogo(false)
+        }
+    }
 
     const handleSave = async (e) => {
         if (e) e.preventDefault()
@@ -176,6 +222,29 @@ export default function AdminSettings() {
                                 <span className="material-symbols-outlined text-sm text-emerald-500">settings</span>
                                 General Store Information
                             </h2>
+
+                            {/* Store Logo Banner */}
+                            <div className="flex items-center justify-between p-3.5 bg-zinc-50 dark:bg-zinc-800/40 rounded-[4px] border border-zinc-200 dark:border-zinc-700/50">
+                                <div className="flex items-center gap-3.5">
+                                    <div className="h-12 w-24 rounded-[4px] bg-white dark:bg-zinc-900 p-2 flex items-center justify-center border border-zinc-200 dark:border-zinc-700 shrink-0">
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        <img src={general.logo || "/logo.png"} alt="Store Logo" className="h-full w-auto object-contain" />
+                                    </div>
+                                    <div>
+                                        <p className="font-bold text-xs text-zinc-900 dark:text-white">Store Logo</p>
+                                        <p className="text-[11px] text-zinc-400">Used across navbar, footer, and emails</p>
+                                    </div>
+                                </div>
+
+                                <label className="cursor-pointer inline-flex items-center gap-1.5 bg-white dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 border border-zinc-300 dark:border-zinc-700 px-3 py-1.5 rounded-[4px] text-xs font-semibold transition-all">
+                                    <span className="material-symbols-outlined text-base text-emerald-500">
+                                        {uploadingLogo ? "progress_activity" : "upload_file"}
+                                    </span>
+                                    <span>{uploadingLogo ? "Uploading…" : "Upload Logo"}</span>
+                                    <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} disabled={uploadingLogo} />
+                                </label>
+                            </div>
+
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <InputField label="Store Name" value={general.storeName} onChange={e => setGeneral(g => ({ ...g, storeName: e.target.value }))} />
                                 <InputField label="Store Tagline" value={general.tagline} onChange={e => setGeneral(g => ({ ...g, tagline: e.target.value }))} />
@@ -307,17 +376,32 @@ export default function AdminSettings() {
                                 Admin Account Profile
                             </h2>
 
-                            <div className="flex items-center gap-4 p-3 bg-zinc-50 dark:bg-zinc-800/40 rounded-[4px] border border-zinc-200 dark:border-zinc-700/50">
-                                <div className="size-10 rounded-[4px] bg-emerald-500 text-slate-950 flex items-center justify-center font-extrabold text-sm shrink-0">
-                                    AR
+                            <div className="flex items-center justify-between p-3.5 bg-zinc-50 dark:bg-zinc-800/40 rounded-[4px] border border-zinc-200 dark:border-zinc-700/50">
+                                <div className="flex items-center gap-3.5">
+                                    <div className="relative size-12 rounded-[4px] overflow-hidden bg-emerald-500 text-slate-950 flex items-center justify-center font-extrabold text-sm shrink-0 border border-zinc-200 dark:border-zinc-700">
+                                        {profile.image ? (
+                                            /* eslint-disable-next-line @next/next/no-img-element */
+                                            <img src={profile.image} alt={profile.name} className="size-full object-cover" />
+                                        ) : (
+                                            <span>{(profile.name || "Admin").split(" ").map(n => n[0]).join("").slice(0, 2)}</span>
+                                        )}
+                                    </div>
+                                    <div>
+                                        <p className="font-bold text-xs text-zinc-900 dark:text-white">{profile.name}</p>
+                                        <p className="text-[11px] text-zinc-400 font-mono">{profile.email}</p>
+                                        <span className="mt-1 inline-block px-2 py-0.5 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 text-[10px] font-bold rounded-[4px] uppercase tracking-wider">
+                                            {profile.role}
+                                        </span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p className="font-bold text-xs text-zinc-900 dark:text-white">{profile.name}</p>
-                                    <p className="text-[11px] text-zinc-400 font-mono">{profile.email}</p>
-                                    <span className="mt-0.5 inline-block px-2 py-0.5 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 text-[10px] font-bold rounded-[4px] uppercase tracking-wider">
-                                        {profile.role}
+
+                                <label className="cursor-pointer inline-flex items-center gap-1.5 bg-white dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 border border-zinc-300 dark:border-zinc-700 px-3 py-1.5 rounded-[4px] text-xs font-semibold transition-all">
+                                    <span className="material-symbols-outlined text-base text-emerald-500">
+                                        {uploadingAvatar ? "progress_activity" : "photo_camera"}
                                     </span>
-                                </div>
+                                    <span>{uploadingAvatar ? "Uploading…" : "Change Photo"}</span>
+                                    <input type="file" accept="image/*" className="hidden" onChange={handleAvatarUpload} disabled={uploadingAvatar} />
+                                </label>
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

@@ -18,9 +18,24 @@ const AdminNavbar = ({ onMenuClick, collapsed, onToggleCollapse }) => {
     const [showSearch, setShowSearch] = useState(false)
     const [showNotif, setShowNotif] = useState(false)
     const [notifications, setNotifications] = useState(NOTIFICATIONS)
-    const [darkMode, setDarkMode] = useState(false)
-    const searchRef = useRef(null)
-    const notifRef = useRef(null)
+    const [adminProfile, setAdminProfile] = useState({ name: "Alex Rivera", role: "Administrator", image: "" })
+
+    useEffect(() => {
+        const fetchAdminProfile = async () => {
+            try {
+                const res = await fetch('/api/admin/settings')
+                const data = await res.json()
+                if (data.success && data.data?.profile) {
+                    setAdminProfile({
+                        name: data.data.profile.name || "Alex Rivera",
+                        role: data.data.profile.role || "Administrator",
+                        image: data.data.profile.image || ""
+                    })
+                }
+            } catch (err) {}
+        }
+        fetchAdminProfile()
+    }, [])
 
     // Load saved dark mode state on mount
     useEffect(() => {
@@ -219,16 +234,22 @@ const AdminNavbar = ({ onMenuClick, collapsed, onToggleCollapse }) => {
                 {/* Admin profile badge */}
                 <div className="flex items-center gap-2.5 cursor-pointer group">
                     <div className="text-right hidden sm:block">
-                        <p className="text-xs font-semibold text-zinc-900 dark:text-zinc-100 leading-tight group-hover:text-emerald-500 transition-colors">Alex Rivera</p>
-                        <p className="text-[10px] font-medium text-zinc-400">Administrator</p>
+                        <p className="text-xs font-semibold text-zinc-900 dark:text-zinc-100 leading-tight group-hover:text-emerald-500 transition-colors">{adminProfile.name}</p>
+                        <p className="text-[10px] font-medium text-zinc-400">{adminProfile.role}</p>
                     </div>
                     <div className="relative">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                            alt="Profile"
-                            className="size-8 rounded-[4px] object-cover ring-2 ring-transparent group-hover:ring-emerald-500/30 transition-all"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbWqTInX8PL0JJXFLbewbvHRt4fIE1fs0caL83S4MqpabALUCvUp_0_cch6Zya9mkj9pWKABiFEqbahx9H0ktg30fyWUjzx8DhJ8Rfse8e-XYxTS1tZHMgzaF_VTNnnbr6oBKyrsBsnuqkkDPZ9v8x5d66ujGi1aQEMuLsSBRkJavFbn0jZtRv8Is-7vTwQkAkdD4TJGt4Y8GP6G8X68_OJDmlYqGjCT_7K0QsWM1bw6I9CSXFk8Ey6IHHoKMr3AFol9cDjj7BdqY"
-                        />
+                        {adminProfile.image ? (
+                            /* eslint-disable-next-line @next/next/no-img-element */
+                            <img
+                                alt="Profile"
+                                className="size-8 rounded-[4px] object-cover ring-2 ring-transparent group-hover:ring-emerald-500/30 transition-all"
+                                src={adminProfile.image}
+                            />
+                        ) : (
+                            <div className="size-8 rounded-[4px] bg-emerald-500 text-slate-950 flex items-center justify-center font-bold text-xs">
+                                {(adminProfile.name || "A").slice(0, 2).toUpperCase()}
+                            </div>
+                        )}
                         <span className="absolute -bottom-0.5 -right-0.5 size-2.5 bg-emerald-500 rounded-full border-2 border-white dark:border-zinc-900" />
                     </div>
                 </div>
