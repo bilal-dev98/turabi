@@ -38,7 +38,7 @@ const AdminLayout = ({ children }) => {
                 <span className="material-symbols-outlined text-3xl">lock</span>
             </div>
             <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">Access Restricted</h1>
-            <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-2 max-w-sm">You are not authorized to view the Janan Fashion Admin Panel.</p>
+            <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-2 max-w-sm">You are not authorized to view the Chand Jewelry Admin Panel.</p>
             <Link href="/" className="bg-zinc-900 hover:bg-zinc-800 dark:bg-emerald-500 dark:hover:bg-emerald-400 dark:text-zinc-950 text-white font-medium flex items-center gap-2 mt-6 px-5 py-2.5 rounded-[4px] text-sm transition-all shadow-xs">
                 Return to Homepage <ArrowRightIcon size={16} />
             </Link>

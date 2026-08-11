@@ -1,8 +1,8 @@
 import StoreLayout from "@/components/store/StoreLayout";
 
 export const metadata = {
-    title: "Janan Fashion - Store Dashboard",
-    description: "Janan Fashion - Store Dashboard",
+    title: "Chand Jewelry - Store Dashboard",
+    description: "Chand Jewelry Store Dashboard",
 };
 
 export default function RootAdminLayout({ children }) {

@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>Janan Fashion</h1>
+  <h1>Chand Jewelry</h1>
   <p>
     An e-commerce platform built with Next.js, Prisma, Supabase, Cloudflare R2 and Tailwind CSS.
   </p>
@@ -45,7 +45,7 @@ Then, run the development server:
 npm run dev
 ```
 
-Production site: [https://jananfashion.store](https://jananfashion.store)
+Production site: [https://chandjewelry.store](https://chandjewelry.store)
 
 You can start editing the page by modifying `app/(public)/page.js`. The page auto-updates as you edit the file.
 

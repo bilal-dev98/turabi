@@ -42,10 +42,10 @@ export default function AdminSettings() {
 
     const [activeTab, setActiveTab] = useState("general")
 
-    const [general, setGeneral] = useState({ storeName: "Janan Fashion", tagline: "Elegance & Perfection", supportEmail: "info@jananfashion.store", phone: "+92 300 1234567", timezone: "UTC+5", currency: "Rs" })
-    const [payment, setPayment] = useState({ stripeKey: "sk_live_***", stripeEnabled: true, paypalEmail: "info@jananfashion.store", paypalEnabled: false, codEnabled: true })
+    const [general, setGeneral] = useState({ storeName: "Chand Jewelry", tagline: "Handcrafted Luxury & Perfection", supportEmail: "info@chandjewelry.store", phone: "+92 300 1234567", timezone: "UTC+5", currency: "Rs" })
+    const [payment, setPayment] = useState({ stripeKey: "sk_live_***", stripeEnabled: true, paypalEmail: "info@chandjewelry.store", paypalEnabled: false, codEnabled: true })
     const [shipping, setShipping] = useState({ freeShippingMin: "2000", defaultRate: "200", expressRate: "450", internationalEnabled: false })
-    const [profile, setProfile] = useState({ name: "Alex Rivera", email: "admin@jananfashion.store", role: "Super Admin" })
+    const [profile, setProfile] = useState({ name: "Alex Rivera", email: "admin@chandjewelry.store", role: "Super Admin" })
     const [security, setSecurity] = useState({ twoFactor: false, loginAlerts: true, sessionTimeout: "30", ipWhitelist: "" })
 
     useEffect(() => {

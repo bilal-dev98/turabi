@@ -82,11 +82,11 @@ const Navbar = () => {
             <div className="mx-4 sm:mx-6">
                 <div className="flex items-center justify-between max-w-7xl mx-auto py-3 sm:py-4 transition-all">
 
-                    {/* Janan Fashion logo */}
+                    {/* Chand Jewelry logo */}
                     <Link href="/" className="shrink-0 flex items-center" style={{ height: '40px', textDecoration: 'none' }}>
                         <img
                             src="/turabi-logo.png"
-                            alt="Janan Fashion Logo"
+                            alt="Chand Jewelry Logo"
                             className="h-10 sm:h-12 w-auto object-contain block"
                         />
                     </Link>

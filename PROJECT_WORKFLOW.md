@@ -1,6 +1,6 @@
-# Janan Fashion E-Commerce: Full Project Workflow & Architecture
+# Chand Jewelry E-Commerce: Full Project Workflow & Architecture
 
-This document provides a complete technical walkthrough of the Janan Fashion e-commerce platform, detailing how the Admin Panel, Public Frontend, API routes, and Supabase database interact based on the current implementation.
+This document provides a complete technical walkthrough of the Chand Jewelry e-commerce platform, detailing how the Admin Panel, Public Frontend, API routes, and Supabase database interact based on the current implementation.
 
 ---
 
@@ -138,12 +138,12 @@ All APIs are designed to return a consistent JSON structure: `{ success: boolean
 A step-by-step example of how data moves through the system, using the Banner System as the scenario:
 
 **Step 1. [Frontend Admin]** The administrator selects a "Warning" template on `/admin/banners`, modifying the text, and clicks "Create Banner" with "Activate immediately" checked.
-**Step 2. [Network]** The React client dispatches an HTTP `POST` request to `https://jananfashion.store/api/admin/banners` with a JSON body containing the text, colors, and the auto-activate flag.
+**Step 2. [Network]** The React client dispatches an HTTP `POST` request to `https://chandjewelry.store/api/admin/banners` with a JSON body containing the text, colors, and the auto-activate flag.
 **Step 3. [Backend API]** The Next.js Route Handler for the POST endpoint receives the payload. Because auto-activate is true, it temporarily pauses the insert operation.
 **Step 4. [Database Write]** The API uses Prisma to send a raw SQL `UPDATE` command to Supabase: `SET "isActive" = false` for all rows.
 **Step 5. [Database Write 2]** The API uses Prisma to send a second raw SQL `INSERT` command to Supabase, writing the new banner row with `isActive` set to `true`.
 **Step 6. [Backend API]** Supabase confirms the write. The API returns a `200 OK` response with `{ success: true }` to the Admin Panel. The Admin UI shows a success toast.
-**Step 7. [Frontend Public]** A customer visits the homepage. The `Banner.jsx` component mounts and executes a `fetch` request to `https://jananfashion.store/api/banners/active`.
+**Step 7. [Frontend Public]** A customer visits the homepage. The `Banner.jsx` component mounts and executes a `fetch` request to `https://chandjewelry.store/api/banners/active`.
 **Step 8. [Database Read]** The GET API route uses Prisma raw SQL to query Supabase for all banners. Supabase returns the array of rows.
 **Step 9. [Backend API]** The API filters the array in memory to find the one where `isActive === true` (the warning banner just created) and sends it as JSON to the customer's browser.
 **Step 10. [Frontend Public]** The `Banner.jsx` component receives the JSON data, updates its React state, and visually renders the Warning banner across the top of the browser window.

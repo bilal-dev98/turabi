@@ -52,7 +52,7 @@ const AdminSidebar = ({ open, onClose }) => {
                         <span className="material-symbols-outlined text-lg font-bold">checkroom</span>
                     </div>
                     <div className="flex flex-col">
-                        <span className="text-sm font-bold tracking-tight text-zinc-900 dark:text-white leading-tight">Janan Fashion</span>
+                        <span className="text-sm font-bold tracking-tight text-zinc-900 dark:text-white leading-tight">Chand Jewelry</span>
                         <span className="text-[10px] uppercase tracking-widest text-emerald-600 dark:text-emerald-400 font-semibold">Admin Panel</span>
                     </div>
                 </Link>
@@ -104,7 +104,7 @@ const AdminSidebar = ({ open, onClose }) => {
                     </div>
                     <div className="flex-1 min-w-0">
                         <p className="text-xs font-semibold text-zinc-900 dark:text-white truncate">Enterprise Store</p>
-                        <p className="text-[10px] text-zinc-500 dark:text-zinc-400 truncate">v2.4 • Janan Fashion</p>
+                        <p className="text-[10px] text-zinc-500 dark:text-zinc-400 truncate">v2.4 • Chand Jewelry</p>
                     </div>
                 </div>
             </div>

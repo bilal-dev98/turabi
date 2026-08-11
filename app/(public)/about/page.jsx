@@ -5,8 +5,8 @@ import Image from 'next/image';
 import { assets } from '@/assets/assets';
 
 export const metadata = {
-    title: "About Us - Janan Fashion",
-    description: "Learn more about Janan Fashion, our mission, and our premium selection of fashion products.",
+    title: "About Us - Chand Jewelry",
+    description: "Learn more about Chand Jewelry, our story, mission, and handcrafted luxury jewelry & fine accessories.",
 };
 
 export default function AboutPage() {
@@ -21,10 +21,10 @@ export default function AboutPage() {
                                 Our Story
                             </div>
                             <h1 className="text-4xl sm:text-6xl leading-[1.2] my-3 font-medium text-slate-800 max-w-xl">
-                                Janan Fashion
+                                Chand Jewelry
                             </h1>
                             <p className="text-slate-600 text-lg sm:text-xl font-medium mt-4 max-w-xl leading-relaxed">
-                                Starting in Rawalpindi and Islamabad, we have evolved into a trusted hub for premium gadgets and electronics. We bring the best tech right to your doorstep.
+                                Crafted with passion, Chand Jewelry is your trusted destination for exquisite handcrafted jewelry, gold & silver rings, necklaces, watches, and fine luxury accessories across Pakistan.
                             </p>
                             <Link href="/contact" className="inline-block bg-slate-800 text-white font-medium text-sm py-4 px-10 mt-10 rounded-md hover:bg-slate-900 transition">
                                 GET IN TOUCH
@@ -74,7 +74,7 @@ export default function AboutPage() {
                 <div className="mt-20">
                     <div className="text-center mb-12">
                         <h2 className="text-4xl font-medium text-slate-800 mb-4">Why Choose Us</h2>
-                        <p className="text-slate-500 font-medium">What makes Janan Fashion the right choice for your fashion needs.</p>
+                        <p className="text-slate-500 font-medium">What makes Chand Jewelry the right choice for your luxury jewelry & accessory needs.</p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-slate-800">

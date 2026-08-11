@@ -2,7 +2,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-const storeName = "Janan Fashion"
+const storeName = "Chand Jewelry"
 
 // SVG Social Icons
 const FacebookIcon = ({ className = "w-5 h-5" }) => (
@@ -36,17 +36,17 @@ const YoutubeIcon = ({ className = "w-5 h-5" }) => (
 )
 
 const socialButtons = [
-    { name: "Facebook", icon: FacebookIcon, href: "https://facebook.com" },
-    { name: "Instagram", icon: InstagramIcon, href: "https://instagram.com" },
-    { name: "Twitter", icon: TwitterIcon, href: "https://x.com" },
-    { name: "LinkedIn", icon: LinkedinIcon, href: "https://linkedin.com" },
-    { name: "YouTube", icon: YoutubeIcon, href: "https://youtube.com" },
+    { name: "Facebook", icon: FacebookIcon, href: "https://facebook.com/chandjewelry.store" },
+    { name: "Instagram", icon: InstagramIcon, href: "https://instagram.com/chandjewelry.store" },
+    { name: "Twitter", icon: TwitterIcon, href: "https://x.com/chandjewelry" },
+    { name: "LinkedIn", icon: LinkedinIcon, href: "https://linkedin.com/company/chandjewelry" },
+    { name: "YouTube", icon: YoutubeIcon, href: "https://youtube.com/@chandjewelry" },
 ]
 
-const JananLogo = ({ className }) => {
+const ChandLogo = ({ className }) => {
     return (
         <span className={`font-black tracking-tight ${className || "text-slate-900 text-2xl"}`}>
-            Janan <span className="text-emerald-600 dark:text-emerald-500">Fashion</span>
+            Chand <span className="text-emerald-600 dark:text-emerald-500">Jewelry</span>
             <span className="text-emerald-600 dark:text-emerald-500 font-black text-3xl leading-none">.</span>
         </span>
     )
@@ -109,9 +109,9 @@ export default function Footer() {
                         <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
                             <div className="space-y-3">
                                 {/* Brand Logo */}
-                                <JananLogo className="text-2xl sm:text-3xl" />
+                                <ChandLogo className="text-2xl sm:text-3xl" />
                                 <p className="text-slate-600 text-xs sm:text-sm leading-relaxed max-w-md pt-1">
-                                    Welcome to Janan Fashion — your ultimate destination for the latest clothing, traditional wear, and fashion accessories crafted with perfection.
+                                    Welcome to Chand Jewelry — your premier destination for handcrafted luxury jewelry, gold & silver rings, necklaces, watches and fine accessories.
                                 </p>
                             </div>
 
@@ -140,7 +140,7 @@ export default function Footer() {
                             <div className="pt-4 border-t border-slate-100 text-xs text-slate-500 space-y-1.5">
                                 <p className="flex items-center gap-1.5">
                                     <span className="material-symbols-outlined text-emerald-600 text-sm">mail</span>
-                                    <span>info@jananfashion.store</span>
+                                    <span>info@chandjewelry.store</span>
                                 </p>
                                 <p className="flex items-center gap-1.5">
                                     <span className="material-symbols-outlined text-emerald-600 text-sm">call</span>

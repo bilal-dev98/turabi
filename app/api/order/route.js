@@ -20,7 +20,7 @@ export async function POST(request) {
             // We create a guest user or attach to existing
             const guestEmail = addressData.email && addressData.email !== 'customer@example.com'
                 ? addressData.email
-                : `${addressData.phone.replace(/[^0-9]/g, '')}@guest.jananfashion.store`;
+                : `${addressData.phone.replace(/[^0-9]/g, '')}@guest.chandjewelry.store`;
 
             let user = await prisma.user.findFirst({
                 where: { email: guestEmail }

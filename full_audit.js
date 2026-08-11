@@ -84,7 +84,7 @@ async function runFullAudit() {
         await s3.send(new PutObjectCommand({
             Bucket: process.env.R2_BUCKET_NAME,
             Key: testKey,
-            Body: Buffer.from('Janan Fashion Audit Test'),
+            Body: Buffer.from('Chand Jewelry Audit Test'),
             ContentType: 'text/plain',
         }));
         console.log('✅ R2 Upload (PUT): PASS -', testKey);
@@ -119,7 +119,7 @@ async function runFullAudit() {
 
     // Check NEXT_PUBLIC_SITE_URL
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-    if (siteUrl && siteUrl.includes('jananfashion.store') && !siteUrl.includes('localhost')) {
+    if (siteUrl && siteUrl.includes('chandjewelry.store') && !siteUrl.includes('localhost')) {
         console.log('✅ SITE_URL: PASS -', siteUrl);
     } else {
         console.log('❌ SITE_URL: FAIL -', siteUrl);
