@@ -124,8 +124,7 @@ export default function AdminSocialLinks() {
         return `https://${trimmed}`;
     }
 
-    const handleSave = async (e) => {
-        if (e) e.preventDefault()
+    const handleSave = async () => {
         setSaving(true)
 
         const payload = PLATFORM_METADATA.map(p => ({
@@ -158,87 +157,90 @@ export default function AdminSocialLinks() {
 
     if (loading) {
         return (
-            <div className="p-8 flex items-center justify-center min-h-[60vh] text-zinc-500 text-sm font-sans">
-                <span className="material-symbols-outlined animate-spin text-emerald-500 text-2xl mr-3">progress_activity</span>
+            <div className="p-8 flex items-center justify-center min-h-[60vh] text-zinc-400 text-xs font-sans">
+                <span className="material-symbols-outlined animate-spin text-emerald-500 text-xl mr-2">progress_activity</span>
                 Loading Social Links settings…
             </div>
         )
     }
 
     return (
-        <div className="p-6 md:p-10 max-w-6xl mx-auto space-y-8 font-sans antialiased">
-            {/* Single Header Action Bar */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-6">
+        <div className="p-5 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full space-y-6 font-sans antialiased">
+            {/* Standard Admin Header Bar */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight flex items-center gap-3">
-                        <span className="material-symbols-outlined text-emerald-600 dark:text-emerald-400 text-3xl">share</span>
-                        Social Media & Contact Links
+                    <h1 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-white">
+                        Social Media Links
                     </h1>
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
-                        Manage all social profiles. Changes automatically reflect across Footer, Contact Page, About Page & Header.
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+                        Manage all store social channels. Links automatically sync across Footer, Contact Page & About Page.
                     </p>
                 </div>
 
-                {/* Single Primary Action Button */}
+                {/* Primary Action Button */}
                 <button
                     type="button"
                     onClick={handleSave}
                     disabled={saving}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm rounded-lg shadow-sm hover:shadow-md transition-all active:scale-95 disabled:opacity-50 shrink-0"
+                    className="inline-flex items-center justify-center gap-2 bg-zinc-900 dark:bg-emerald-500 text-white dark:text-slate-950 px-4 py-2 rounded-[4px] font-semibold text-xs shadow-xs hover:bg-zinc-800 dark:hover:bg-emerald-400 transition-all active:scale-95 disabled:opacity-50 shrink-0"
                 >
                     {saving ? (
                         <>
-                            <span className="material-symbols-outlined animate-spin text-base">progress_activity</span>
+                            <span className="material-symbols-outlined animate-spin text-sm">progress_activity</span>
                             <span>Saving Changes…</span>
                         </>
                     ) : (
                         <>
-                            <span className="material-symbols-outlined text-base">save</span>
+                            <span className="material-symbols-outlined text-sm">save</span>
                             <span>Save & Sync Website</span>
                         </>
                     )}
                 </button>
             </div>
 
-            {/* Active Links Banner Stats */}
-            <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4 flex items-center justify-between">
+            {/* Active Links Summary */}
+            <div className="bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800/50 rounded-xl p-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                    <span className="material-symbols-outlined text-emerald-600 dark:text-emerald-400 text-2xl">verified</span>
+                    <span className="material-symbols-outlined text-emerald-600 dark:text-emerald-400 text-xl">verified</span>
                     <div>
-                        <p className="text-sm font-bold text-emerald-950 dark:text-emerald-200">
-                            {activeCount} Active Social Channels
+                        <p className="text-xs font-bold text-emerald-950 dark:text-emerald-300">
+                            {activeCount} Active Channels Connected
                         </p>
-                        <p className="text-xs text-emerald-700 dark:text-emerald-400">
-                            Enabled links will be dynamically displayed on the store frontend.
+                        <p className="text-[11px] text-emerald-700 dark:text-emerald-400/90 mt-0.5">
+                            Enabled links will be dynamically displayed to customers on the website.
                         </p>
                     </div>
                 </div>
             </div>
 
             {/* Social Links Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
                 {PLATFORM_METADATA.map((p) => {
                     const currentData = socialLinks[p.key] || { url: "", isActive: true }
                     const SvgIcon = p.svg
                     return (
                         <div
                             key={p.key}
-                            className={`p-5 rounded-2xl border transition-all bg-white dark:bg-zinc-900 shadow-xs flex flex-col justify-between space-y-4 ${
+                            className={`p-4 sm:p-5 rounded-xl border transition-all bg-white dark:bg-[#121215] shadow-xs flex flex-col justify-between space-y-4 ${
                                 currentData.isActive
                                     ? "border-zinc-200 dark:border-zinc-800"
-                                    : "border-zinc-200/50 dark:border-zinc-800/40 opacity-60 bg-zinc-50 dark:bg-zinc-950"
+                                    : "border-zinc-200/60 dark:border-zinc-800/40 opacity-60 bg-zinc-50/50 dark:bg-zinc-950/50"
                             }`}
                         >
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-3">
-                                    <div className={`size-10 rounded-xl ${p.bgClass} flex items-center justify-center shadow-xs shrink-0`}>
-                                        <SvgIcon className="w-5 h-5" />
+                                    <div className={`size-9 rounded-lg ${p.bgClass} flex items-center justify-center shadow-xs shrink-0`}>
+                                        <SvgIcon className="w-4.5 h-4.5" />
                                     </div>
                                     <div>
-                                        <h3 className="text-base font-bold text-zinc-900 dark:text-white">{p.name}</h3>
-                                        <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
+                                        <h3 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">{p.name}</h3>
+                                        <span className={`inline-block text-[10px] font-semibold uppercase tracking-wider mt-0.5 ${
+                                            currentData.isActive
+                                                ? "text-emerald-600 dark:text-emerald-400"
+                                                : "text-zinc-400 dark:text-zinc-500"
+                                        }`}>
                                             {currentData.isActive ? "Visible on site" : "Hidden from site"}
-                                        </p>
+                                        </span>
                                     </div>
                                 </div>
 
@@ -250,21 +252,21 @@ export default function AdminSocialLinks() {
                                         onChange={() => handleToggleActive(p.key)}
                                         className="sr-only peer"
                                     />
-                                    <div className="w-11 h-6 bg-zinc-200 peer-focus:outline-hidden rounded-full peer dark:bg-zinc-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:after:border-zinc-600 peer-checked:bg-emerald-600"></div>
+                                    <div className="w-9 h-5 bg-zinc-200 peer-focus:outline-hidden rounded-full peer dark:bg-zinc-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:after:border-zinc-600 peer-checked:bg-emerald-500"></div>
                                 </label>
                             </div>
 
                             {/* URL Input */}
                             <div>
-                                <label className="block text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5">
-                                    Profile / Page URL
+                                <label className="block text-[10px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+                                    Profile / Channel URL
                                 </label>
                                 <input
-                                    type="url"
+                                    type="text"
                                     value={currentData.url}
                                     onChange={(e) => handleUrlChange(p.key, e.target.value)}
                                     placeholder={p.placeholder}
-                                    className="w-full px-3.5 py-2.5 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-xs sm:text-sm text-zinc-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-emerald-500/50 transition-all placeholder:text-zinc-400"
+                                    className="w-full bg-white dark:bg-zinc-800/60 border border-slate-200 dark:border-zinc-700/80 rounded-lg px-3.5 py-2 text-xs text-zinc-900 dark:text-zinc-100 outline-hidden focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
                                 />
                             </div>
                         </div>
