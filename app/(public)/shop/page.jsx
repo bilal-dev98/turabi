@@ -184,7 +184,7 @@ function ShopContent() {
                         {[[0, 50], [50, 100], [100, 200], [200, PRICE_MAX]].map(([lo, hi]) => (
                             <button key={`${lo}-${hi}`} onClick={() => setPriceRange([lo, hi])}
                                 className={`text-xs px-2 py-1 rounded-lg border transition-all font-medium ${priceRange[0] === lo && priceRange[1] === hi ? "border-primary bg-primary/10 text-primary" : "border-slate-200 text-slate-500 hover:border-primary/40"}`}>
-                                ${lo}–{hi === PRICE_MAX ? `${hi}+` : `$${hi}`}
+                                Rs {lo}–{hi === PRICE_MAX ? `${hi}+` : `Rs ${hi}`}
                             </button>
                         ))}
                     </div>

@@ -96,7 +96,7 @@ export default function AdminSettings() {
                                 <div>
                                     <label className="block text-[10px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">Currency</label>
                                     <select value={general.currency} onChange={e => setGeneral(g => ({ ...g, currency: e.target.value }))} className="w-full bg-white dark:bg-zinc-800/60 border border-slate-300 dark:border-zinc-700 rounded-[4px] px-3.5 py-2 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:ring-2 focus:ring-slate-900/10 dark:focus:ring-emerald-500/20 transition-all">
-                                        {["Rs", "$", "€", "£", "AED"].map(c => <option key={c}>{c}</option>)}
+                                        {["Rs", "PKR"].map(c => <option key={c}>{c}</option>)}
                                     </select>
                                 </div>
                             </div>

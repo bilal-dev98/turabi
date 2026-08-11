@@ -21,7 +21,7 @@ const Hero = () => {
                 <div className='relative flex-1 flex flex-col bg-green-200 rounded-3xl xl:min-h-100 group overflow-hidden'>
                     <div className='p-6 sm:p-16 z-10'>
                         <div className='inline-flex items-center gap-2 sm:gap-3 bg-green-300 text-green-700 pr-3 sm:pr-4 p-1 rounded-full text-[11px] sm:text-sm font-medium'>
-                            <span className='bg-green-600 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-white text-[10px] sm:text-xs font-bold'>NEWS</span> Free Shipping on Orders Above $50! <ChevronRightIcon className='group-hover:ml-1 transition-all' size={14} />
+                            <span className='bg-green-600 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-white text-[10px] sm:text-xs font-bold'>NEWS</span> Free Shipping on Orders Above Rs 2500! <ChevronRightIcon className='group-hover:ml-1 transition-all' size={14} />
                         </div>
                         <h2 className='text-2xl sm:text-5xl leading-[1.2] my-3 sm:my-4 font-semibold text-slate-800 max-w-xs sm:max-w-md tracking-tight'>
                             Gadgets you'll love. Prices you'll trust.

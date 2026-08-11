@@ -20,7 +20,7 @@ const TrackOrderModal = ({ isOpen, onClose }) => {
                 status: 'In Transit',
                 date: '2024-02-24',
                 items: 3,
-                total: '$145.00',
+                total: 'Rs 1450',
                 steps: [
                     { label: 'Order Placed', completed: true, icon: <Clock size={16} /> },
                     { label: 'Processing', completed: true, icon: <Package size={16} /> },
