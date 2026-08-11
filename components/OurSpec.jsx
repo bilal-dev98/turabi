@@ -30,34 +30,13 @@ const OurSpecs = ({ sectionData }) => {
                             background: 'radial-gradient(circle at 50% 0%, #FFB347 0%, #F9ED96 30%, #F4F8F9 60%, #F4F8F9 100%)'
                         }}
                     >
-                        {/* Prompt Box */}
-                        <div className="absolute top-[30px] left-[24px] right-[24px] bg-white rounded-[12px] p-4 text-[0.8rem] text-[#475569] leading-[1.6] shadow-[0_8px_20px_rgba(0,0,0,0.04)]">
-                            Exquisite 18k & 24k gold, sterling silver & gemstone jewelry{' '}
-                            <span className="font-semibold bg-gradient-to-r from-[#FFB347] to-[#E5A1F5] bg-clip-text text-transparent">
-                                handcrafted to perfection
-                            </span>{' '}
-                            by Pakistan's finest{' '}
-                            <span className="font-semibold bg-gradient-to-r from-[#FFB347] to-[#E5A1F5] bg-clip-text text-transparent">
-                                master jewelers
-                            </span>.
+                        <div className="absolute inset-x-0 top-0 bottom-[70px] flex items-center justify-center px-[24px]">
+                            <img 
+                                src="/icons/Handcrafted%20Custom%20Designs.webp" 
+                                alt="Handcrafted Custom Designs" 
+                                className="w-full h-[190px] object-contain mt-[15px] drop-shadow-md"
+                            />
                         </div>
-
-                        {/* Add More Details Pill */}
-                        <div className="absolute top-[180px] left-[40px] bg-white border border-black px-[14px] py-[5px] rounded-[20px] text-[0.75rem] font-semibold text-[#1e293b] shadow-[0_4px_15px_rgba(0,0,0,0.08)] flex items-center gap-[6px]">
-                            <span className="text-[#a855f7] text-[1rem]">✦</span>
-                            <span>Customization Available</span>
-                        </div>
-
-                        {/* Cursor Arrow */}
-                        <svg 
-                            className="absolute top-[205px] left-[110px] w-6 h-6 z-10 drop-shadow-[0_4px_6px_rgba(0,0,0,0.2)]"
-                            viewBox="0 0 24 24" 
-                            fill="#0f172a" 
-                            stroke="#ffffff" 
-                            strokeWidth="1"
-                        >
-                            <path d="M4 2L20 11L11 13L9 22L4 2Z" />
-                        </svg>
 
                         <h3 className="text-[1.05rem] font-semibold text-[#1e293b] p-[24px] z-10">
                             Handcrafted Custom Designs
@@ -73,9 +52,9 @@ const OurSpecs = ({ sectionData }) => {
                     >
                         <div className="absolute inset-x-0 top-0 bottom-[70px] flex items-center justify-center px-[24px]">
                             <img 
-                                src="https://pub-f170a2592d2c4a1485466404c36807be.r2.dev/viktor/network.svg" 
-                                alt="Insured Shipping Network" 
-                                className="w-full h-[180px] object-contain mt-[20px]"
+                                src="/icons/Insured%20Express%20Shipping.webp" 
+                                alt="Insured Express Shipping" 
+                                className="w-full h-[190px] object-contain mt-[15px] drop-shadow-md"
                             />
                         </div>
 
