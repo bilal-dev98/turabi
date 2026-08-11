@@ -1,7 +1,13 @@
 import prisma from "@/lib/prisma";
+import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 export const dynamic = 'force-dynamic';
+
+const getPrisma = () => {
+    if (prisma && prisma.socialLink) return prisma;
+    return new PrismaClient();
+};
 
 const DEFAULT_PLATFORMS = [
     { platform: 'facebook', name: 'Facebook', url: 'https://facebook.com/chandjewelry.store', isActive: true },
@@ -16,14 +22,15 @@ const DEFAULT_PLATFORMS = [
 
 export async function GET() {
     try {
-        let links = await prisma.socialLink.findMany({
+        const db = getPrisma();
+        let links = await db.socialLink.findMany({
             orderBy: { createdAt: 'asc' }
         });
 
         // Seed default platforms if database is empty
         if (!links || links.length === 0) {
             for (const item of DEFAULT_PLATFORMS) {
-                await prisma.socialLink.upsert({
+                await db.socialLink.upsert({
                     where: { platform: item.platform },
                     update: {},
                     create: {
@@ -33,7 +40,7 @@ export async function GET() {
                     }
                 });
             }
-            links = await prisma.socialLink.findMany({
+            links = await db.socialLink.findMany({
                 orderBy: { createdAt: 'asc' }
             });
         }
@@ -54,11 +61,12 @@ export async function PUT(request) {
             return NextResponse.json({ success: false, message: "Invalid payload format" }, { status: 400 });
         }
 
+        const db = getPrisma();
         const updatedLinks = [];
 
         for (const item of links) {
             if (!item.platform) continue;
-            const updated = await prisma.socialLink.upsert({
+            const updated = await db.socialLink.upsert({
                 where: { platform: item.platform.toLowerCase() },
                 update: {
                     url: item.url ? item.url.trim() : "",

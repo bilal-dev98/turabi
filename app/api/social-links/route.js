@@ -1,7 +1,13 @@
 import prisma from "@/lib/prisma";
+import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 export const dynamic = 'force-dynamic';
+
+const getPrisma = () => {
+    if (prisma && prisma.socialLink) return prisma;
+    return new PrismaClient();
+};
 
 const DEFAULT_SOCIAL_LINKS = [
     { platform: 'facebook', url: 'https://facebook.com/chandjewelry.store', isActive: true },
@@ -16,7 +22,8 @@ const DEFAULT_SOCIAL_LINKS = [
 
 export async function GET() {
     try {
-        let links = await prisma.socialLink.findMany({
+        const db = getPrisma();
+        let links = await db.socialLink.findMany({
             where: { isActive: true },
             orderBy: { createdAt: 'asc' }
         });
