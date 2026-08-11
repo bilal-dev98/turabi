@@ -11,7 +11,7 @@ const NOTIFICATIONS = [
     { id: 5, icon: "inventory_2", title: "Low stock alert", desc: "Smart Watch Black · 3 left", time: "5h ago", read: true },
 ]
 
-const AdminNavbar = ({ onMenuClick }) => {
+const AdminNavbar = ({ onMenuClick, collapsed, onToggleCollapse }) => {
     const router = useRouter()
     const [search, setSearch] = useState("")
     const [searchResults, setSearchResults] = useState([])
@@ -104,7 +104,7 @@ const AdminNavbar = ({ onMenuClick }) => {
 
     return (
         <header className="h-16 bg-white dark:bg-[#121215] sticky top-0 z-30 px-4 sm:px-6 lg:px-8 flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800/80 transition-colors duration-200 shadow-xs">
-            {/* Left: Mobile menu toggle + Global search */}
+            {/* Left: Mobile menu toggle + Desktop Collapse + Global search */}
             <div className="flex items-center gap-3 flex-1 max-w-md">
                 <button
                     onClick={onMenuClick}
@@ -112,6 +112,16 @@ const AdminNavbar = ({ onMenuClick }) => {
                     title="Toggle menu"
                 >
                     <span className="material-symbols-outlined text-xl">menu</span>
+                </button>
+
+                <button
+                    onClick={onToggleCollapse}
+                    className="hidden lg:flex p-2 text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-[4px] transition-colors shrink-0"
+                    title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+                >
+                    <span className="material-symbols-outlined text-xl">
+                        {collapsed ? "menu_open" : "side_navigation"}
+                    </span>
                 </button>
 
                 {/* Search Input */}

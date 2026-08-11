@@ -10,6 +10,7 @@ const AdminLayout = ({ children }) => {
     const [isAdmin, setIsAdmin] = useState(false)
     const [loading, setLoading] = useState(true)
     const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [collapsed, setCollapsed] = useState(false)
 
     const fetchIsAdmin = async () => {
         setIsAdmin(true)
@@ -18,15 +19,36 @@ const AdminLayout = ({ children }) => {
 
     useEffect(() => {
         fetchIsAdmin()
+        const saved = localStorage.getItem("admin_sidebar_collapsed")
+        if (saved === "true") {
+            setCollapsed(true)
+        }
     }, [])
+
+    const toggleCollapse = () => {
+        setCollapsed(prev => {
+            const next = !prev
+            localStorage.setItem("admin_sidebar_collapsed", next ? "true" : "false")
+            return next
+        })
+    }
 
     return loading ? (
         <Loading />
     ) : isAdmin ? (
         <div className="bg-[#f6f6f7] dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100 min-h-screen flex font-sans antialiased selection:bg-zinc-900 selection:text-white dark:selection:bg-emerald-500 dark:selection:text-zinc-950 transition-colors duration-200">
-            <AdminSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-            <main className="flex-1 lg:ml-64 min-h-screen flex flex-col w-full relative min-w-0 overflow-x-hidden">
-                <AdminNavbar onMenuClick={() => setSidebarOpen(true)} />
+            <AdminSidebar
+                open={sidebarOpen}
+                onClose={() => setSidebarOpen(false)}
+                collapsed={collapsed}
+                onToggleCollapse={toggleCollapse}
+            />
+            <main className={`flex-1 ${collapsed ? 'lg:ml-16' : 'lg:ml-64'} transition-all duration-300 min-h-screen flex flex-col w-full relative min-w-0 overflow-x-hidden`}>
+                <AdminNavbar
+                    onMenuClick={() => setSidebarOpen(true)}
+                    collapsed={collapsed}
+                    onToggleCollapse={toggleCollapse}
+                />
                 <div className="flex-1">
                     {children}
                 </div>
