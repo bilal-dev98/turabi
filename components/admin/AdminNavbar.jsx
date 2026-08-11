@@ -19,6 +19,9 @@ const AdminNavbar = ({ onMenuClick, collapsed, onToggleCollapse }) => {
     const [showNotif, setShowNotif] = useState(false)
     const [notifications, setNotifications] = useState(NOTIFICATIONS)
     const [adminProfile, setAdminProfile] = useState({ name: "Alex Rivera", role: "Administrator", image: "" })
+    const [darkMode, setDarkMode] = useState(false)
+    const searchRef = useRef(null)
+    const notifRef = useRef(null)
 
     useEffect(() => {
         const fetchAdminProfile = async () => {
