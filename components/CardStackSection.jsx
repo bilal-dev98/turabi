@@ -1,5 +1,6 @@
 'use client'
 import { CardStack } from '@/components/CardStack'
+import Title from '@/components/Title'
 import { useEffect, useState } from 'react'
 
 const defaultItems = [
@@ -78,16 +79,8 @@ const CardStackSection = () => {
     return (
         <section className="w-full py-6 sm:py-10 overflow-x-hidden">
             {/* Header */}
-            <div className="text-center mb-4 sm:mb-6 px-4">
-                <p className="text-xs font-bold uppercase tracking-widest text-primary mb-1.5">
-                    Featured Collection
-                </p>
-                <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">
-                    Shop the Highlights
-                </h2>
-                <p className="mt-1.5 sm:mt-2 text-slate-500 text-xs sm:text-sm max-w-md mx-auto">
-                    Drag, swipe, or click through our curated picks. Each card is a world of its own.
-                </p>
+            <div className="mb-6 px-4">
+                <Title title="Shop the Highlights" description="Drag, swipe, or click through our curated picks. Each card is a world of its own." visibleButton={false} />
             </div>
 
             {/* Card Stack */}

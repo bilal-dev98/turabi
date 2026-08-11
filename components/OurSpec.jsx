@@ -1,23 +1,14 @@
 'use client'
 import React from 'react'
+import Title from './Title'
 
 const OurSpecs = ({ sectionData }) => {
     return (
-        <section className="w-full bg-[#f6f6f7] py-[80px] px-[20px] flex justify-center font-sans my-10 sm:my-16">
+        <section className="w-full bg-[#f6f6f7] py-[60px] sm:py-[80px] px-[20px] flex justify-center font-sans my-10 sm:my-16">
             <div className="w-full max-w-[1100px] text-center">
                 {/* Header Block */}
-                <div className="mb-12">
-                    <span 
-                        className="inline-block text-[0.75rem] font-semibold uppercase tracking-[1px] mb-4 bg-gradient-to-r from-[#F5C344] via-[#F28482] to-[#B567C2] bg-clip-text text-transparent"
-                    >
-                        Chand Jewelry Craftsmanship
-                    </span>
-                    <h2 className="text-[2.25rem] sm:text-[2.75rem] font-medium text-[#0f172a] tracking-[-0.02em] leading-tight mb-3">
-                        Built for Luxury & Elegance
-                    </h2>
-                    <p className="text-[1.125rem] text-[#64748b] leading-[1.5]">
-                        Everything you need to experience timeless jewelry<br />from selection to delivery
-                    </p>
+                <div className="mb-10 sm:mb-12">
+                    <Title title="Built for Luxury & Elegance" description="Everything you need to experience timeless jewelry from selection to delivery" visibleButton={false} />
                 </div>
 
                 {/* Grid */}
