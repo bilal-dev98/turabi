@@ -39,16 +39,17 @@ export async function GET() {
         if (!links || links.length === 0) {
             for (const item of DEFAULT_PLATFORMS) {
                 try {
+                    const idVal = 'soc_' + item.platform;
                     if (db.socialLink) {
                         await db.socialLink.upsert({
                             where: { platform: item.platform },
                             update: {},
-                            create: { platform: item.platform, url: item.url, isActive: item.isActive }
+                            create: { id: idVal, platform: item.platform, url: item.url, isActive: item.isActive }
                         });
                     } else {
                         await db.$executeRawUnsafe(
-                            'INSERT INTO "SocialLink" (id, platform, url, "isActive", "createdAt", "updatedAt") VALUES (gen_random_uuid()::text, $1, $2, $3, NOW(), NOW()) ON CONFLICT (platform) DO NOTHING',
-                            item.platform, item.url, item.isActive
+                            'INSERT INTO "SocialLink" (id, platform, url, "isActive", "createdAt", "updatedAt") VALUES ($1, $2, $3, $4, NOW(), NOW()) ON CONFLICT (platform) DO NOTHING',
+                            idVal, item.platform, item.url, item.isActive
                         );
                     }
                 } catch (e) {}
@@ -80,26 +81,27 @@ export async function PUT(request) {
             const pKey = item.platform.toLowerCase();
             const urlVal = item.url ? item.url.trim() : "";
             const activeVal = typeof item.isActive === 'boolean' ? item.isActive : true;
+            const idVal = 'soc_' + pKey;
 
             try {
                 if (db.socialLink) {
                     const updated = await db.socialLink.upsert({
                         where: { platform: pKey },
                         update: { url: urlVal, isActive: activeVal },
-                        create: { platform: pKey, url: urlVal, isActive: activeVal }
+                        create: { id: idVal, platform: pKey, url: urlVal, isActive: activeVal }
                     });
                     updatedLinks.push(updated);
                 } else {
                     await db.$executeRawUnsafe(
-                        'INSERT INTO "SocialLink" (id, platform, url, "isActive", "createdAt", "updatedAt") VALUES (gen_random_uuid()::text, $1, $2, $3, NOW(), NOW()) ON CONFLICT (platform) DO UPDATE SET url = $2, "isActive" = $3, "updatedAt" = NOW()',
-                        pKey, urlVal, activeVal
+                        'INSERT INTO "SocialLink" (id, platform, url, "isActive", "createdAt", "updatedAt") VALUES ($1, $2, $3, $4, NOW(), NOW()) ON CONFLICT (platform) DO UPDATE SET url = $3, "isActive" = $4, "updatedAt" = NOW()',
+                        idVal, pKey, urlVal, activeVal
                     );
                     updatedLinks.push({ platform: pKey, url: urlVal, isActive: activeVal });
                 }
             } catch (err) {
                 await db.$executeRawUnsafe(
-                    'INSERT INTO "SocialLink" (id, platform, url, "isActive", "createdAt", "updatedAt") VALUES (gen_random_uuid()::text, $1, $2, $3, NOW(), NOW()) ON CONFLICT (platform) DO UPDATE SET url = $2, "isActive" = $3, "updatedAt" = NOW()',
-                    pKey, urlVal, activeVal
+                    'INSERT INTO "SocialLink" (id, platform, url, "isActive", "createdAt", "updatedAt") VALUES ($1, $2, $3, $4, NOW(), NOW()) ON CONFLICT (platform) DO UPDATE SET url = $3, "isActive" = $4, "updatedAt" = NOW()',
+                    idVal, pKey, urlVal, activeVal
                 ).catch(() => {});
                 updatedLinks.push({ platform: pKey, url: urlVal, isActive: activeVal });
             }
