@@ -4,6 +4,13 @@ import { NextResponse } from "next/server";
 export const dynamic = 'force-dynamic';
 export const revalidate = 3600;
 
+const toAbsoluteUrl = (url, baseUrl) => {
+    if (!url) return null;
+    if (url.startsWith('http://') || url.startsWith('https://')) return url;
+    const cleanPath = url.startsWith('/') ? url : `/${url}`;
+    return `${baseUrl}${cleanPath}`;
+};
+
 export async function GET() {
     const baseUrl = 'https://www.chandjewelry.store';
     const nowIso = new Date().toISOString();
@@ -31,7 +38,7 @@ export async function GET() {
             lastmod: (p.updatedAt || new Date()).toISOString(),
             priority: '0.8',
             changefreq: 'weekly',
-            image: Array.isArray(p.images) && p.images[0] ? p.images[0] : null,
+            image: Array.isArray(p.images) && p.images[0] ? toAbsoluteUrl(p.images[0], baseUrl) : null,
             title: p.name || 'Chand Jewelry'
         }));
 
