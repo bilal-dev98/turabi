@@ -25,24 +25,24 @@ const OurSpecs = ({ sectionData }) => {
                     
                     {/* Card 1 — Handcrafted Custom Designs */}
                     <div 
-                        className="relative h-[340px] rounded-[20px] overflow-hidden flex flex-col justify-end shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)]"
+                        className="relative h-[390px] rounded-[20px] overflow-hidden flex flex-col justify-end shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)]"
                         style={{
                             background: 'radial-gradient(circle at 50% 0%, #FFB347 0%, #F9ED96 30%, #F4F8F9 60%, #F4F8F9 100%)'
                         }}
                     >
-                        <div className="absolute inset-x-0 top-0 bottom-[70px] flex items-center justify-center px-[24px]">
+                        <div className="absolute inset-x-0 top-0 bottom-[105px] flex items-center justify-center px-[24px]">
                             <img 
                                 src="/icons/Handcrafted%20Custom%20Designs.webp" 
                                 alt="Handcrafted Custom Designs" 
-                                className="w-full h-[190px] object-contain mt-[15px] drop-shadow-md"
+                                className="w-full h-[210px] object-contain mt-[15px] drop-shadow-md"
                             />
                         </div>
 
-                        <div className="p-[20px] pb-[24px] z-10">
-                            <h3 className="text-[1.05rem] font-semibold text-[#1e293b]">
+                        <div className="p-[24px] pb-[28px] z-10">
+                            <h3 className="text-[1.1rem] font-semibold text-[#1e293b]">
                                 Handcrafted Custom Designs
                             </h3>
-                            <p className="text-[0.8rem] text-[#64748b] mt-1 font-normal leading-relaxed">
+                            <p className="text-[0.825rem] text-[#64748b] mt-2.5 font-normal leading-relaxed">
                                 Bespoke gold & silver jewelry tailored to perfection by master artisans.
                             </p>
                         </div>
@@ -50,24 +50,24 @@ const OurSpecs = ({ sectionData }) => {
 
                     {/* Card 2 — Insured Express Shipping */}
                     <div 
-                        className="relative h-[340px] rounded-[20px] overflow-hidden flex flex-col justify-end shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)]"
+                        className="relative h-[390px] rounded-[20px] overflow-hidden flex flex-col justify-end shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)]"
                         style={{
                             background: 'radial-gradient(circle at 50% 0%, #E5A1F5 0%, #F8ACA0 30%, #F4F8F9 60%, #F4F8F9 100%)'
                         }}
                     >
-                        <div className="absolute inset-x-0 top-0 bottom-[90px] flex items-center justify-center px-[24px]">
+                        <div className="absolute inset-x-0 top-0 bottom-[105px] flex items-center justify-center px-[24px]">
                             <img 
                                 src="/icons/Insured%20Express%20Shipping.webp" 
                                 alt="Insured Express Shipping" 
-                                className="w-full h-[180px] object-contain mt-[10px] drop-shadow-md"
+                                className="w-full h-[200px] object-contain mt-[10px] drop-shadow-md"
                             />
                         </div>
 
-                        <div className="p-[20px] pb-[24px] z-10">
-                            <h3 className="text-[1.05rem] font-semibold text-[#1e293b]">
+                        <div className="p-[24px] pb-[28px] z-10">
+                            <h3 className="text-[1.1rem] font-semibold text-[#1e293b]">
                                 Insured Express Shipping
                             </h3>
-                            <p className="text-[0.8rem] text-[#64748b] mt-1 font-normal leading-relaxed">
+                            <p className="text-[0.825rem] text-[#64748b] mt-2.5 font-normal leading-relaxed">
                                 Fast, safe & fully insured doorstep delivery across Pakistan & worldwide.
                             </p>
                         </div>
@@ -75,7 +75,7 @@ const OurSpecs = ({ sectionData }) => {
 
                     {/* Card 3 — 100% Certified Guarantee */}
                     <div 
-                        className="relative h-[340px] rounded-[20px] overflow-hidden flex flex-col justify-end shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)]"
+                        className="relative h-[390px] rounded-[20px] overflow-hidden flex flex-col justify-end shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)]"
                         style={{
                             background: 'radial-gradient(circle at 50% 0%, #F9ED96 0%, #E5A1F5 30%, #F4F8F9 60%, #F4F8F9 100%)'
                         }}
@@ -95,11 +95,11 @@ const OurSpecs = ({ sectionData }) => {
                         <img 
                             src="https://pub-f170a2592d2c4a1485466404c36807be.r2.dev/viktor/library%20icon.svg" 
                             alt="Luxury Catalog Icon" 
-                            className="absolute top-[40px] left-1/2 -translate-x-1/2 w-[160px] drop-shadow-[0_15px_25px_rgba(0,0,0,0.08)]"
+                            className="absolute top-[45px] left-1/2 -translate-x-1/2 w-[175px] drop-shadow-[0_15px_25px_rgba(0,0,0,0.08)]"
                         />
 
                         {/* Search Pill */}
-                        <div className="absolute top-[195px] left-1/2 -translate-x-1/2 bg-white border border-black px-[18px] py-[6px] rounded-[20px] text-[0.75rem] font-medium text-[#1e293b] shadow-[0_8px_20px_rgba(0,0,0,0.06)] whitespace-nowrap flex items-center gap-[8px]">
+                        <div className="absolute top-[220px] left-1/2 -translate-x-1/2 bg-white border border-black px-[18px] py-[6px] rounded-[20px] text-[0.75rem] font-medium text-[#1e293b] shadow-[0_8px_20px_rgba(0,0,0,0.06)] whitespace-nowrap flex items-center gap-[8px]">
                             <svg className="w-[14px] h-[14px]" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <circle cx="11" cy="11" r="8" />
                                 <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -107,11 +107,11 @@ const OurSpecs = ({ sectionData }) => {
                             <span>Search in Luxury Catalog</span>
                         </div>
 
-                        <div className="p-[20px] pb-[24px] z-10">
-                            <h3 className="text-[1.05rem] font-semibold text-[#1e293b]">
+                        <div className="p-[24px] pb-[28px] z-10">
+                            <h3 className="text-[1.1rem] font-semibold text-[#1e293b]">
                                 100% Certified Guarantee
                             </h3>
-                            <p className="text-[0.8rem] text-[#64748b] mt-1 font-normal leading-relaxed">
+                            <p className="text-[0.825rem] text-[#64748b] mt-2.5 font-normal leading-relaxed">
                                 Genuine hallmarked precious metals, certified stones & lifetime warranty.
                             </p>
                         </div>
