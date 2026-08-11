@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import Link from 'next/link'
+import SocialLinks from './SocialLinks'
 
 const storeName = "Chand Jewelry"
 
@@ -119,20 +120,7 @@ export default function Footer() {
                                 <p className="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">
                                     Connect With Us
                                 </p>
-                                <div className="flex items-center gap-2.5 flex-wrap">
-                                    {socialButtons.map((s) => (
-                                        <a
-                                            key={s.name}
-                                            href={s.href}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            aria-label={s.name}
-                                            className="size-9 sm:size-10 rounded-xl bg-slate-100 border border-slate-200/80 text-slate-600 hover:text-white hover:bg-emerald-600 hover:border-emerald-600 flex items-center justify-center transition-all duration-300 hover:scale-105 shadow-xs"
-                                        >
-                                            <s.icon className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-                                        </a>
-                                    ))}
-                                </div>
+                                <SocialLinks />
                             </div>
 
                             {/* Contact & Copyright Info */}

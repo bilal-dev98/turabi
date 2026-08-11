@@ -1,6 +1,7 @@
 import React from 'react';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
+import SocialLinks from '@/components/SocialLinks';
 
 export const metadata = {
     title: "Contact Us - Chand Jewelry",
@@ -79,17 +80,11 @@ export default function ContactPage() {
                             </div>
                         </div>
 
-                        <div className="relative z-10 mt-16 flex gap-4">
-                            {/* Social Icons Placeholder */}
-                            <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary hover:text-slate-900 transition-colors">
-                                <span className="font-bold text-sm">FB</span>
-                            </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary hover:text-slate-900 transition-colors">
-                                <span className="font-bold text-sm">TW</span>
-                            </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary hover:text-slate-900 transition-colors">
-                                <span className="font-bold text-sm">IG</span>
-                            </a>
+                        <div className="relative z-10 mt-12 pt-6 border-t border-slate-800 space-y-3">
+                            <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                                Follow & Connect With Us
+                            </p>
+                            <SocialLinks buttonStyle="size-10 rounded-full bg-white/10 text-white hover:bg-emerald-500 hover:text-slate-950 flex items-center justify-center transition-all duration-300 hover:scale-105 shadow-xs" />
                         </div>
                     </div>
 

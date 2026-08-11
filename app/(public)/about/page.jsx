@@ -3,6 +3,7 @@ import { ShoppingBag, Truck, ShieldCheck, HeadphonesIcon, TrendingUp, Users, Che
 import Link from 'next/link';
 import Image from 'next/image';
 import { assets } from '@/assets/assets';
+import SocialLinks from '@/components/SocialLinks';
 
 export const metadata = {
     title: "About Us - Chand Jewelry",
@@ -134,11 +135,25 @@ export default function AboutPage() {
                             </div>
                             <h3 className="text-xl font-medium mb-3">Community First</h3>
                             <p className="text-slate-600 leading-relaxed text-sm">
-                                Built for tech lovers, by tech lovers. We listen to our community to constantly improve our offerings.
+                                Built for jewelry lovers. We listen to our community to constantly refine our luxury designs and services.
                             </p>
                         </div>
                     </div>
                 </div>
+
+                {/* Social Connect Banner */}
+                <div className="mt-16 bg-slate-900 text-white rounded-3xl p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+                    <div className="space-y-2 text-center md:text-left z-10">
+                        <h3 className="text-2xl sm:text-3xl font-bold tracking-tight">Connect With Chand Jewelry</h3>
+                        <p className="text-slate-400 text-sm max-w-md">
+                            Follow our social channels to get exclusive sneak peeks of new gold, silver & gemstone collections.
+                        </p>
+                    </div>
+                    <div className="z-10">
+                        <SocialLinks buttonStyle="size-11 rounded-2xl bg-white/10 text-white hover:bg-emerald-500 hover:text-slate-950 flex items-center justify-center transition-all duration-300 hover:scale-105 shadow-md" />
+                    </div>
+                </div>
+
             </div>
         </div>
     );

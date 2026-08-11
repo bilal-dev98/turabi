@@ -38,6 +38,7 @@ const AdminSidebar = ({ open, onClose }) => {
         {
             title: "Settings",
             links: [
+                { name: 'Social Links', href: '/admin/social', icon: 'share' },
                 { name: 'Settings', href: '/admin/settings', icon: 'settings' },
             ]
         }
