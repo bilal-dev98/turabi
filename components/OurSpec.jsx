@@ -3,27 +3,27 @@ import React from 'react'
 
 const OurSpecs = ({ sectionData }) => {
     return (
-        <section className="w-full bg-white py-[80px] px-[20px] flex justify-center font-sans">
+        <section className="w-full bg-[#f6f6f7] py-[80px] px-[20px] flex justify-center font-sans my-10 sm:my-16">
             <div className="w-full max-w-[1100px] text-center">
                 {/* Header Block */}
                 <div className="mb-12">
                     <span 
                         className="inline-block text-[0.75rem] font-semibold uppercase tracking-[1px] mb-4 bg-gradient-to-r from-[#F5C344] via-[#F28482] to-[#B567C2] bg-clip-text text-transparent"
                     >
-                        Core Features
+                        Chand Jewelry Craftsmanship
                     </span>
                     <h2 className="text-[2.25rem] sm:text-[2.75rem] font-medium text-[#0f172a] tracking-[-0.02em] leading-tight mb-3">
-                        Built for Speed & Quality
+                        Built for Luxury & Elegance
                     </h2>
                     <p className="text-[1.125rem] text-[#64748b] leading-[1.5]">
-                        Everything you need to go<br />from idea to image
+                        Everything you need to experience timeless jewelry<br />from selection to delivery
                     </p>
                 </div>
 
                 {/* Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[24px] text-left">
                     
-                    {/* Card 1 — Smart Prompt Suggestions */}
+                    {/* Card 1 — Handcrafted Custom Designs */}
                     <div 
                         className="relative h-[340px] rounded-[20px] overflow-hidden flex flex-col justify-end shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)]"
                         style={{
@@ -32,24 +32,20 @@ const OurSpecs = ({ sectionData }) => {
                     >
                         {/* Prompt Box */}
                         <div className="absolute top-[30px] left-[24px] right-[24px] bg-white rounded-[12px] p-4 text-[0.8rem] text-[#475569] leading-[1.6] shadow-[0_8px_20px_rgba(0,0,0,0.04)]">
-                            A bright, high-resolution 3D illustration of a{' '}
+                            Exquisite 18k & 24k gold, sterling silver & gemstone jewelry{' '}
                             <span className="font-semibold bg-gradient-to-r from-[#FFB347] to-[#E5A1F5] bg-clip-text text-transparent">
-                                cheerful cartoon
+                                handcrafted to perfection
                             </span>{' '}
-                            of a{' '}
+                            by Pakistan's finest{' '}
                             <span className="font-semibold bg-gradient-to-r from-[#FFB347] to-[#E5A1F5] bg-clip-text text-transparent">
-                                girl character
-                            </span>{' '}
-                            <span className="font-semibold bg-gradient-to-r from-[#FFB347] to-[#E5A1F5] bg-clip-text text-transparent">
-                                centred against a
-                            </span>{' '}
-                            smooth blue background
+                                master jewelers
+                            </span>.
                         </div>
 
                         {/* Add More Details Pill */}
                         <div className="absolute top-[180px] left-[40px] bg-white border border-black px-[14px] py-[5px] rounded-[20px] text-[0.75rem] font-semibold text-[#1e293b] shadow-[0_4px_15px_rgba(0,0,0,0.08)] flex items-center gap-[6px]">
                             <span className="text-[#a855f7] text-[1rem]">✦</span>
-                            <span>Add more details</span>
+                            <span>Customization Available</span>
                         </div>
 
                         {/* Cursor Arrow */}
@@ -64,11 +60,11 @@ const OurSpecs = ({ sectionData }) => {
                         </svg>
 
                         <h3 className="text-[1.05rem] font-semibold text-[#1e293b] p-[24px] z-10">
-                            Smart Prompt Suggestions
+                            Handcrafted Custom Designs
                         </h3>
                     </div>
 
-                    {/* Card 2 — API Access */}
+                    {/* Card 2 — Insured Express Shipping */}
                     <div 
                         className="relative h-[340px] rounded-[20px] overflow-hidden flex flex-col justify-end shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)]"
                         style={{
@@ -78,17 +74,17 @@ const OurSpecs = ({ sectionData }) => {
                         <div className="absolute inset-x-0 top-0 bottom-[70px] flex items-center justify-center px-[24px]">
                             <img 
                                 src="https://pub-f170a2592d2c4a1485466404c36807be.r2.dev/viktor/network.svg" 
-                                alt="API Network" 
+                                alt="Insured Shipping Network" 
                                 className="w-full h-[180px] object-contain mt-[20px]"
                             />
                         </div>
 
                         <h3 className="text-[1.05rem] font-semibold text-[#1e293b] p-[24px] z-10">
-                            API Access
+                            Insured Express Shipping
                         </h3>
                     </div>
 
-                    {/* Card 3 — Project Library */}
+                    {/* Card 3 — 100% Certified Guarantee */}
                     <div 
                         className="relative h-[340px] rounded-[20px] overflow-hidden flex flex-col justify-end shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)]"
                         style={{
@@ -109,7 +105,7 @@ const OurSpecs = ({ sectionData }) => {
                         {/* Folder Image */}
                         <img 
                             src="https://pub-f170a2592d2c4a1485466404c36807be.r2.dev/viktor/library%20icon.svg" 
-                            alt="Folder Library Icon" 
+                            alt="Luxury Catalog Icon" 
                             className="absolute top-[50px] left-1/2 -translate-x-1/2 w-[170px] drop-shadow-[0_15px_25px_rgba(0,0,0,0.08)]"
                         />
 
@@ -119,11 +115,11 @@ const OurSpecs = ({ sectionData }) => {
                                 <circle cx="11" cy="11" r="8" />
                                 <line x1="21" y1="21" x2="16.65" y2="16.65" />
                             </svg>
-                            <span>Search in library</span>
+                            <span>Search in Luxury Catalog</span>
                         </div>
 
                         <h3 className="text-[1.05rem] font-semibold text-[#1e293b] p-[24px] z-10">
-                            Project Library
+                            100% Certified Guarantee
                         </h3>
                     </div>
 
