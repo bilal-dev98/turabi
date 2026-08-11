@@ -26,8 +26,12 @@ export default function robots() {
             {
                 userAgent: 'PerplexityBot',
                 allow: '/',
+            },
+            {
+                userAgent: 'Bytespider',
+                allow: '/',
             }
         ],
-        sitemap: 'https://chandjewelry.store/sitemap.xml',
+        sitemap: 'https://www.chandjewelry.store/sitemap.xml',
     }
 }

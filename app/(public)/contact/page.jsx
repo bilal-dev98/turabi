@@ -4,13 +4,46 @@ import ContactForm from '@/components/ContactForm';
 import SocialLinks from '@/components/SocialLinks';
 
 export const metadata = {
-    title: "Contact Us - Chand Jewelry",
-    description: "Get in touch with the Chand Jewelry team. We are here to assist you with order inquiries, custom jewelry, and support.",
+    title: "Contact Us - Handcrafted Jewelry Support",
+    description: "Get in touch with Chand Jewelry. Contact us for custom gold & silver jewelry, order tracking, and 24/7 customer support.",
+    alternates: {
+        canonical: 'https://www.chandjewelry.store/contact',
+    },
+    openGraph: {
+        title: "Contact Us - Chand Jewelry",
+        description: "Reach out to Chand Jewelry via WhatsApp +92 325 5821056 or email info@chandjewelry.store.",
+        url: 'https://www.chandjewelry.store/contact',
+    }
 };
 
 export default function ContactPage() {
+    const contactJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": "Contact Us - Chand Jewelry",
+        "url": "https://www.chandjewelry.store/contact",
+        "mainEntity": {
+            "@type": "JewelryStore",
+            "name": "Chand Jewelry",
+            "url": "https://www.chandjewelry.store",
+            "telephone": ["+923255821056", "+923099162733"],
+            "email": "info@chandjewelry.store",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shams Colony H-13 Islamabad / Pindora chungi Rawalpindi",
+                "addressLocality": "Islamabad / Rawalpindi",
+                "addressRegion": "Punjab",
+                "addressCountry": "PK"
+            }
+        }
+    };
+
     return (
-        <div className="min-h-screen bg-background-light py-16">
+        <div className="min-h-screen bg-background-light py-16 font-sans">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(contactJsonLd) }}
+            />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header Section */}
                 <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">

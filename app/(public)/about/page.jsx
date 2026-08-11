@@ -1,18 +1,59 @@
 import React from 'react';
-import { ShoppingBag, Truck, ShieldCheck, HeadphonesIcon, TrendingUp, Users, CheckCircle2 } from 'lucide-react';
+import { ShoppingBag, Truck, ShieldCheck, HeadphonesIcon, TrendingUp, Users } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { assets } from '@/assets/assets';
 import SocialLinks from '@/components/SocialLinks';
 
 export const metadata = {
-    title: "About Us - Chand Jewelry",
-    description: "Learn more about Chand Jewelry, our story, mission, and handcrafted luxury jewelry & fine accessories.",
+    title: "About Us - Handcrafted Luxury Jewelry",
+    description: "Learn more about Chand Jewelry, our royal artisan heritage, mission, and handcrafted gold & silver jewelry across Pakistan.",
+    alternates: {
+        canonical: 'https://www.chandjewelry.store/about',
+    },
+    openGraph: {
+        title: "About Us - Chand Jewelry",
+        description: "Discover Chand Jewelry's heritage of handcrafted gold, silver, gemstone rings, and fine luxury accessories.",
+        url: 'https://www.chandjewelry.store/about',
+    }
 };
 
 export default function AboutPage() {
+    const faqJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is Chand Jewelry?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Chand Jewelry is a premier online store specializing in handcrafted luxury gold & silver jewelry, diamond solitaires, luxury wristwatches, and fine accessories across Pakistan."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Are Chand Jewelry products authentic and hallmarked?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, 100% of our precious metals are hallmarked 24k/22k/18k gold and 925 sterling silver, accompanied by certified authenticity guarantees."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does Chand Jewelry offer insured delivery across Pakistan?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, we provide fully insured express doorstep shipping across all major cities in Pakistan within 1-3 business days."
+                }
+            }
+        ]
+    };
+
     return (
-        <div className="mx-6 mb-20">
+        <div className="mx-6 mb-20 font-sans">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+            />
             <div className="max-w-7xl mx-auto my-10">
                 {/* Hero / Vision Section */}
                 <div className="flex flex-col xl:flex-row gap-8">
@@ -31,7 +72,6 @@ export default function AboutPage() {
                                 GET IN TOUCH
                             </Link>
                         </div>
-                        {/* If there's a suitable image in assets, we could use it here. Using a subtle decorative shape instead. */}
                         <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-green-200 rounded-full blur-3xl opacity-50"></div>
                     </div>
 
@@ -39,7 +79,7 @@ export default function AboutPage() {
                         <div className="flex-1 bg-orange-100 rounded-3xl p-8 sm:p-10 flex flex-col justify-center relative overflow-hidden">
                             <h2 className="text-3xl font-medium bg-gradient-to-r from-slate-800 to-[#FFAD51] bg-clip-text text-transparent mb-4">Our Mission</h2>
                             <p className="text-slate-600 font-medium leading-relaxed">
-                                To redefine how you shop for technology. We bridge the gap between premium electronics and accessible pricing.
+                                To redefine how you shop for luxury jewelry. We bridge the gap between royal artisan craftsmanship and accessible luxury pricing.
                             </p>
                         </div>
                         <div className="flex-1 bg-emerald-100 rounded-3xl p-8 sm:p-10 flex flex-col justify-center relative overflow-hidden">
@@ -125,7 +165,7 @@ export default function AboutPage() {
                             </div>
                             <h3 className="text-xl font-medium mb-3">Best Prices</h3>
                             <p className="text-slate-600 leading-relaxed text-sm">
-                                We work directly with brands and distributors to pass massive savings down to our customers.
+                                We work directly with master artisans to pass massive savings down to our customers.
                             </p>
                         </div>
 
@@ -153,7 +193,6 @@ export default function AboutPage() {
                         <SocialLinks buttonStyle="size-11 rounded-2xl bg-white/10 text-white hover:bg-emerald-500 hover:text-slate-950 flex items-center justify-center transition-all duration-300 hover:scale-105 shadow-md" />
                     </div>
                 </div>
-
             </div>
         </div>
     );

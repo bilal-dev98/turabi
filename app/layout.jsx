@@ -7,18 +7,30 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", weight: ["300", "400", "500", "600", "700"] });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit", weight: ["300", "400", "500", "600", "700", "800", "900"] });
 
-
 export const metadata = {
-    metadataBase: new URL('https://chandjewelry.store'),
+    metadataBase: new URL('https://www.chandjewelry.store'),
     title: {
         default: "Chand Jewelry - Handcrafted Luxury Jewelry & Fine Accessories",
         template: "%s | Chand Jewelry"
     },
-    description: "Discover Chand Jewelry - your premier online store for handcrafted luxury jewelry, gold & silver rings, necklaces, watches and fine accessories in Pakistan.",
-    keywords: ["Chand Jewelry", "jewelry store Pakistan", "luxury watches", "gold jewelry", "silver rings", "necklaces", "online jewelry shop", "handcrafted jewelry", "buy jewelry online Pakistan"],
-    authors: [{ name: "Chand Jewelry" }],
+    description: "Discover Chand Jewelry - your premier online destination for handcrafted luxury gold & silver jewelry, diamond rings, necklaces, luxury watches, and bespoke accessories in Pakistan.",
+    keywords: [
+        "Chand Jewelry",
+        "Chand Jewelry Store",
+        "chandjewelry.store",
+        "handcrafted luxury jewelry",
+        "gold jewelry Pakistan",
+        "silver rings Pakistan",
+        "luxury watches",
+        "diamond solitaires",
+        "online jewelry shop Pakistan",
+        "bespoke jewelry designs",
+        "custom gold bangles"
+    ],
+    authors: [{ name: "Chand Jewelry", url: "https://www.chandjewelry.store" }],
     creator: "Chand Jewelry",
     publisher: "Chand Jewelry",
+    manifest: "/manifest.json",
     icons: {
         icon: [
             { url: '/favicon.ico?v=4' },
@@ -29,19 +41,19 @@ export const metadata = {
         apple: '/apple-icon.png?v=4',
     },
     alternates: {
-        canonical: 'https://chandjewelry.store',
+        canonical: 'https://www.chandjewelry.store',
     },
     openGraph: {
         title: "Chand Jewelry - Handcrafted Luxury Jewelry & Fine Accessories",
-        description: "Discover Chand Jewelry - your premier online store for handcrafted luxury jewelry, gold & silver rings, necklaces, watches and fine accessories in Pakistan.",
-        url: 'https://chandjewelry.store',
+        description: "Discover Chand Jewelry - your premier online destination for handcrafted luxury gold & silver jewelry, diamond rings, necklaces, luxury watches, and bespoke accessories in Pakistan.",
+        url: 'https://www.chandjewelry.store',
         siteName: 'Chand Jewelry',
         images: [
             {
-                url: 'https://chandjewelry.store/twitter-og.png',
+                url: 'https://www.chandjewelry.store/twitter-og.png',
                 width: 1200,
                 height: 630,
-                alt: 'Chand Jewelry OG Banner',
+                alt: 'Chand Jewelry - Handcrafted Luxury Jewelry',
             },
         ],
         locale: 'en_PK',
@@ -50,8 +62,8 @@ export const metadata = {
     twitter: {
         card: 'summary_large_image',
         title: "Chand Jewelry - Handcrafted Luxury Jewelry & Fine Accessories",
-        description: "Discover Chand Jewelry - your premier online store for handcrafted luxury jewelry, gold & silver rings, necklaces, watches and fine accessories in Pakistan.",
-        images: ['https://chandjewelry.store/twitter-og.png'],
+        description: "Discover Chand Jewelry - your premier online destination for handcrafted luxury gold & silver jewelry, diamond rings, necklaces, luxury watches, and bespoke accessories in Pakistan.",
+        images: ['https://www.chandjewelry.store/twitter-og.png'],
     },
     robots: {
         index: true,
@@ -71,14 +83,19 @@ export default function RootLayout({ children }) {
         "@context": "https://schema.org",
         "@graph": [
             {
-                "@type": "Organization",
-                "@id": "https://chandjewelry.store/#organization",
+                "@type": "JewelryStore",
+                "@id": "https://www.chandjewelry.store/#organization",
                 "name": "Chand Jewelry",
-                "url": "https://chandjewelry.store",
-                "logo": "https://chandjewelry.store/logo.png",
+                "alternateName": ["Chand Jewellery", "Chand Jewelry Store"],
+                "url": "https://www.chandjewelry.store",
+                "logo": "https://www.chandjewelry.store/logo.png",
+                "image": "https://www.chandjewelry.store/twitter-og.png",
+                "description": "Handcrafted Luxury Jewelry, Royal Gold & Silver Accessories in Pakistan.",
+                "priceRange": "$$",
                 "sameAs": [
                     "https://facebook.com/chandjewelry.store",
-                    "https://instagram.com/chandjewelry.store"
+                    "https://instagram.com/chandjewelry.store",
+                    "https://wa.me/923255821056"
                 ],
                 "contactPoint": {
                     "@type": "ContactPoint",
@@ -87,18 +104,23 @@ export default function RootLayout({ children }) {
                     "email": "info@chandjewelry.store",
                     "areaServed": "PK",
                     "availableLanguage": ["en", "ur"]
+                },
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "PK",
+                    "addressRegion": "Punjab"
                 }
             },
             {
                 "@type": "WebSite",
-                "@id": "https://chandjewelry.store/#website",
-                "url": "https://chandjewelry.store",
+                "@id": "https://www.chandjewelry.store/#website",
+                "url": "https://www.chandjewelry.store",
                 "name": "Chand Jewelry",
                 "description": "Handcrafted Luxury Jewelry & Fine Accessories in Pakistan",
-                "publisher": { "@id": "https://chandjewelry.store/#organization" },
+                "publisher": { "@id": "https://www.chandjewelry.store/#organization" },
                 "potentialAction": {
                     "@type": "SearchAction",
-                    "target": "https://chandjewelry.store/shop?search={search_term_string}",
+                    "target": "https://www.chandjewelry.store/shop?search={search_term_string}",
                     "query-input": "required name=search_term_string"
                 }
             }
