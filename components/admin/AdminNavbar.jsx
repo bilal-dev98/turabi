@@ -116,7 +116,7 @@ const AdminNavbar = ({ onMenuClick, collapsed, onToggleCollapse }) => {
 
                 {/* Search Input */}
                 <div ref={searchRef} className="relative w-full group hidden sm:block">
-                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 text-sm group-focus-within:text-zinc-900 dark:group-focus-within:text-emerald-400 transition-colors">
+                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 text-sm group-focus-within:text-zinc-900 dark:group-focus-within:text-emerald-400 transition-colors pointer-events-none">
                         search
                     </span>
                     <input
