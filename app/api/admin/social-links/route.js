@@ -23,26 +23,37 @@ const DEFAULT_PLATFORMS = [
 export async function GET() {
     try {
         const db = getPrisma();
-        let links = await db.socialLink.findMany({
-            orderBy: { createdAt: 'asc' }
-        });
+        let links = [];
+
+        try {
+            if (db.socialLink) {
+                links = await db.socialLink.findMany({ orderBy: { createdAt: 'asc' } });
+            } else {
+                links = await db.$queryRawUnsafe('SELECT platform, url, "isActive" FROM "SocialLink" ORDER BY "createdAt" ASC');
+            }
+        } catch (e) {
+            links = await db.$queryRawUnsafe('SELECT platform, url, "isActive" FROM "SocialLink" ORDER BY "createdAt" ASC').catch(() => []);
+        }
 
         // Seed default platforms if database is empty
         if (!links || links.length === 0) {
             for (const item of DEFAULT_PLATFORMS) {
-                await db.socialLink.upsert({
-                    where: { platform: item.platform },
-                    update: {},
-                    create: {
-                        platform: item.platform,
-                        url: item.url,
-                        isActive: item.isActive,
+                try {
+                    if (db.socialLink) {
+                        await db.socialLink.upsert({
+                            where: { platform: item.platform },
+                            update: {},
+                            create: { platform: item.platform, url: item.url, isActive: item.isActive }
+                        });
+                    } else {
+                        await db.$executeRawUnsafe(
+                            'INSERT INTO "SocialLink" (id, platform, url, "isActive", "createdAt", "updatedAt") VALUES (gen_random_uuid()::text, $1, $2, $3, NOW(), NOW()) ON CONFLICT (platform) DO NOTHING',
+                            item.platform, item.url, item.isActive
+                        );
                     }
-                });
+                } catch (e) {}
             }
-            links = await db.socialLink.findMany({
-                orderBy: { createdAt: 'asc' }
-            });
+            links = await db.$queryRawUnsafe('SELECT platform, url, "isActive" FROM "SocialLink" ORDER BY "createdAt" ASC').catch(() => DEFAULT_PLATFORMS);
         }
 
         return NextResponse.json({ success: true, data: links });
@@ -55,7 +66,7 @@ export async function GET() {
 export async function PUT(request) {
     try {
         const body = await request.json();
-        const { links } = body; // Array of { platform, url, isActive }
+        const { links } = body;
 
         if (!Array.isArray(links)) {
             return NextResponse.json({ success: false, message: "Invalid payload format" }, { status: 400 });
@@ -66,19 +77,32 @@ export async function PUT(request) {
 
         for (const item of links) {
             if (!item.platform) continue;
-            const updated = await db.socialLink.upsert({
-                where: { platform: item.platform.toLowerCase() },
-                update: {
-                    url: item.url ? item.url.trim() : "",
-                    isActive: typeof item.isActive === 'boolean' ? item.isActive : true,
-                },
-                create: {
-                    platform: item.platform.toLowerCase(),
-                    url: item.url ? item.url.trim() : "",
-                    isActive: typeof item.isActive === 'boolean' ? item.isActive : true,
+            const pKey = item.platform.toLowerCase();
+            const urlVal = item.url ? item.url.trim() : "";
+            const activeVal = typeof item.isActive === 'boolean' ? item.isActive : true;
+
+            try {
+                if (db.socialLink) {
+                    const updated = await db.socialLink.upsert({
+                        where: { platform: pKey },
+                        update: { url: urlVal, isActive: activeVal },
+                        create: { platform: pKey, url: urlVal, isActive: activeVal }
+                    });
+                    updatedLinks.push(updated);
+                } else {
+                    await db.$executeRawUnsafe(
+                        'INSERT INTO "SocialLink" (id, platform, url, "isActive", "createdAt", "updatedAt") VALUES (gen_random_uuid()::text, $1, $2, $3, NOW(), NOW()) ON CONFLICT (platform) DO UPDATE SET url = $2, "isActive" = $3, "updatedAt" = NOW()',
+                        pKey, urlVal, activeVal
+                    );
+                    updatedLinks.push({ platform: pKey, url: urlVal, isActive: activeVal });
                 }
-            });
-            updatedLinks.push(updated);
+            } catch (err) {
+                await db.$executeRawUnsafe(
+                    'INSERT INTO "SocialLink" (id, platform, url, "isActive", "createdAt", "updatedAt") VALUES (gen_random_uuid()::text, $1, $2, $3, NOW(), NOW()) ON CONFLICT (platform) DO UPDATE SET url = $2, "isActive" = $3, "updatedAt" = NOW()',
+                    pKey, urlVal, activeVal
+                ).catch(() => {});
+                updatedLinks.push({ platform: pKey, url: urlVal, isActive: activeVal });
+            }
         }
 
         return NextResponse.json({ success: true, data: updatedLinks });

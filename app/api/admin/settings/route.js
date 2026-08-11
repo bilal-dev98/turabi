@@ -48,15 +48,26 @@ const DEFAULT_SETTINGS = {
 export async function GET() {
     try {
         const db = getPrisma();
-        const records = await db.storeSetting.findMany();
+        let records = [];
+
+        try {
+            if (db.storeSetting) {
+                records = await db.storeSetting.findMany();
+            } else {
+                records = await db.$queryRawUnsafe('SELECT key, value FROM "StoreSetting"');
+            }
+        } catch (e) {
+            records = await db.$queryRawUnsafe('SELECT key, value FROM "StoreSetting"').catch(() => []);
+        }
 
         const result = { ...DEFAULT_SETTINGS };
 
         records.forEach(rec => {
             if (rec.key && result[rec.key]) {
+                const val = typeof rec.value === 'string' ? JSON.parse(rec.value) : rec.value;
                 result[rec.key] = {
                     ...result[rec.key],
-                    ...(typeof rec.value === 'object' ? rec.value : {})
+                    ...(typeof val === 'object' && val !== null ? val : {})
                 };
             }
         });
@@ -70,7 +81,7 @@ export async function GET() {
 
 export async function PUT(request) {
     try {
-        const body = await request.json(); // { section: 'general'|'payment'|'shipping'|'profile'|'security', data: { ... } }
+        const body = await request.json();
         const { section, data } = body;
 
         if (!section || !data) {
@@ -78,14 +89,35 @@ export async function PUT(request) {
         }
 
         const db = getPrisma();
+        let updatedValue = data;
 
-        const updated = await db.storeSetting.upsert({
-            where: { key: section },
-            update: { value: data },
-            create: { key: section, value: data }
-        });
+        try {
+            if (db.storeSetting) {
+                const updated = await db.storeSetting.upsert({
+                    where: { key: section },
+                    update: { value: data },
+                    create: { key: section, value: data }
+                });
+                updatedValue = updated.value;
+            } else {
+                const jsonStr = JSON.stringify(data);
+                await db.$executeRawUnsafe(
+                    'INSERT INTO "StoreSetting" (key, value, "updatedAt") VALUES ($1, $2::jsonb, NOW()) ON CONFLICT (key) DO UPDATE SET value = $2::jsonb, "updatedAt" = NOW()',
+                    section,
+                    jsonStr
+                );
+            }
+        } catch (dbErr) {
+            console.warn("ORM upsert failed, using raw SQL fallback:", dbErr.message);
+            const jsonStr = JSON.stringify(data);
+            await db.$executeRawUnsafe(
+                'INSERT INTO "StoreSetting" (key, value, "updatedAt") VALUES ($1, $2::jsonb, NOW()) ON CONFLICT (key) DO UPDATE SET value = $2::jsonb, "updatedAt" = NOW()',
+                section,
+                jsonStr
+            );
+        }
 
-        return NextResponse.json({ success: true, data: updated.value, section });
+        return NextResponse.json({ success: true, data: updatedValue, section });
     } catch (error) {
         console.error("Admin settings PUT error:", error);
         return NextResponse.json({ success: false, message: error.message }, { status: 500 });
