@@ -60,6 +60,16 @@ const ICON_MAP = {
     pinterest: { name: "Pinterest", icon: PinterestIcon, defaultUrl: "https://pinterest.com/chandjewelry" },
 }
 
+function formatExternalUrl(url) {
+    if (!url) return "#";
+    const trimmed = url.trim();
+    if (!trimmed) return "#";
+    if (trimmed.startsWith("http://") || trimmed.startsWith("https://") || trimmed.startsWith("mailto:") || trimmed.startsWith("tel:")) {
+        return trimmed;
+    }
+    return `https://${trimmed}`;
+}
+
 export default function SocialLinks({ className = "", buttonStyle = "" }) {
     const [links, setLinks] = useState([])
 
@@ -95,7 +105,7 @@ export default function SocialLinks({ className = "", buttonStyle = "" }) {
                     return (
                         <a
                             key={item.platform}
-                            href={item.url}
+                            href={formatExternalUrl(item.url)}
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label={meta.name}
@@ -118,7 +128,7 @@ export default function SocialLinks({ className = "", buttonStyle = "" }) {
                 return (
                     <a
                         key={item.platform}
-                        href={item.url}
+                        href={formatExternalUrl(item.url)}
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={meta.name}

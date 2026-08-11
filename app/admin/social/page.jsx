@@ -66,13 +66,23 @@ export default function AdminSocialLinks() {
         }))
     }
 
+    const formatUrlProtocol = (input) => {
+        if (!input) return "";
+        const trimmed = input.trim();
+        if (!trimmed) return "";
+        if (trimmed.startsWith("http://") || trimmed.startsWith("https://") || trimmed.startsWith("mailto:") || trimmed.startsWith("tel:")) {
+            return trimmed;
+        }
+        return `https://${trimmed}`;
+    }
+
     const handleSave = async (e) => {
         e.preventDefault()
         setSaving(true)
 
         const payload = PLATFORM_METADATA.map(p => ({
             platform: p.key,
-            url: socialLinks[p.key]?.url || "",
+            url: formatUrlProtocol(socialLinks[p.key]?.url || ""),
             isActive: socialLinks[p.key]?.isActive ?? true
         }))
 
