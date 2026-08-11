@@ -52,7 +52,7 @@ const Hero = () => {
                 {/* 1. Large Main Hero Banner (~61% width on desktop) */}
                 <Link 
                     href="/shop" 
-                    className='w-[88vw] sm:w-[58vw] lg:w-auto lg:flex-[3.2] shrink-0 lg:shrink snap-start relative flex flex-col justify-between rounded-3xl min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] group overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-500 bg-slate-100'
+                    className='w-[88vw] sm:w-[58vw] lg:w-auto lg:flex-[3.2] shrink-0 lg:shrink snap-start relative flex flex-col justify-between rounded-[4px] min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] group overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-500 bg-slate-100'
                 >
                     <Image 
                         priority 
@@ -67,7 +67,7 @@ const Hero = () => {
                 {/* 2. Side Card 1 */}
                 <Link 
                     href="/shop" 
-                    className='w-[55vw] sm:w-[32vw] lg:w-auto lg:flex-1 shrink-0 lg:shrink snap-start relative flex flex-col justify-between rounded-3xl min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] group overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-500 bg-slate-100'
+                    className='w-[55vw] sm:w-[32vw] lg:w-auto lg:flex-1 shrink-0 lg:shrink snap-start relative flex flex-col justify-between rounded-[4px] min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] group overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-500 bg-slate-100'
                 >
                     <Image 
                         src="/hero-banners/card-1.webp" 
@@ -81,7 +81,7 @@ const Hero = () => {
                 {/* 3. Side Card 2 */}
                 <Link 
                     href="/shop" 
-                    className='w-[55vw] sm:w-[32vw] lg:w-auto lg:flex-1 shrink-0 lg:shrink snap-start relative flex flex-col justify-between rounded-3xl min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] group overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-500 bg-slate-100'
+                    className='w-[55vw] sm:w-[32vw] lg:w-auto lg:flex-1 shrink-0 lg:shrink snap-start relative flex flex-col justify-between rounded-[4px] min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] group overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-500 bg-slate-100'
                 >
                     <Image 
                         src="/hero-banners/card-3.webp" 
