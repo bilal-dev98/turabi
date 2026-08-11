@@ -15,7 +15,7 @@ const SORT_OPTIONS = [
     { value: "discount", label: "Biggest Discount" },
 ]
 const PER_PAGE = 12
-const PRICE_MAX = 500
+const PRICE_MAX = 50000
 const CATEGORY_ICONS = {
     Headphones: "headphones", Speakers: "speaker", Watch: "watch", Earbuds: "earbuds",
     Mouse: "mouse", Decoration: "light", Camera: "photo_camera", Pen: "edit",
@@ -99,7 +99,7 @@ function ShopContent() {
         ...categories.map(c => ({ label: c, clear: () => setCategories(prev => prev.filter(x => x !== c)) })),
         ...(inStockOnly ? [{ label: "In Stock", clear: () => setInStockOnly(false) }] : []),
         ...(minRating > 0 ? [{ label: `${minRating}★+`, clear: () => setMinRating(0) }] : []),
-        ...(priceRange[0] > 0 || priceRange[1] < PRICE_MAX ? [{ label: `$${priceRange[0]}–$${priceRange[1]}`, clear: () => setPriceRange([0, PRICE_MAX]) }] : []),
+        ...(priceRange[0] > 0 || priceRange[1] < PRICE_MAX ? [{ label: `Rs ${priceRange[0]}–Rs ${priceRange[1]}`, clear: () => setPriceRange([0, PRICE_MAX]) }] : []),
     ]
 
     const clearAll = () => {
@@ -167,21 +167,21 @@ function ShopContent() {
                     </div>
                     {/* Min slider */}
                     <div className="relative">
-                        <input type="range" min={0} max={PRICE_MAX} step={5}
+                        <input type="range" min={0} max={PRICE_MAX} step={100}
                             value={priceRange[0]}
                             onChange={e => { const v = +e.target.value; if (v < priceRange[1]) setPriceRange([v, priceRange[1]]) }}
                             className="w-full accent-primary h-1.5 rounded-full appearance-none bg-slate-200 cursor-pointer" />
                     </div>
                     {/* Max slider */}
                     <div className="relative">
-                        <input type="range" min={0} max={PRICE_MAX} step={5}
+                        <input type="range" min={0} max={PRICE_MAX} step={100}
                             value={priceRange[1]}
                             onChange={e => { const v = +e.target.value; if (v > priceRange[0]) setPriceRange([priceRange[0], v]) }}
                             className="w-full accent-primary h-1.5 rounded-full appearance-none bg-slate-200 cursor-pointer" />
                     </div>
                     {/* Quick presets */}
                     <div className="flex gap-1.5 flex-wrap">
-                        {[[0, 50], [50, 100], [100, 200], [200, PRICE_MAX]].map(([lo, hi]) => (
+                        {[[0, 1000], [1000, 3000], [3000, 5000], [5000, PRICE_MAX]].map(([lo, hi]) => (
                             <button key={`${lo}-${hi}`} onClick={() => setPriceRange([lo, hi])}
                                 className={`text-xs px-2 py-1 rounded-lg border transition-all font-medium ${priceRange[0] === lo && priceRange[1] === hi ? "border-primary bg-primary/10 text-primary" : "border-slate-200 text-slate-500 hover:border-primary/40"}`}>
                                 Rs {lo}–{hi === PRICE_MAX ? `${hi}+` : `Rs ${hi}`}

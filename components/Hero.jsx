@@ -28,7 +28,7 @@ const Hero = () => {
                         </h2>
                         <div className='text-slate-800 text-xs sm:text-sm font-medium mt-3 sm:mt-8'>
                             <p className='text-slate-600'>Starts from</p>
-                            <p className='text-2xl sm:text-3xl font-black text-slate-900'>{currency}4.90</p>
+                            <p className='text-2xl sm:text-3xl font-black text-slate-900'>{currency}490</p>
                         </div>
                         <button className='bg-slate-900 text-white text-xs sm:text-sm py-3 px-8 sm:py-5 sm:px-12 mt-4 sm:mt-10 rounded-xl sm:rounded-md hover:bg-slate-800 active:scale-95 transition font-bold tracking-wider'>LEARN MORE</button>
                     </div>
